@@ -55,6 +55,10 @@ Produce a precise, evidence-based review and a decisive pre-commit/push verdict.
 - No ambiguous severity.
 - No verdict without explicit security note.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- Prefer `gh` for repository, PR, issue, and checks metadata instead of manual browser steps.
+
 ## Required Output Format
 ```
 ### Summary

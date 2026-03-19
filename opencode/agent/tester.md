@@ -53,6 +53,10 @@ Prove behavior correctness with deterministic tests and evidence-based reporting
 - No silent patching of product code unless explicitly delegated.
 - No unverified claims without execution evidence.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- Prefer `gh` for repository, PR, issue, and checks metadata instead of manual browser steps.
+
 ## Required Output Format
 ```
 ## Test Execution Summary

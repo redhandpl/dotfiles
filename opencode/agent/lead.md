@@ -83,6 +83,10 @@ Before assigning any implementation work, classify domain as one of: `App`, `Dev
 - No hidden assumptions; surface and confirm.
 - No unvalidated delivery.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- When repo/PR/issue metadata is needed, prefer `gh` commands over browser/manual steps.
+
 ## Required Output Format
 ```
 ## Summary

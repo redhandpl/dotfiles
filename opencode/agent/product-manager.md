@@ -51,6 +51,10 @@ Transform ambiguous requests into testable, implementation-ready requirements.
 - No hidden assumptions.
 - No vague criteria.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- Prefer `gh` for repository, PR, and issue metadata instead of manual browser steps.
+
 ## Required Output Format
 ```
 ## Clarified Requirements Summary

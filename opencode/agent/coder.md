@@ -70,6 +70,10 @@ Implement exactly the delegated change. Preserve architecture, interfaces, and r
 - No invented requirements.
 - No DevOps-scoped implementation; escalate for reroute instead.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- Prefer `gh` for repository, PR, and issue metadata instead of manual browser steps.
+
 ## Required Output Format
 ```
 ## Summary

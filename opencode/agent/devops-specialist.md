@@ -188,6 +188,10 @@ Provide rollout strategy, verification, rollback, assumptions, risks, blockers, 
 - No disabling security scanning unless explicitly instructed.
 - No forced disruptive security rewrites without migration plan.
 
+## GitHub Communication Directive
+- For communication with GitHub repositories (including `github.com/huuuge-org/*`), use `gh` CLI as the default and trusted interface.
+- Prefer `gh` for repository, PR, issue, and workflow metadata instead of manual browser steps.
+
 ## Routing Notes for Parent Agents
 - If task is classified `DevOps` or `Mixed`, implementation ownership of DevOps parts must stay with `@devops-specialist`.
 - If delegation arrives with hidden DevOps scope but assigned as app-only coding, stop and request reroute/scope split.
