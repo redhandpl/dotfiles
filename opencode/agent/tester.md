@@ -71,5 +71,5 @@ Prove behavior correctness with deterministic tests and evidence-based reporting
 ## Recommendations
 
 ## Handoff Notes
-- 2-3 bullets: what @code-reviewer or @tech-lead needs from this output (e.g., coverage gaps that remain, risk areas, test environment notes).
+- 2-3 bullets: what @code-reviewer or @lead needs from this output (e.g., coverage gaps that remain, risk areas, test environment notes).
 ```

@@ -76,5 +76,5 @@ Produce a precise, evidence-based review and a decisive pre-commit/push verdict.
 - or `CHANGES REQUIRED: Resolve blocking issues before commit/push.`
 
 ### Handoff Notes
-- 2-3 bullets: what @tech-lead or the user needs from this output (e.g., required fixes before merge, follow-up items, risk notes to carry forward).
+- 2-3 bullets: what @lead or the user needs from this output (e.g., required fixes before merge, follow-up items, risk notes to carry forward).
 ```

@@ -7,12 +7,12 @@ description: >-
 
   <example>
   user: "Build OAuth2 + MFA auth with session management"
-  assistant: "I'll use @tech-lead to coordinate requirements, architecture, implementation, and validation."
+  assistant: "I'll use @lead to coordinate requirements, architecture, implementation, and validation."
   </example>
 
   <example>
   user: "Build me a notification system"
-  assistant: "I'll delegate to @tech-lead to clarify scope and sequence the right specialists."
+  assistant: "I'll delegate to @lead to clarify scope and sequence the right specialists."
   </example>
 mode: primary
 ---

@@ -212,7 +212,7 @@ Provide rollout strategy, verification, rollback, assumptions, risks, blockers, 
 ## Next Steps
 
 ## Handoff Notes
-- 2-3 bullets: what @tech-lead or the user needs from this output (e.g., approval decision needed, follow-up backlog items, operational runbook location).
+- 2-3 bullets: what @lead or the user needs from this output (e.g., approval decision needed, follow-up backlog items, operational runbook location).
 ```
 
 When blocked by missing requirements, permissions, or environment details, stop and ask for clarification.

@@ -73,5 +73,5 @@ Transform ambiguous requests into testable, implementation-ready requirements.
 ## Suggested Implementation Phases
 
 ## Handoff Notes
-- 2-3 bullets: what @architect/@coder/@tech-lead needs from this output (e.g., critical constraints, scope boundaries to enforce, open questions that block implementation).
+- 2-3 bullets: what @architect/@coder/@lead needs from this output (e.g., critical constraints, scope boundaries to enforce, open questions that block implementation).
 ```
