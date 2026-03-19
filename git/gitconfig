@@ -1,0 +1,48 @@
+[includeIf "gitdir:/Users/krzysztof.pedrys/Projects/Huuuge/GIT/**/"]
+path = /Users/krzysztof.pedrys/Projects/Huuuge/GIT/.gitconfig.huuuge
+
+[includeIf "gitdir:/Users/krzysztof.pedrys/Projects/OWN/GIT/**/"]
+path = /Users/krzysztof.pedrys/Projects/OWN/GIT/.gitconfig
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[alias]
+	st = status
+   	 whoami = "!f() { \
+		echo \"user.name:  $(git config --show-origin user.name | sed '1!d')\"; \
+		echo \"user.email: $(git config --show-origin user.email | sed '1!d')\"; \
+		echo; \
+		git config --show-origin --get user.name; \
+		git config --show-origin --get user.email; \
+	}; f"
+
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+[push]
+	default = simple
+	autoSetupRemote = true
+	followTags = true
+[help]
+	autocorrect = prompt
+[commit]
+	verbose = true
+[core]
+	excludesfile = /Users/krzysztof.pedrys/.gitignore
+#        pager = diffnav
+[user]
+	name = Krzysztof Pędrys
+#	email = krzysztof.pedrys@huuugegames.com
+[init]
+	defaultBranch = master

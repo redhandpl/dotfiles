@@ -1,0 +1,13 @@
+[user]
+	name = Krzysztof Pędrys
+	email = krzysztof.pedrys@huuugegames.com
+	signingkey = 9C0756745AC1F144A89E1123961F1145DEF66E19
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pager]
+	branch = cat
+[commit]
+	gpgsign = true

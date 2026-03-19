@@ -1,0 +1,19 @@
+-- lua/plugins/gitsigns.lua
+return {
+  {
+    "lewis6991/gitsigns.nvim",
+    event = { "BufReadPre", "BufNewFile" },
+    opts = {
+      -- możesz zostawić pustą tabelę albo dopasować konfigurację
+      signs = {
+        add = { text = "│" },
+        change = { text = "│" },
+        delete = { text = "_" },
+        topdelete = { text = "‾" },
+        changedelete = { text = "~" },
+      },
+      current_line_blame = true,
+    },
+  },
+}
+

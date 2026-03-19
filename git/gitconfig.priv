@@ -1,0 +1,13 @@
+[user]
+	name = Krzysztof Pędrys
+	email = krzysztof@pedrys.pl
+	signingkey = CE1A8331CAD08597766713D2E993C10A9A466B29
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[pager]
+	branch = cat
+[commit]
+	gpgsign = true
