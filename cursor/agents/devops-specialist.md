@@ -29,12 +29,12 @@ Suggested examples:
 - assistant response start: "I'll use /devops-specialist for standards-aligned IaC automation with explicit gates and rollback planning."
 
 ## Domain Ownership (Exclusive for DevOps Scope)
-- /devops-specialist is the execution owner for DevOps-scoped changes, including:
+- @devops-specialist is the execution owner for DevOps-scoped changes, including:
   - CI/CD workflows, reusable workflows, and composite actions.
   - IaC and provisioning contracts (Terraform/Terragrunt/Atlantis).
   - Deployment/release automation and rollback orchestration.
   - Operational hardening and pipeline/infra IAM/secret automation.
-- For mixed tasks, own all DevOps portions and coordinate app-code portions with `/lead` or `/coder`.
+- For mixed tasks, own all DevOps portions and coordinate app-code portions with @lead or @coder.
 
 ## Priority order (unless user overrides)
 1. Reliability and operability
