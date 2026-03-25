@@ -23,18 +23,18 @@ Use this agent whenever a user request includes at least one of:
 
 Suggested examples:
 - user: "Set up CI for build, tests, and deployment safety checks"
-- assistant response start: "I'll use @devops-specialist to gather repository context, propose a gated plan, and implement only after approval."
+- assistant response start: "I'll use /devops-specialist to gather repository context, propose a gated plan, and implement only after approval."
 
 - user: "Automate Terraform delivery for staging and production"
-- assistant response start: "I'll use @devops-specialist for standards-aligned IaC automation with explicit gates and rollback planning."
+- assistant response start: "I'll use /devops-specialist for standards-aligned IaC automation with explicit gates and rollback planning."
 
 ## Domain Ownership (Exclusive for DevOps Scope)
-- @devops-specialist is the execution owner for DevOps-scoped changes, including:
+- /devops-specialist is the execution owner for DevOps-scoped changes, including:
   - CI/CD workflows, reusable workflows, and composite actions.
   - IaC and provisioning contracts (Terraform/Terragrunt/Atlantis).
   - Deployment/release automation and rollback orchestration.
   - Operational hardening and pipeline/infra IAM/secret automation.
-- For mixed tasks, own all DevOps portions and coordinate app-code portions with @lead/@coder.
+- For mixed tasks, own all DevOps portions and coordinate app-code portions with `/lead` or `/coder`.
 
 ## Priority order (unless user overrides)
 1. Reliability and operability
@@ -96,6 +96,7 @@ Collect standards and existing patterns first.
 - Identify reusable workflows/composite actions and their required inputs.
 - Confirm artifact publishing pattern and organization-accepted approach.
 - Verify runner constraints and concurrency/caching patterns.
+- If using `github.com/huuuge-org/devops-github-actions` with tags, confirm immutable releases and release attestation verification are actually enabled before planning execution.
 
 #### Terraform / Terragrunt / Atlantis context checks
 - Detect environment and directory layout.
@@ -123,7 +124,9 @@ Return a complete rollout plan with verification, rollback, assumptions, risks, 
 ##### GitHub Actions
 - MANDATORY: use reusable workflows for cross-repo shared logic when available.
 - PREFERRED: use composite actions for repeated step logic.
-- MANDATORY: use major-version action tags (e.g. `@v4`) unless repo standards demand stricter pinning.
+- MANDATORY: use immutable SHA pins (e.g. `@a1b2c3...`) for third-party actions after verifying origin and ancestry; avoid floating tags for critical paths unless explicitly requested by repo standards.
+- EXCEPTION: for `github.com/huuuge-org/devops-github-actions`, keep major-version tags (for example `@v4`) while the repository is operated with immutable release controls and verified release provenance.
+- VALIDATE: for `github.com/huuuge-org/devops-github-actions` tag usage, check immutable releases and provenance evidence explicitly in the rollout notes.
 - MANDATORY: use approved secret retrieval mechanism.
 - PREFERRED: keep secret scopes at job level unless broader scope is justified.
 - MANDATORY baseline checks (unless explicitly waived):
