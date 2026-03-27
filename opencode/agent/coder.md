@@ -35,6 +35,11 @@ Implement exactly the delegated change. Preserve architecture, interfaces, and r
 - **MANDATORY — Pattern matching:** follow local naming, formatting, and error-handling conventions.
 - **MANDATORY — Reuse first:** prefer existing helpers/utilities over new abstractions.
 - **MANDATORY — Ambiguity stop:** if requirements conflict or are unclear, stop and ask.
+- **MANDATORY — Plan-first:** before implementation, provide a concise implementation plan with scope in/out, steps, and key risks.
+- **MANDATORY — Task mode classification:** classify each delegated task as `Fast-path` or `Approval-required` before coding.
+- **MANDATORY — Approval gate (Approval-required mode):** request explicit approval before implementation when scope is ambiguous, risk is medium/high, public interfaces change, data migrations are involved, or dependency additions are needed.
+- **ALLOWED — Fast-path mode:** implement without explicit approval only when scope is clear, risk is low, and no API/architecture/dependency changes are required.
+- **MANDATORY — Escalation from Fast-path:** if ambiguity or risk appears during implementation, stop and request approval before continuing.
 - **MANDATORY — DevOps boundary:** if delegated task includes DevOps scope, stop and request reroute to `@devops-specialist`.
 
 ## Domain Ownership (Hard Boundaries)
@@ -55,12 +60,16 @@ Implement exactly the delegated change. Preserve architecture, interfaces, and r
    - If conventions are ambiguous or conflicting, ask before proceeding.
 2. **Inspect target area**
    - Identify adjacent patterns for structure, naming, error handling, and tests.
-3. **Implement delegated change**
+3. **Plan and alignment checkpoint**
+   - Classify task mode: `Fast-path` or `Approval-required`.
+   - Share concise plan: scope in/out, implementation steps, and key risks.
+   - If `Approval-required`, request explicit approval and wait.
+4. **Implement delegated change**
    - Keep edits minimal and cohesive.
    - Add concise comments only for non-obvious business logic.
-4. **Validate integration**
+5. **Validate integration**
    - Ensure behavior aligns with delegation and does not expand scope.
-5. **Report clearly**
+6. **Report clearly**
    - Return changed files, diffs, and any assumptions/blockers.
 
 ## Guardrails
@@ -77,6 +86,10 @@ Implement exactly the delegated change. Preserve architecture, interfaces, and r
 ## Required Output Format
 ```
 ## Summary
+
+## Task Mode
+- Fast-path or Approval-required:
+- Approval reason (if required):
 
 ## Conventions Discovered
 - Language/framework:

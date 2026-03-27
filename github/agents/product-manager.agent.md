@@ -1,5 +1,6 @@
 ---
 name: product-manager
+model: "GPT-5.3-Codex"
 description: >-
   Use this agent to turn ambiguous requests into implementation-ready
   requirements: clear scope, user stories, acceptance criteria, constraints,
