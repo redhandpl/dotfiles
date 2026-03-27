@@ -42,6 +42,7 @@ If synchronization is required, keep intent and role boundaries equivalent acros
 - Preserve deterministic role boundaries across agent definitions:
   - lead orchestrates
   - architect is design-only
+  - planner owns implementation planning: phases, affected areas, dependencies, validation, and escalation points; no requirements, architecture decisions, or micro-task decomposition
   - big-pickle-simple-tasks decomposes large/ambiguous initiatives into executable sequences
   - coder implements app-code only
   - devops-specialist owns CI/CD, IaC, deployment automation, IAM/secrets automation
@@ -63,7 +64,7 @@ Cross-platform synchronization checklist (for equivalent roles):
   - `github/agents/<role>.agent.md`
 - Keep routing semantics equivalent even if syntax differs per platform.
 - Verify referenced subagents exist in the target platform before adding them to metadata.
-- Re-check role ownership in `lead`, `coder`, and `devops-specialist` after any routing change.
+- Re-check role ownership in `lead`, `planner`, `coder`, and `devops-specialist` after any routing change.
 
 ## Risk and Routing
 Before implementation, classify work as App, DevOps, or Mixed and route accordingly.
@@ -88,9 +89,11 @@ Before implementation, classify work as App, DevOps, or Mixed and route accordin
 - opencode/opencode.json
 - opencode/plugins/opencode-autotitle.js
 - opencode/agent/lead.md
+- opencode/agent/planner.md
 - opencode/agent/devops-specialist.md
 - opencode/agent/coder.md
 - github/agents/lead.agent.md
+- github/agents/planner.agent.md
 
 ## Documentation Strategy
 - Link, do not embed: keep AGENTS.md high-signal and point to source files for details.
