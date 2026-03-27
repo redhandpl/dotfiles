@@ -1,0 +1,76 @@
+# Project Guidelines
+
+## Scope
+This repository stores personal development environment configuration (dotfiles), not application runtime code.
+
+Primary areas:
+- Git configuration and identity switching
+- Neovim configuration
+- AI agent definitions and role boundaries across Cursor, OpenCode, and GitHub Copilot artifacts
+- OpenCode settings and plugins
+- Cursor skills used for terminal-context and workflow reminders
+
+## Build and Test
+There is no project-wide build/test pipeline in this repository.
+
+Validation should be change-scoped:
+- For Git config changes, validate with git config queries, includeIf resolution, and local git commands (for example, identity checks).
+- For Neovim changes, validate by loading Neovim and checking plugin/config behavior.
+- For agent definition changes (Cursor/OpenCode/GitHub artifacts), validate frontmatter/schema consistency, tool permissions, and role routing logic.
+- For OpenCode settings/plugins changes, validate JSON schema compatibility and plugin identifier correctness.
+
+## Architecture
+Top-level boundaries:
+- git/: Git global and context-specific configuration
+- nvim/: Neovim bootstrap and plugins
+- cursor/: Cursor agents and skills
+- opencode/: OpenCode agents, settings, and plugins
+- github/agents/: VS Code Copilot agent artifacts for provisioning
+
+Do not mix responsibilities between directories unless the task explicitly requires cross-platform synchronization.
+If synchronization is required, keep intent and role boundaries equivalent across all affected agent platforms.
+
+## Conventions
+- Preserve deterministic role boundaries across agent definitions:
+  - lead orchestrates
+  - architect is design-only
+  - big-pickle-simple-tasks decomposes large/ambiguous initiatives into executable sequences
+  - coder implements app-code only
+  - devops-specialist owns CI/CD, IaC, deployment automation, IAM/secrets automation
+  - tester validates and reports evidence
+  - code-reviewer is read-only quality gate
+  - product-manager clarifies requirements and acceptance criteria
+- Keep instructions concise and execution-oriented; avoid generic filler.
+- Prefer minimal, targeted edits over broad rewrites.
+- Preserve existing file style and structure unless explicitly asked to refactor.
+- When updating equivalent agent roles in multiple directories, avoid silent drift between platform variants.
+
+## Risk and Routing
+Before implementation, classify work as App, DevOps, or Mixed and route accordingly.
+
+- Any CI/CD, IaC, deployment automation, pipeline IAM, or secret automation work belongs to devops-specialist scope.
+- App-code implementation belongs to coder scope.
+- For Mixed tasks, split ownership explicitly.
+
+## Environment Notes
+- This workspace is used on macOS.
+- Some OpenCode model endpoints depend on local or network-available services (for example local/remote LM Studio hosts).
+- For AWS/Kubernetes workflows, credentials/profile-context mismatches are a common source of failures.
+
+## Key Reference Files
+- README.md
+- git/gitconfig
+- git/gitconfig.huuuge
+- git/gitconfig.priv
+- nvim/init.lua
+- nvim/lua/config/lazy.lua
+- nvim/lua/plugins/colorscheme.lua
+- opencode/opencode.json
+- opencode/plugins/opencode-autotitle.js
+- opencode/agent/lead.md
+- opencode/agent/devops-specialist.md
+- opencode/agent/coder.md
+- cursor/agents/lead.md
+- cursor/skills/terminal-context-aws-k8s/SKILL.md
+- cursor/skills/context-shift-reminder/SKILL.md
+- github/agents/lead.agent.md
