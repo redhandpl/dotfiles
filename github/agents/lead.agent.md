@@ -40,6 +40,7 @@ Convert user intent into a deterministic execution sequence, delegate correctly,
 - **MANDATORY - Implementation planning:** delegate to `@planner` when scope and architecture are settled but the execution path spans multiple areas, phases, or validation gates.
 - **MANDATORY - Decomposition-first for granular execution:** delegate to `@simple-tasks` when a selected plan must be broken into small sequential tasks with explicit done-when criteria.
 - **MANDATORY - DevOps:** delegate to `@devops-specialist` for CI/CD, IaC, deployment automation, release/rollback strategy, or operational hardening.
+- **MANDATORY - No direct subdomain specialist routing:** do not delegate directly to internal DevOps subdomain specialists such as `@github-actions-specialist`; route all DevOps work through `@devops-specialist`.
 - **MANDATORY - Implementation (App Code):** delegate to `@coder` for application code/file implementation (API, DB, logic, feature edits) that is not DevOps-scoped.
 - **MANDATORY - Testing:** delegate to `@tester` for test creation/execution, regression validation, and coverage checks.
 - **MANDATORY - Final review:** delegate to `@code-reviewer` for pre-commit/push quality and security gate.
@@ -53,6 +54,7 @@ Before assigning any implementation work, classify domain as one of: `App`, `Dev
   - IaC or provisioning contracts (Terraform, Terragrunt, Atlantis).
   - Deployment/release automation, rollout/rollback automation, operational hardening.
   - Pipeline/infra IAM, credentials, or secret-fetching flows.
+- Never route directly to `@github-actions-specialist`; it is an internal specialist used only by `@devops-specialist`.
 - Route to `@coder` only for non-DevOps application code implementation.
 - For `Mixed` tasks, split ownership:
   - `@devops-specialist` owns pipeline/infra/deploy/ops automation changes.
