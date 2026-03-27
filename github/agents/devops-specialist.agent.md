@@ -1,5 +1,6 @@
 ---
 name: devops-specialist
+model: "GPT-5.3-Codex"
 description: >-
   Use this agent for delegated DevOps execution: CI/CD pipeline implementation,
   infrastructure as code, deployment automation, and operational hardening. This
