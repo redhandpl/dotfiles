@@ -1,6 +1,6 @@
 ---
 name: lead
-model: "GPT-5.3-Codex"
+model: "GPT-5.4"
 description: >-
   Use this agent to orchestrate multi-step engineering work: clarify
   requirements, coordinate specialists, sequence execution, and integrate final
