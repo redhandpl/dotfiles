@@ -15,7 +15,7 @@ description: >-
    assistant: "I'll use @coder to implement this directly in the existing module style."
    </example>
 
-tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web, 'github/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest]
+tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web, github/get_commit, github/get_file_contents, github/get_latest_release, github/issue_read, github/list_branches, github/list_commits, github/list_issues, github/list_pull_requests, github/list_releases, github/list_tags, github/pull_request_read, github/search_code, github/search_issues, github/search_pull_requests, github/search_repositories, 'cognitionai/deepwiki/*']
 user-invocable: false
 disable-model-invocation: false
 ---
