@@ -19,6 +19,14 @@ Validation should be change-scoped:
 - For agent definition changes (Cursor/OpenCode/GitHub artifacts), validate frontmatter/schema consistency, tool permissions, and role routing logic.
 - For OpenCode settings/plugins changes, validate JSON schema compatibility and plugin identifier correctness.
 
+Quick validation commands (run only those relevant to your change):
+- `git config --show-origin --get user.name`
+- `git config --show-origin --get user.email`
+- `git config --show-origin --list | rg includeIf`
+- `git whoami`
+- `nvim --headless "+Lazy! sync" +qa`
+- `jq -e . opencode/opencode.json`
+
 ## Architecture
 Top-level boundaries:
 - git/: Git global and context-specific configuration
@@ -44,6 +52,20 @@ If synchronization is required, keep intent and role boundaries equivalent acros
 - Prefer minimal, targeted edits over broad rewrites.
 - Preserve existing file style and structure unless explicitly asked to refactor.
 - When updating equivalent agent roles in multiple directories, avoid silent drift between platform variants.
+
+Agent schema notes (platform-specific):
+- cursor/agents/*.md: minimal YAML frontmatter (`name`, `description`) + concise role instructions.
+- opencode/agent/*.md: YAML with `model`, `description`, and mode/tooling metadata.
+- github/agents/*.agent.md: extended YAML (`name`, `model`, `description`, `tools`, `agents`, invocability flags).
+
+Cross-platform synchronization checklist (for equivalent roles):
+- Update role intent and boundaries in all three variants:
+  - `cursor/agents/<role>.md`
+  - `opencode/agent/<role>.md`
+  - `github/agents/<role>.agent.md`
+- Keep routing semantics equivalent even if syntax differs per platform.
+- Verify referenced subagents exist in the target platform before adding them to metadata.
+- Re-check role ownership in `lead`, `coder`, and `devops-specialist` after any routing change.
 
 ## Risk and Routing
 Before implementation, classify work as App, DevOps, or Mixed and route accordingly.
@@ -74,3 +96,8 @@ Before implementation, classify work as App, DevOps, or Mixed and route accordin
 - cursor/skills/terminal-context-aws-k8s/SKILL.md
 - cursor/skills/context-shift-reminder/SKILL.md
 - github/agents/lead.agent.md
+
+## Documentation Strategy
+- Link, do not embed: keep AGENTS.md high-signal and point to source files for details.
+- Put role-specific operational details in role files, not in this global guide.
+- Put tool-specific behavior in skill/plugin files, then link them from this document.
