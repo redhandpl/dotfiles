@@ -6,9 +6,10 @@ This repository stores personal development environment configuration (dotfiles)
 Primary areas:
 - Git configuration and identity switching
 - Neovim configuration
-- AI agent definitions and role boundaries across Cursor, OpenCode, and GitHub Copilot artifacts
+- AI agent definitions and role boundaries across OpenCode and GitHub Copilot artifacts
 - OpenCode settings and plugins
-- Cursor skills used for terminal-context and workflow reminders
+
+Cursor artifacts may still exist in the repository for historical reference, but they are out of support and should not receive routine updates.
 
 ## Build and Test
 There is no project-wide build/test pipeline in this repository.
@@ -16,7 +17,7 @@ There is no project-wide build/test pipeline in this repository.
 Validation should be change-scoped:
 - For Git config changes, validate with git config queries, includeIf resolution, and local git commands (for example, identity checks).
 - For Neovim changes, validate by loading Neovim and checking plugin/config behavior.
-- For agent definition changes (Cursor/OpenCode/GitHub artifacts), validate frontmatter/schema consistency, tool permissions, and role routing logic.
+- For agent definition changes (OpenCode/GitHub artifacts), validate frontmatter/schema consistency, tool permissions, and role routing logic.
 - For OpenCode settings/plugins changes, validate JSON schema compatibility and plugin identifier correctness.
 
 Quick validation commands (run only those relevant to your change):
@@ -31,7 +32,6 @@ Quick validation commands (run only those relevant to your change):
 Top-level boundaries:
 - git/: Git global and context-specific configuration
 - nvim/: Neovim bootstrap and plugins
-- cursor/: Cursor agents and skills
 - opencode/: OpenCode agents, settings, and plugins
 - github/agents/: VS Code Copilot agent artifacts for provisioning
 
@@ -54,13 +54,11 @@ If synchronization is required, keep intent and role boundaries equivalent acros
 - When updating equivalent agent roles in multiple directories, avoid silent drift between platform variants.
 
 Agent schema notes (platform-specific):
-- cursor/agents/*.md: minimal YAML frontmatter (`name`, `description`) + concise role instructions.
 - opencode/agent/*.md: YAML with `model`, `description`, and mode/tooling metadata.
 - github/agents/*.agent.md: extended YAML (`name`, `model`, `description`, `tools`, `agents`, invocability flags).
 
 Cross-platform synchronization checklist (for equivalent roles):
-- Update role intent and boundaries in all three variants:
-  - `cursor/agents/<role>.md`
+- Update role intent and boundaries in both supported variants:
   - `opencode/agent/<role>.md`
   - `github/agents/<role>.agent.md`
 - Keep routing semantics equivalent even if syntax differs per platform.
@@ -92,9 +90,6 @@ Before implementation, classify work as App, DevOps, or Mixed and route accordin
 - opencode/agent/lead.md
 - opencode/agent/devops-specialist.md
 - opencode/agent/coder.md
-- cursor/agents/lead.md
-- cursor/skills/terminal-context-aws-k8s/SKILL.md
-- cursor/skills/context-shift-reminder/SKILL.md
 - github/agents/lead.agent.md
 
 ## Documentation Strategy

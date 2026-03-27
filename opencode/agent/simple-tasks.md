@@ -6,12 +6,12 @@ description: >-
 
   <example>
   user: "I need to build an e-commerce platform from scratch"
-  assistant: "I'll use @big-pickle-simple-tasks to produce a concrete step-by-step plan."
+  assistant: "I'll use @simple-tasks to produce a concrete step-by-step plan."
   </example>
 
   <example>
   user: "Migrate our legacy database with zero downtime"
-  assistant: "I'll delegate to @big-pickle-simple-tasks for a safe, staged execution sequence."
+  assistant: "I'll delegate to @simple-tasks for a safe, staged execution sequence."
   </example>
 mode: primary
 tools:
