@@ -1,6 +1,6 @@
 ---
 name: architect
-model: "GPT-5.3-Codex"
+model: "GPT-5.4"
 description: >-
   Use this agent for high-level architecture and system design work only:
   component boundaries, technical decisions, trade-offs, and migration paths.
