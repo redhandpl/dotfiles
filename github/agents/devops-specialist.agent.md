@@ -16,7 +16,7 @@ description: >-
   assistant: "I'll use @devops-specialist for standards-aligned IaC automation with explicit approval gates."
   </example>
 
-tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web, 'github/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest]
+tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web, 'github/*', 'cognitionai/deepwiki/*', github.vscode-pull-request-github/issue_fetch, github.vscode-pull-request-github/labels_fetch, github.vscode-pull-request-github/notification_fetch, github.vscode-pull-request-github/doSearch, github.vscode-pull-request-github/activePullRequest, github.vscode-pull-request-github/pullRequestStatusChecks, github.vscode-pull-request-github/openPullRequest]
 user-invocable: false
 disable-model-invocation: false
 ---

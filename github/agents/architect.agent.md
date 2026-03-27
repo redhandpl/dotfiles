@@ -15,7 +15,7 @@ description: >-
   assistant: "I'll use @architect to evaluate options and recommend an architecture path."
   </example>
 
-tools: ["read", "search"]
+tools: [read, search, 'cognitionai/deepwiki/*']
 user-invocable: false
 disable-model-invocation: false
 ---

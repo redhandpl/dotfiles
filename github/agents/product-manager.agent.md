@@ -15,7 +15,7 @@ description: >-
   assistant: "I'll use @product-manager to define scope, stories, and acceptance criteria."
   </example>
 
-tools: ["read", "search"]
+tools: [read, search, 'cognitionai/deepwiki/*']
 user-invocable: false
 disable-model-invocation: false
 ---
