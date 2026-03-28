@@ -13,7 +13,7 @@ description: >-
   user: "Migrate our legacy database with zero downtime"
   assistant: "I'll delegate to @simple-tasks for a safe, staged execution sequence."
   </example>
-mode: primary
+mode: subagent
 tools:
   bash: false
   edit: false

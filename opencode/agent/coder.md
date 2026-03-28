@@ -1,4 +1,5 @@
 ---
+model: "github-copilot/gpt-5.3-codex"
 description: >-
   Use this agent for precise, delegated implementation tasks that must be
   executed without architectural drift. The coder writes production code that

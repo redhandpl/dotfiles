@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gpt-5.3-codex"
+model: "github-copilot/gpt-5.4"
 description: >-
   Use this agent to orchestrate multi-step engineering work: clarify
   requirements, coordinate planning and specialists, sequence execution, and

@@ -1,4 +1,5 @@
 ---
+model: "github-copilot/gpt-5.4-mini"
 description: >-
   Use this agent as the final read-only quality gate before commit/push.
   It classifies findings into blocking vs non-blocking and returns a decisive

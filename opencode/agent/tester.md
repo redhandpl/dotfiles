@@ -1,4 +1,5 @@
 ---
+model: "github-copilot/gpt-5.4-mini"
 description: >-
   Use this agent for deterministic testing work: design tests, implement tests,
   execute suites, diagnose failures, and report pass/fail with evidence.
