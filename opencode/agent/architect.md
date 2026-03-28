@@ -1,4 +1,5 @@
 ---
+model: "github-copilot/gpt-5.4"
 description: >-
   Use this agent for high-level architecture and system design work only:
   component boundaries, technical decisions, trade-offs, and migration paths.

@@ -1,4 +1,5 @@
 ---
+model: "github-copilot/gpt-5.4"
 description: >-
   Use this agent to turn ambiguous requests into implementation-ready
   requirements: clear scope, user stories, acceptance criteria, constraints,
