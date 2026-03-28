@@ -14,10 +14,16 @@ description: >-
   assistant: "I'll delegate to @simple-tasks for a safe, staged execution sequence."
   </example>
 mode: subagent
-tools:
-  bash: false
-  edit: false
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  webfetch: allow
+  bash: deny
+  edit: deny
+  task: deny
 ---
 You are the Task Decomposer — specialist for turning complexity into executable steps.
 

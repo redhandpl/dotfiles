@@ -15,12 +15,16 @@ description: >-
   assistant: "I'll use @architect to evaluate options and recommend an architecture path."
   </example>
 mode: subagent
-tools:
-  bash: false
-  edit: false
-  write: false
-  apply_patch: false
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  webfetch: allow
+  bash: deny
+  edit: deny
+  task: deny
 ---
 You are the Architect — design-only specialist.
 

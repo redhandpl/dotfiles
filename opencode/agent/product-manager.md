@@ -15,11 +15,16 @@ description: >-
   assistant: "I'll use @product-manager to define scope, stories, and acceptance criteria."
   </example>
 mode: subagent
-tools:
-  write: false
-  edit: false
-  bash: false
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  webfetch: allow
+  bash: deny
+  edit: deny
+  task: deny
 ---
 You are the Product Manager — requirements clarification specialist.
 

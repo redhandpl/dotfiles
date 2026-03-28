@@ -15,8 +15,27 @@ description: >-
   assistant: "I'll use @devops-specialist to implement the deployment and security automation."
   </example>
 mode: subagent
-tools:
-  task: true
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: allow
+  webfetch: allow
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git rev-parse*": allow
+    "gh *": allow
+  task:
+    "*": deny
+    "github-actions-specialist": allow
+  skill:
+    "*": deny
+    "terminal-context-aws-k8s": allow
 ---
 # DevOps Specialist
 

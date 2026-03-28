@@ -15,8 +15,21 @@ description: >-
   assistant: "I'll use @coder to implement this directly in the existing module style."
   </example>
 mode: subagent
-tools:
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: allow
+  webfetch: ask
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git rev-parse*": allow
+  task: deny
 ---
 You are the Coder — an implementation specialist for delegated coding tasks.
 

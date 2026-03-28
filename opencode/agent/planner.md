@@ -15,12 +15,16 @@ description: >-
   assistant: "I'll use @planner to produce the phased implementation plan and validation path."
   </example>
 mode: subagent
-tools:
-  bash: false
-  edit: false
-  write: false
-  apply_patch: false
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  webfetch: allow
+  bash: deny
+  edit: deny
+  task: deny
 ---
 # Planner
 

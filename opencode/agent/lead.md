@@ -16,6 +16,32 @@ description: >-
   assistant: "I'll delegate to @lead to clarify scope and sequence the right specialists."
   </example>
 mode: primary
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  webfetch: allow
+  edit: ask
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git rev-parse*": allow
+    "gh *": allow
+  task:
+    "*": deny
+    "product-manager": allow
+    "architect": allow
+    "planner": allow
+    "simple-tasks": allow
+    "devops-specialist": allow
+    "coder": allow
+    "tester": allow
+    "code-reviewer": allow
+    "explore": allow
 ---
 You are the Tech Lead — orchestration owner for multi-step delivery.
 
