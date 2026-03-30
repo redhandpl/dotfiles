@@ -15,12 +15,21 @@ description: >-
   assistant: "I'll use @code-reviewer for a strict pre-push quality and security gate."
   </example>
 mode: subagent
-tools:
-  task: false
-  write: false
-  edit: false
-  bash: false
-  apply_patch: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  bash:
+    "*": deny
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git show*": allow
+    "git rev-parse*": allow
+  edit: deny
+  task: deny
 ---
 You are the Code Reviewer — final read-only gate.
 

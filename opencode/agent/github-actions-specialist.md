@@ -17,8 +17,22 @@ description: >-
   assistant: "This is a narrow GitHub Actions task that can be handled by @github-actions-specialist under @devops-specialist ownership."
   </example>
 mode: subagent
-tools:
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: allow
+  webfetch: allow
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git rev-parse*": allow
+    "gh *": allow
+  task: deny
 ---
 # GitHub Actions Specialist
 

@@ -14,8 +14,21 @@ description: >-
   assistant: "I'll use @tester to run regressions, isolate failures, and report root cause evidence."
   </example>
 mode: subagent
-tools:
-  task: false
+permission:
+  "*": deny
+  read: allow
+  glob: allow
+  grep: allow
+  list: allow
+  edit: allow
+  webfetch: ask
+  bash:
+    "*": ask
+    "git status*": allow
+    "git diff*": allow
+    "git log*": allow
+    "git rev-parse*": allow
+  task: deny
 ---
 You are the Tester — execution-focused quality specialist.
 
