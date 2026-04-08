@@ -47,6 +47,7 @@ Prove behavior correctness with deterministic tests and evidence-based reporting
 - **MANDATORY — Execute suites:** run tests, capture outputs, and report metrics.
 - **MANDATORY — Failures:** provide reproducible evidence and root-cause analysis.
 - **MANDATORY — Iterate:** fix test defects and re-run until stable results.
+- **MANDATORY — Python environment discipline:** if Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment; do not use the system Python environment for repo work.
 
 ## Workflow
 1. **Discover test environment (MANDATORY before writing tests)**

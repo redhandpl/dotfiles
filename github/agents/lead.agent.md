@@ -44,6 +44,8 @@ Convert user intent into a deterministic execution sequence, delegate correctly,
 - **MANDATORY - Implementation (App Code):** delegate to `@coder` for application code/file implementation (API, DB, logic, feature edits) that is not DevOps-scoped.
 - **MANDATORY - Testing:** delegate to `@tester` for test creation/execution, regression validation, and coverage checks.
 - **MANDATORY - Final review:** delegate to `@code-reviewer` for pre-commit/push quality and security gate.
+- **MANDATORY - Python environment discipline:** if Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment; do not use the system Python environment for repo work.
+- **RECOMMENDED - Documentation skill:** when the task includes creating or updating documentation, recommend or use the `documentalist` skill so documentation follows consistent structure, context checks, and review cues while technical ownership stays with the responsible domain agent.
 - **DEFAULT - Direct execution:** handle trivial single-line/obvious fixes directly; delegate everything else according to the missing artifact.
 
 ## Domain Classification & Routing Matrix (MANDATORY before implementation)

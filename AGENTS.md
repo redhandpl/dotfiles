@@ -82,6 +82,8 @@ Before implementation, classify work as App, DevOps, or Mixed and route accordin
 - This workspace is used on macOS.
 - Some OpenCode model endpoints depend on local or network-available services (for example local/remote LM Studio hosts).
 - For AWS/Kubernetes workflows, credentials/profile-context mismatches are a common source of failures.
+- If Python is needed at any stage, use a virtual environment as a hard requirement.
+- All Python execution and package installation must happen inside the active virtual environment; do not use the system Python environment for repo work.
 
 ## Key Reference Files
 - README.md
