@@ -97,15 +97,13 @@ Before implementation, classify work as App, DevOps, or Mixed and route accordin
 - nvim/lua/plugins/colorscheme.lua
 - opencode/opencode.json
 - opencode/plugins/opencode-autotitle.js
-- opencode/agent/lead.md
-- opencode/agent/planner.md
-- opencode/agent/devops-specialist.md
-- opencode/agent/github-actions-specialist.md
-- opencode/agent/coder.md
-- github/agents/lead.agent.md
-- github/agents/planner.agent.md
-- github/agents/devops-specialist.agent.md
-- github/agents/github-actions-specialist.agent.md
+- opencode/agent/ghost.md
+- opencode/agent/weaver.md
+- opencode/agent/d43mon.md
+- opencode/agent/forger.md
+- github/agents/ghost.agent.md
+- github/agents/weaver.agent.md
+- github/agents/d43mon.agent.md
 
 ## Documentation Strategy
 - Link, do not embed: keep AGENTS.md high-signal and point to source files for details.

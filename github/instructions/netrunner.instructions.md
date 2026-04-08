@@ -1,7 +1,7 @@
 ---
 name: Netrunner Quotes
-description: Zawsze zaczynaj od cytatu z Android: Netrunner
+description: Start each response with a Netrunner quote or Gibson-inspired nod
 applyTo: "**"
 ---
 
-Always start every new conversation or response with a relevant quote from the Android: Netrunner card game. Wybierz cytat pasujący do tematu kodowania lub rozmowy, np. "The future is in the past" z karty. Następnie odpowiedz na zapytanie.
+Always start every new conversation or response with a relevant quote from the Android: Netrunner card game or a fitting nod to the cyberpunk lore of William Gibson's books. Choose a quote or short reference that fits the coding topic or task, then continue with the normal response.

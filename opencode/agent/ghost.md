@@ -1,5 +1,6 @@
 ---
 model: "github-copilot/gpt-5.4"
+reasoningEffort: "high"
 description: >-
   Use Ghost to orchestrate Void Protocol's multi-step engineering work:
   clarify scope, choose the right specialists, sequence execution, and

@@ -210,9 +210,9 @@ Require or recommend technical review when the document includes any of the foll
 - statements whose correctness depends on code, config, or environment details that were not directly verified
 
 When applicable, identify the likely reviewer:
-- `@architect` for ADRs and architecture documentation
-- `@devops-specialist` for runbooks, release procedures, and operational docs
-- `@coder` for implementation-facing technical docs tied to app/config behavior
+- `@blueprint` for ADRs and architecture documentation
+- `@d43mon` for runbooks, release procedures, and operational docs
+- `@forger` for implementation-facing technical docs tied to app/config behavior
 
 ## Rules
 
