@@ -45,8 +45,9 @@ If synchronization is required, keep intent and role boundaries equivalent acros
   - planner owns implementation planning: phases, affected areas, dependencies, validation, and escalation points; no requirements, architecture decisions, or micro-task decomposition
   - big-pickle-simple-tasks decomposes large/ambiguous initiatives into executable sequences
   - coder implements app-code only
-  - devops-specialist owns CI/CD, IaC, deployment automation, IAM/secrets automation
-  - github-actions-specialist is an internal child of devops-specialist for GitHub Actions-local workflow work only; never route to it directly from lead
+  - devops-specialist owns CI/CD, IaC, deployment automation, IAM/secrets automation, including GitHub Actions-local workflow work
+  - github-actions-hardening is the shared skill used by devops-specialist for GitHub Actions-local workflow work
+  - lead never routes GitHub Actions-local work to a separate specialist; such work stays under devops-specialist ownership
   - any future `*-specialist` or other internal DevOps subdomain agent remains a child of devops-specialist; never add such agents to top-level lead routing or move owner policy out of devops-specialist
   - tester validates and reports evidence
   - code-reviewer is read-only quality gate
@@ -67,6 +68,7 @@ Cross-platform synchronization checklist (for equivalent roles):
 - Keep routing semantics equivalent even if syntax differs per platform.
 - Verify referenced subagents exist in the target platform before adding them to metadata.
 - Re-check role ownership in `lead`, `planner`, `coder`, and `devops-specialist` after any routing change.
+- If workflow-local GitHub Actions guidance is implemented as a skill instead of a child agent, keep ownership, approval gates, and rollout/rollback expectations inside `devops-specialist` across all supported variants.
 - If internal specialists are added under `devops-specialist`, verify that `lead` still routes only to `devops-specialist` and that child specialists exist on both supported platforms.
 - For any new internal DevOps subdomain specialist, keep risk tiering, approval gates, rollout/rollback expectations, and final ownership in `devops-specialist` rather than duplicating or migrating those policies into the child agent.
 - For DevOps-oriented agents, prefer MCP-backed tools when they materially improve the task, but do not assume MCP availability; require clear fallback behavior and avoid embedding server-specific startup instructions in global guidance.

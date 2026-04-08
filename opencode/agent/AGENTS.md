@@ -72,6 +72,10 @@ For touched areas, use the strongest relevant validation available:
 - Prefer `gh` for repository, PR, issue, and workflow metadata when command-line GitHub access is needed.
 - Use MCP tools only when they materially improve the task and are actually available.
 
+## Git conventions
+- Repository-managed Git aliases defined in `git/gitconfig` are part of local conventions and may be used by agents after discovery.
+- Prefer `git gs` for a compact repository overview when that alias is available.
+
 ## Output contract
 All agents should, at minimum, make clear:
 - what they assumed,
