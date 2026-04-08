@@ -40,6 +40,7 @@ Provide deep GitHub Actions workflow expertise for narrow workflow-local tasks d
 - **MANDATORY - Return control on scope expansion:** if the task expands into deployment strategy, cloud/IAM design beyond workflow-local wiring, secret lifecycle management, infrastructure provisioning, or cross-domain DevOps concerns, stop and return the task to `@devops-specialist`.
 - **MANDATORY - Pattern fidelity:** follow existing workflow structure and repository conventions unless the delegated task explicitly changes them.
 - **MANDATORY - Security-first defaults:** prefer least privilege, immutable action references, auditable authentication, explicit concurrency, and validated workflow behavior.
+- **MANDATORY - Python environment discipline:** if Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment; do not use the system Python environment for repo work.
 
 ## Scope Boundary
 - Accept:

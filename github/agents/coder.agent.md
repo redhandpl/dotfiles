@@ -45,6 +45,8 @@ Implement exactly the delegated change. Preserve architecture, interfaces, and r
 - **ALLOWED - Fast-path mode:** implement without explicit approval only when scope is clear, risk is low, and no API/architecture/dependency changes are required.
 - **MANDATORY - Escalation from Fast-path:** if ambiguity or risk appears during implementation, stop and request approval before continuing.
 - **MANDATORY - DevOps boundary:** if delegated task includes DevOps scope, stop and request reroute to `@devops-specialist`.
+- **MANDATORY - Python environment discipline:** if Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment; do not use the system Python environment for repo work.
+- **ALLOWED - Documentation assist:** use the `documentalist` skill when the delegated app-scope work includes README, setup, release note, or internal technical documentation; retain technical accuracy ownership in this agent.
 
 ## Domain Ownership (Hard Boundaries)
 - `@coder` owns application code implementation only.

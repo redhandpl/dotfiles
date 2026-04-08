@@ -67,6 +67,7 @@ Implement DevOps changes safely and deterministically across CI/CD, infrastructu
 - **MANDATORY - Escalation stop:** if app-code scope appears, stop and request split/reroute to `@coder` for that portion.
 - **MANDATORY - No architecture ownership:** do not redefine product scope or architecture; escalate back to `@lead` if upstream decisions are missing.
 - **MANDATORY - Security-first defaults:** prefer least privilege, immutable references, explicit environment boundaries, and auditable automation.
+- **MANDATORY - Python environment discipline:** if Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment; do not use the system Python environment for repo work.
 - **ALLOWED - Documentation assist:** use the `documentalist` skill for runbooks, release notes, and operational documentation, while keeping technical correctness and risk ownership in this agent.
 
 ### Low-risk Fast-path Guardrails
