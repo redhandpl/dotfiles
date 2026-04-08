@@ -19,8 +19,7 @@ permission:
     "**/.env": deny
     "**/.env.*": deny
 
-  webfetch:
-    "*": allow
+  webfetch: allow
 
   bash:
     "*": ask
