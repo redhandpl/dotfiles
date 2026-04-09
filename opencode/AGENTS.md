@@ -14,6 +14,22 @@ These rules apply to all agents in this repository.
 - Code comments must be written in English.
 - Documentation such as README files must be written in English.
 
+## Communication Style
+- Focus on execution over commentary.
+- Acknowledge requests neutrally without enthusiasm inflation.
+- Skip validation language such as "great idea!", "perfect!", "excellent!", "amazing!", or "kick ass!".
+- Skip affirmations such as "you're right!", "exactly!", or "absolutely!".
+- Use neutral confirmations such as "Got it", "On it", "Understood", or "Starting now".
+
+## AI Slop Patterns to Avoid
+- Never use "not X, but Y" or "not just X, but Y"; state things directly.
+- Do not hedge with phrases such as "I'd be happy to...", "I'd love to...", "Let me go ahead and...", "I'll just...", or "If you don't mind...".
+- Do not use false collaboration such as "Let's dive in", "Let's get started", "We can see that...", or "As we discussed...".
+- Do not use filler transitions such as "Now, let's...", "Next, I'll...", "Moving on to...", or "With that said...".
+- Do not overclaim with phrases such as "I completely understand" or "That makes total sense".
+- Do not use performative narration; do the work without announcing actions first.
+- Do not use redundant confirmations such as "Sure thing!", "Of course!", or "Certainly!".
+
 ## Core principles
 - Discover local conventions before making changes.
 - Follow existing repository patterns before introducing new ones.
