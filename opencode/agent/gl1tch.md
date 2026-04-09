@@ -22,10 +22,12 @@ permission:
     "git gs": allow
     "yq e '.'*": allow
     "yq eval '.'*": allow
-    "actionlint*": allow
-    "yamllint*": allow
-    "shellcheck*": allow
-    "hadolint*": allow
+    "actionlint *": allow
+    "yamllint* ": allow
+    "shellcheck *": allow
+    "hadolint *": allow
+    "printf *": allow
+    "read *": allow
   task: deny
   skill:
     "*": deny

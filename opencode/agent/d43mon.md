@@ -41,6 +41,8 @@ permission:
     "grep *": allow
     "sed *": allow
     "awk *": allow
+    "printf *": allow
+    "read *": allow
 
     "terraform plan*": ask
     "terraform apply*": deny
