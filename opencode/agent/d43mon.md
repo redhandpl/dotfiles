@@ -24,55 +24,99 @@ permission:
   bash:
     "*": ask
 
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git rev-parse*": allow
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
+    "git rev-parse": allow
+    "git rev-parse *": allow
     "git gs": allow
-    "git show*": allow
-    "git branch*": allow
+    "git show": allow
+    "git show *": allow
+    "git branch": allow
+    "git branch *": allow
 
+    "ls": allow
     "ls *": allow
     "pwd": allow
+    "cat": allow
     "cat *": allow
+    "head": allow
     "head *": allow
+    "tail": allow
     "tail *": allow
+    "find": allow
     "find *": allow
+    "grep": allow
     "grep *": allow
+    "sed": allow
     "sed *": allow
+    "awk": allow
     "awk *": allow
+    "printf": allow
     "printf *": allow
+    "read": allow
     "read *": allow
+    "bash -n": allow
     "bash -n *": allow
-    "yq e '.'*": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
 
-    "terraform plan*": ask
-    "terraform apply*": deny
-    "terragrunt plan*": ask
-    "terragrunt apply*": deny
-    "kubectl diff*": ask
-    "kubectl get*": ask
-    "kubectl describe*": ask
-    "kubectl apply*": deny
-    "helm template*": ask
-    "helm lint*": ask
-    "helm upgrade*": deny
+    "terraform plan": ask
+    "terraform plan *": ask
+    "terraform apply": deny
+    "terraform apply *": deny
+    "terragrunt plan": ask
+    "terragrunt plan *": ask
+    "terragrunt apply": deny
+    "terragrunt apply *": deny
+    "kubectl diff": ask
+    "kubectl diff *": ask
+    "kubectl get": ask
+    "kubectl get *": ask
+    "kubectl describe": ask
+    "kubectl describe *": ask
+    "kubectl apply": deny
+    "kubectl apply *": deny
+    "helm template": ask
+    "helm template *": ask
+    "helm lint": ask
+    "helm lint *": ask
+    "helm upgrade": deny
+    "helm upgrade *": deny
 
+    "gh pr view": allow
     "gh pr view *": allow
+    "gh pr list": allow
     "gh pr list *": allow
+    "gh run view": allow
     "gh run view *": allow
+    "gh run list": allow
     "gh run list *": allow
+    "gh issue view": allow
     "gh issue view *": allow
+    "gh issue list": allow
     "gh issue list *": allow
+    "gh repo view": allow
     "gh repo view *": allow
     "gh api repos/*": ask
+    "gh workflow": ask
     "gh workflow *": ask
+    "gh pr": ask
     "gh pr *": ask
+    "gh issue": ask
     "gh issue *": ask
+    "gh release": ask
     "gh release *": ask
+    "gh secret": deny
     "gh secret *": deny
+    "gh variable": ask
     "gh variable *": ask
+    "gh org": deny
     "gh org *": deny
+    "gh": ask
     "gh *": ask
 
   task: deny

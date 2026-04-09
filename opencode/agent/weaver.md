@@ -12,9 +12,13 @@ permission:
   grep: allow
   list: allow
   webfetch: allow
+  question: allow
   bash: deny
   edit: deny
   task: deny
+  skill:
+    "*": deny
+    "delivery-gates": allow
 ---
 You are Weaver the Planner.
 

@@ -15,11 +15,21 @@ permission:
   webfetch: allow
   bash:
     "*": ask
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git rev-parse*": allow
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
+    "git rev-parse": allow
+    "git rev-parse *": allow
     "git gs": allow
+    "git config --show-origin --get *": allow
+    "git config --show-origin --list": allow
+    "git config --show-origin --list *": allow
+    "git whoami": allow
+    "jq -e . opencode/opencode.json": allow
+    "nvim --headless \"+Lazy! sync\" +qa": allow
   task: deny
   skill:
     "*": deny

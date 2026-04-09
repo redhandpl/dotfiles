@@ -12,28 +12,42 @@ permission:
   list: allow
   bash:
     "*": deny
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git show*": allow
-    "git rev-parse*": allow
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
+    "git show": allow
+    "git show *": allow
+    "git rev-parse": allow
+    "git rev-parse *": allow
     "git gs": allow
-    "yq e '.'*": allow
-    "yq eval '.'*": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
+    "yq eval '.'": allow
+    "yq eval '.' *": allow
+    "actionlint": allow
     "actionlint *": allow
-    "yamllint* ": allow
+    "yamllint": allow
+    "yamllint *": allow
+    "shellcheck": allow
     "shellcheck *": allow
+    "hadolint": allow
     "hadolint *": allow
+    "printf": allow
     "printf *": allow
+    "read": allow
     "read *": allow
+    "bash -n": allow
     "bash -n *": allow
+    "ls": allow
     "ls *": allow
   edit: deny
   task: deny
 
   skill:
     "*": deny
-    "documentalist": allow
     "repo-conventions": allow
     "review-rubric": allow
 ---

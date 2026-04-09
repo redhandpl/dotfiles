@@ -15,25 +15,38 @@ permission:
   webfetch: ask
   bash:
     "*": ask
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git rev-parse*": allow
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
+    "git rev-parse": allow
+    "git rev-parse *": allow
     "git gs": allow
+    "git tag -l": allow
     "git tag -l *": allow
-    "yq e '.'*": allow
-    "yq eval '.'*": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
+    "yq eval '.'": allow
+    "yq eval '.' *": allow
+    "actionlint": allow
     "actionlint *": allow
-    "yamllint* ": allow
+    "yamllint": allow
+    "yamllint *": allow
+    "shellcheck": allow
     "shellcheck *": allow
+    "hadolint": allow
     "hadolint *": allow
+    "printf": allow
     "printf *": allow
+    "read": allow
     "read *": allow
+    "echo": allow
     "echo *": allow
   task: deny
   skill:
     "*": deny
-    "documentalist": allow
     "repo-conventions": allow
     "test-strategy": allow
 ---

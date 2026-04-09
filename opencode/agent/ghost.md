@@ -17,23 +17,35 @@ permission:
   edit: ask
   bash:
     "*": ask
-    "git status*": allow
-    "git diff*": allow
-    "git log*": allow
-    "git rev-parse*": allow
+    "git status": allow
+    "git status *": allow
+    "git diff": allow
+    "git diff *": allow
+    "git log": allow
+    "git log *": allow
+    "git rev-parse": allow
+    "git rev-parse *": allow
     "git gs": allow
     
     # GitHub CLI read-only for orchestration
+    "gh pr view": allow
     "gh pr view *": allow
+    "gh pr list": allow
     "gh pr list *": allow  
+    "gh run view": allow
     "gh run view *": allow
+    "gh run list": allow
     "gh run list *": allow
+    "gh issue view": allow
     "gh issue view *": allow
+    "gh issue list": allow
     "gh issue list *": allow
+    "gh repo view": allow
     "gh repo view *": allow
     "gh workflow list": allow
     
     # Everything else ask
+    "gh": ask
     "gh *": ask
 
   task:
@@ -48,7 +60,7 @@ permission:
     "sentinel": allow
   skill:
     "*": deny
-    "documentalist": allow
+    "delivery-gates": allow
 ---
 # Ghost the Tech Lead
 

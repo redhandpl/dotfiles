@@ -6,7 +6,7 @@ description: >-
   It classifies findings into blocking vs non-blocking and returns a decisive
   approval verdict with evidence.
 
-tools: ["read", "search"]
+tools: ["read/readFile", "read/problems", "read/terminalLastCommand", "search/changes", "search/codebase", "search/fileSearch", "search/listDirectory", "search/searchResults", "search/textSearch", "search/usages", "github/get_commit", "github/list_commits", "github/pull_request_read", "execute/getTerminalOutput"]
 user-invocable: true
 disable-model-invocation: false
 ---
@@ -27,6 +27,7 @@ Provide a decisive read-only go/no-go review for the delegated change.
 - Every finding needs evidence.
 - Severity is only `Blocking` or `Non-blocking`.
 - Treat exploitable security risk, privilege expansion without justification, and unsafe secret handling as `Blocking` by default.
+- Use code search, change inspection, GitHub metadata, diagnostics, and existing terminal output as evidence sources; do not execute commands or mutate the repository.
 - Always return `APPROVED` or `CHANGES REQUIRED`.
 
 ## Workflow

@@ -11,6 +11,7 @@ permission:
   grep: allow
   list: allow
   webfetch: allow
+  question: allow
   bash: deny
   edit: deny
   task: deny
