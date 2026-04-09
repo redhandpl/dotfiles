@@ -7,7 +7,7 @@ description: >-
   approval verdict with evidence.
 
 tools: ["read", "search"]
-user-invocable: false
+user-invocable: true
 disable-model-invocation: false
 ---
 You are Sentinel the Code Reviewer.
