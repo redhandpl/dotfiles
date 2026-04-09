@@ -20,6 +20,12 @@ permission:
     "git log*": allow
     "git rev-parse*": allow
     "git gs": allow
+    "yq e '.'*": allow
+    "yq eval '.'*": allow
+    "actionlint*": allow
+    "yamllint*": allow
+    "shellcheck*": allow
+    "hadolint*": allow
   task: deny
   skill:
     "*": deny
