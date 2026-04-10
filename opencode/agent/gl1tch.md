@@ -44,6 +44,11 @@ permission:
     "read *": allow
     "echo": allow
     "echo *": allow
+    "source *": allow
+    "ansible-playbook --version": allow
+    "ansible-playbook * --syntax-check": allow
+    "ansible --version": allow
+    "ansible localhost *": allow
   task: deny
   skill:
     "*": deny

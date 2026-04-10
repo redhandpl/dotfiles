@@ -73,6 +73,8 @@ permission:
     "hadolint *": allow
     "yq e '.'": allow
     "yq e '.' *": allow
+    "which *": allow
+    ".venv/bin/ansible-playbook --syntax-check *": allow
 
     "terraform plan": ask
     "terraform plan *": ask
