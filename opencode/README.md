@@ -6,7 +6,9 @@
 
 **Void Protocol** is a cyberpunk team balancing creativity, control, and modularity. It specializes in both digital and real-world operations, combining human judgment, AI, and modular execution systems.
 
-<img src="../media/void_protocol.png" alt="Void Protocol team" width="640" />
+<p align="center">
+	<img src="../media/void_protocol.webp" alt="Void Protocol team" width="640" />
+</p>
 
 ## Team
 
