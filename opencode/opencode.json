@@ -4,7 +4,7 @@
     "opencode-antigravity-auth@latest",
     "cc-safety-net",
     "@hoangp8/opencode-plugin-editor-diff@0.1.1",
-    "opencode-mermaid-renderer@0.0.1",
+    "opencode-mermaid-renderer@0.0.1"
   ],
   "provider": {
     "lmstudio-local": {

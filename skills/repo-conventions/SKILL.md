@@ -21,6 +21,7 @@ Use this skill when working inside an existing repository and you need shared ru
 - Keep changes minimal, reversible, and scoped to the request.
 - Prefer modifying existing files over adding new abstractions.
 - Avoid introducing new layers unless explicitly requested.
+- For agent, instruction, skill, or OpenCode settings artifacts, pair this skill with `agent-governance`.
 - Surface assumptions explicitly; do not hide uncertainty.
 - Escalate when scope, ownership, or architecture is unclear.
 - Prefer evidence-backed claims over intuition.

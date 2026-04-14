@@ -50,7 +50,8 @@ These rules apply to all agents in this repository.
 - App code belongs to `@forger`.
 - DevOps work belongs to `@d43mon`.
 - GitHub Actions-local workflow work belongs to `@d43mon`.
-- `@d43mon` uses the `github-actions-hardening` skill for workflow-local GitHub Actions changes.
+- `@d43mon` uses the `github-actions` skill for workflow-local GitHub Actions changes.
+- `@d43mon` uses `terminal-context-bridge` before AWS or Kubernetes terminal work and may rely on a private or local overlay such as `terminal-context-aws-k8s` for the actual mapping.
 - Mixed work must be split explicitly.
 - Final non-trivial changes should go through `@gl1tch` and `@sentinel`.
 

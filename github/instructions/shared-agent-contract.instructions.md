@@ -23,9 +23,14 @@ applyTo: "**"
 - App code belongs to `@Forger`.
 - DevOps work belongs to `@d43mon`.
 - GitHub Actions-local workflow work belongs to `@d43mon`.
-- `@d43mon` uses the `github-actions-hardening` skill for workflow-local GitHub Actions changes.
+- `@d43mon` uses the `github-actions` skill for workflow-local GitHub Actions changes.
+- `@d43mon` uses `terminal-context-bridge` before AWS or Kubernetes terminal work and may rely on a private or local overlay such as `terminal-context-aws-k8s` for the actual mapping.
 - Mixed work must be split explicitly.
-- Final non-trivial changes should go through `@GL1TCH` and `@Sentinel`.
+- Final non-trivial changes on the default multi-agent path should go through `@GL1TCH` and `@Sentinel`.
+- `@Nexus` is the official, user-selected single-agent exception.
+- When invoked directly, `@Nexus` performs discovery through final review inside one context and does not delegate to other agents.
+- Under `@Nexus`, `Mixed` work still requires an explicit app/devops interface even though execution stays inside one agent.
+- `@Nexus` does not change the default Ghost-led routing for the rest of `Void Protocol`.
 
 - If Python is used at any stage, create or activate a virtual environment first.
 - Run all Python commands and package installation only inside the active virtual environment.

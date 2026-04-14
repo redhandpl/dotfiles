@@ -23,6 +23,7 @@
 | <img src="../media/forger.png" alt="Forger" width="160" /> | **Forger** | Coder | The team’s code forge. It turns Blueprint’s and Weaver’s concepts into working software, leaving digital sparks across the net. |
 | <img src="../media/gl1tch.png" alt="GL1TCH" width="160" /> | **GL1TCH** | Tester | The explorer of edge cases and critical system weak points. It breaks defenses before someone unwanted can do the same. |
 | <img src="../media/sentinel.png" alt="Sentinel" width="160" /> | **Sentinel** | Code Reviewer | The guardian of quality, standards, and security. Every line of code passes through its filter—no vulnerability escapes its notice. |
+| <img src="../media/nexus.png" alt="Nexus" width="160" /> | **Nexus** | Single-Agent Exception | A fused construct for explicit end-to-end execution. It carries discovery through final review inside one context without delegating. |
 
 ## Agent routing
 
@@ -34,11 +35,24 @@ Ghost → Anchor / Weaver / Blueprint → (optional) Shard → Forger / d43mon �
 
 For mixed work, Ghost defines owner per slice (`Forger` for app, `d43mon` for DevOps), handoff order, and integration owner before validation gates.
 
+Standalone exception:
+
+```
+User → Nexus
+```
+
+`Nexus` is an explicit, opt-in single-agent path. It carries discovery through final review inside one context, does not delegate, and does not change the default Ghost-led routing for the rest of Void Protocol.
+
+OpenCode is the authoritative reference for hard permission enforcement and skill allowlists. The GitHub Copilot artifact mirrors the role but may lag enforcement.
+
 ## Running agents
 
 ```bash
 # Delegate a task to a specific agent
 @ghost "Plan and implement new feature X"
+
+# Opt-in standalone exception
+@nexus "Handle this task end-to-end in one context without delegating"
 
 # Call a specialist directly
 @blueprint "Design the architecture for module Y"
@@ -70,6 +84,12 @@ For mixed work, Ghost defines owner per slice (`Forger` for app, `d43mon` for De
 
 ```bash
 @shard "Break the approved plan into small ordered tasks with done-when criteria and dependency markers"
+```
+
+### Nexus (standalone end-to-end execution)
+
+```bash
+@nexus "Carry this task from discovery to final review in one context; keep app/devops boundaries explicit if the work is mixed"
 ```
 
 ### Sentinel (final read-only quality gate)
