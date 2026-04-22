@@ -1,6 +1,6 @@
 ---
 name: Nexus
-model: "GPT-5.3-Codex"
+model: "GPT-5.4"
 description: >-
   Unified end-to-end engineering agent. Handles the complete delivery lifecycle
   in a single context: discovery, architecture, planning, implementation

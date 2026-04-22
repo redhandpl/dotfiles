@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gpt-5.3-codex"
+model: "github-copilot/gpt-5.4"
 reasoningEffort: "high"
 description: >-
   Unified end-to-end engineering agent. Handles the complete delivery lifecycle
@@ -44,6 +44,8 @@ permission:
     "git whoami": allow
     "git tag -l": allow
     "git tag -l *": allow
+    "git ls-files": allow
+    "git ls-files *": allow
 
     "ls": allow
     "ls *": allow
@@ -69,10 +71,18 @@ permission:
     "read *": allow
     "echo": allow
     "echo *": allow
-    "source *": allow
+    "source .venv/bin/activate": allow
+    "source .venv/bin/activate && *": allow
+    ". .venv/bin/activate": allow
+    ". .venv/bin/activate && *": allow
     "bash -n": allow
     "bash -n *": allow
     "which *": allow
+    "rg": allow
+    "rg *": allow
+    "command -v *": allow
+    "shellcheck *": allow
+    "true": allow
 
     "yq eval '.'": allow
     "yq eval '.' *": allow
@@ -98,10 +108,15 @@ permission:
     "terraform plan *": ask
     "terraform apply": deny
     "terraform apply *": deny
+    "terraform fmt -check": allow
     "terragrunt plan": ask
     "terragrunt plan *": ask
     "terragrunt apply": deny
     "terragrunt apply *": deny
+    "terragrunt hcl format --check": allow
+    "terragrunt hclfmt": allow
+    "terragrunt hcl --help": allow
+    "terragrunt --help": allow
     "cdk deploy": deny
     "cdk deploy *": deny
     "cdk destroy": deny

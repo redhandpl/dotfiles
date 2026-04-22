@@ -44,7 +44,10 @@ permission:
     "read *": allow
     "echo": allow
     "echo *": allow
-    "source *": allow
+    "source .venv/bin/activate": allow
+    "source .venv/bin/activate && *": allow
+    ". .venv/bin/activate": allow
+    ". .venv/bin/activate && *": allow
     "ansible-playbook --version": allow
     "ansible-playbook * --syntax-check": allow
     "ansible --version": allow
