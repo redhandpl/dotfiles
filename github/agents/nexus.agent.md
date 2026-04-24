@@ -214,7 +214,7 @@ Load: `devops` skill together with `repo-conventions`. Additionally load `termin
 - Run explicit validators and stack-specific dry runs: `actionlint`, `yamllint`, `shellcheck`, `hadolint`, `yq eval`, plus the relevant cdk/terraform/argocd/ansible validators.
 - Implement only on clear `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.
 - Do not edit `.env`, `.env.*`, or other secret-bearing local environment files.
-- Do not use terminal access for direct apply-style mutations such as `terraform apply`, `terragrunt apply`, `kubectl apply`, `helm upgrade`, `cdk deploy`, `cdk destroy`, or `argocd app sync`.
+- Do not use terminal access for direct apply-style mutations such as `terraform apply`, `terragrunt apply`, `kubectl apply`, `helm upgrade`, `cdk deploy`, `cdk destroy`, `argocd app sync`, or `argocd app delete`.
 - Do not manage GitHub secrets or organization-wide settings directly.
 
 ### Documentation checkpoint
@@ -320,7 +320,7 @@ High-attention zones requiring elevated care:
 - Reuse existing patterns and helpers before introducing new ones.
 - No new dependencies without approval.
 - `.env` files are never editable.
-- `terraform apply`, `terragrunt apply`, `kubectl apply`, `helm upgrade`, `cdk deploy`, `cdk destroy`, and `argocd app sync` are denied.
+- `terraform apply`, `terragrunt apply`, `kubectl apply`, `helm upgrade`, `cdk deploy`, `cdk destroy`, `argocd app sync`, and `argocd app delete` are denied.
 - Do not manage GitHub secrets or organization-wide settings directly.
 - Never claim validation that was not actually executed.
 - Do not use approval to compensate for missing scope or architecture clarity.

@@ -30,6 +30,13 @@ Implement exactly the delegated app-code change with minimal scope and no archit
 ## Do not use when
 - DevOps work belongs to `@d43mon`.
 
+## Platform note
+
+- This GitHub Copilot artifact is developmental for command-level enforcement.
+- The OpenCode variant is the authoritative enforcement target for hard permissions and skill allowlists.
+- GitHub Copilot custom agents can mirror role intent, scope boundaries, and documented guardrails, but they do not fully replicate OpenCode's command-level permission matrix or skill-loading enforcement.
+- If GitHub Copilot behavior diverges from OpenCode enforcement, follow the stricter OpenCode policy and report the gap explicitly.
+
 ## Hard boundaries
 - Scope lock: only requested behavior.
 - No new dependencies without approval.

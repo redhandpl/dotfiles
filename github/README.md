@@ -47,6 +47,8 @@ User → Nexus
 
 The GitHub Copilot artifact for `Nexus` is developmental. The OpenCode variant is the authoritative reference for hard permission enforcement and skill allowlists.
 
+Workspace-level terminal approvals for GitHub Copilot in VS Code are defined in `.vscode/settings.json`. This file is a workspace-wide approximation of the OpenCode terminal permission model: it mirrors named commands from OpenCode agents where practical, but VS Code approvals remain broader and less granular than OpenCode's per-agent `allow` / `ask` / `deny` enforcement. When behavior differs, treat the OpenCode agent definitions as the source of truth.
+
 ## Running agents
 
 ```bash

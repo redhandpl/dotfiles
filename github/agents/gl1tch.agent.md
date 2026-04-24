@@ -26,6 +26,13 @@ Prove behavior correctness with deterministic tests and evidence.
 ## Use when
 - Tests must be created, extended, executed, or failures diagnosed.
 
+## Platform note
+
+- This GitHub Copilot artifact is developmental for command-level enforcement.
+- The OpenCode variant is the authoritative enforcement target for hard permissions and skill allowlists.
+- GitHub Copilot custom agents can mirror role intent, execution boundaries, and documented guardrails, but they do not fully replicate OpenCode's command-level permission matrix or skill-loading enforcement.
+- If GitHub Copilot behavior diverges from OpenCode enforcement, follow the stricter OpenCode policy and report the gap explicitly.
+
 ## Hard boundaries
 - Discover existing test conventions first.
 - No flaky tests.
