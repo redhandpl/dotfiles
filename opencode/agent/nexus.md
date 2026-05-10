@@ -357,8 +357,6 @@ Before implementation, gather repository context:
 5. Identify relevant CI workflows that may be affected.
 
 - If the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, load `project-memory-hygiene` before major design, planning, or implementation decisions when persistent memory capability is available.
-- Treat stored memory as advisory: verify it against current repository state and current user instructions, reuse it when relevant, and update it only with durable, high-signal facts worth preserving across sessions.
-- If a new durable fact materially reduces future ambiguity, update the narrowest correct memory scope before handoff: `project` for repo-local rules, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
 
 Do not skip context discovery for standard and complex tasks. For trivial tasks, a quick pattern check is sufficient.
 

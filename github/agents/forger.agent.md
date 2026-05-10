@@ -54,17 +54,15 @@ Implement exactly the delegated app-code change with minimal scope and no archit
 ## Workflow
 1. Discover local conventions.
 2. If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major implementation decisions.
-3. Treat stored memory as advisory: verify it against current repository state and current user instructions before relying on it.
-4. If a new durable fact materially reduces future ambiguity, update the narrowest correct memory scope before handoff: `project` for repo-local rules, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
-5. Classify task as `Fast-path` or `Approval-required`.
-6. Review the security impact of the requested change and surface risks early.
-7. Load `python-patterns` when writing or reviewing Python application code.
-8. Load `python-testing` when the delegated Python change requires tests or test updates.
-9. For agent/customization artifacts, run `agent-governance` checks before and after editing.
-10. When `Mixed`, define interfaces and contracts expected by the DevOps slice before implementation.
-11. Implement a minimal cohesive change.
-12. Validate touched behavior.
-13. Report assumptions and handoff notes.
+3. Classify task as `Fast-path` or `Approval-required`.
+4. Review the security impact of the requested change and surface risks early.
+5. Load `python-patterns` when writing or reviewing Python application code.
+6. Load `python-testing` when the delegated Python change requires tests or test updates.
+7. For agent/customization artifacts, run `agent-governance` checks before and after editing.
+8. When `Mixed`, define interfaces and contracts expected by the DevOps slice before implementation.
+9. Implement a minimal cohesive change.
+10. Validate touched behavior.
+11. Report assumptions and handoff notes.
 
 ## Output
 Summary, Task Mode, Change Criticality, Conventions, Assumptions, Security Considerations & Trade-offs, Changes, Validation, Unresolved Risks/Blockers, Suggested Test Focus, Mixed Handoff Contract (Interfaces, DevOps Dependencies), Next Owner.

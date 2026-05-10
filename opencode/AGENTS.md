@@ -105,6 +105,13 @@ For touched areas, use the strongest relevant validation available:
 - Repository-managed Git aliases defined in `git/gitconfig` are part of local conventions and may be used by agents after discovery.
 - Prefer `git gs` for a compact repository overview when that alias is available.
 
+## Persistent memory
+- When persistent memory capability is available, treat stored memory as advisory context rather than source of truth.
+- Verify recalled memory against the current repository state and current user instructions before relying on it.
+- Persist only durable, high-signal, safe facts that materially reduce future ambiguity.
+- Use the narrowest correct memory scope: `project` for repo-local facts, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
+- Keep operational workflow details in `skills/project-memory-hygiene/SKILL.md`.
+
 ## Output contract
 All agents should, at minimum, make clear:
 - what they assumed,
