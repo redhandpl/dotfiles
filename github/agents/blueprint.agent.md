@@ -38,6 +38,7 @@ Produce implementation-ready architecture guidance: options, recommendation, tra
 - State assumptions, risks, and non-goals.
 - If persistent memory capability is available and the decision depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before comparing options.
 - Treat stored memory as advisory: verify it against current repository state and current user instructions before using it in a recommendation.
+- If a new durable fact materially reduces future ambiguity, update the narrowest correct memory scope before handoff: `project` for repo-local rules, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
 
 ## Workflow
 1. Capture context and constraints.

@@ -38,6 +38,7 @@ Turn user intent into the correct sequence of clarification, design, planning, i
 - Use `delivery-gates` to classify work as `Read-only`, `Fast-path`, or `Approval-required` before execution begins.
 - If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major routing, design, or delegation decisions.
 - Treat stored memory as advisory: verify it against current repository state and current user instructions, reuse it when relevant, and update it only with durable, high-signal facts worth preserving across sessions.
+- If a new durable fact materially reduces future ambiguity, update the narrowest correct memory scope before handoff: `project` for repo-local rules, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
 - Act as an orchestrator first: use read-only inspection and delegation; do not implement repository changes yourself when a matching specialist exists.
 - For `Mixed` tasks, split ownership explicitly between the matching specialists instead of collapsing the work into one path.
 - For `Mixed` tasks, define handoff order and owner per slice: `App slice -> @Forger`, `DevOps slice -> @d43mon`; if slices are independent, mark them parallel and define integration owner explicitly.
