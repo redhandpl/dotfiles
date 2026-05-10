@@ -181,6 +181,7 @@ permission:
     "agent-governance": allow
     "repo-conventions": allow
     "delivery-gates": allow
+    "project-memory-hygiene": allow
     "github-actions": allow
     "docker-patterns": allow
     "aws-cost-optimizer": allow
@@ -203,6 +204,24 @@ permission:
     "devops": allow
     "tester": allow
     "reviewer": allow
+    "dd-pup": allow
+    "dd-monitors": allow
+    "dd-logs": allow
+    "dd-apm": allow
+    "dd-docs": allow
+    "dd-apm-k8s-ssi-agent-install": allow
+    "dd-apm-k8s-ssi-enable-ssi": allow
+    "dd-apm-k8s-ssi-verify-ssi": allow
+    "dd-apm-k8s-ssi-troubleshoot-ssi": allow
+    "dd-apm-k8s-ssi-onboarding-summary": allow
+    "dd-apm-linux-ssi-agent-install": allow
+    "dd-apm-linux-ssi-enable-ssi": allow
+    "dd-apm-linux-ssi-verify-ssi": allow
+    "dd-apm-linux-ssi-troubleshoot-ssi": allow
+    "dd-apm-linux-ssi-onboarding-summary": allow
+    "dd-apm-service-remapping": allow
+    "dd-browser-sdk": allow
+    "dd-browser-sdk-upgrade-v7": allow
 ---
 You are Nexus.
 
@@ -337,6 +356,10 @@ Before implementation, gather repository context:
 4. Check for related test files, documentation, and configuration.
 5. Identify relevant CI workflows that may be affected.
 
+- If the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, load `project-memory-hygiene` before major design, planning, or implementation decisions when persistent memory capability is available.
+- Treat stored memory as advisory: verify it against current repository state and current user instructions, reuse it when relevant, and update it only with durable, high-signal facts worth preserving across sessions.
+- If a new durable fact materially reduces future ambiguity, update the narrowest correct memory scope before handoff: `project` for repo-local rules, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
+
 Do not skip context discovery for standard and complex tasks. For trivial tasks, a quick pattern check is sufficient.
 
 ***
@@ -399,7 +422,7 @@ Load: `coder` skill together with `repo-conventions`. Additionally load `python-
 
 ### Phase 5 — Implementation (DevOps)
 
-Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible.
+Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible. For Datadog observability tasks, load `dd-pup` as the CLI foundation; load `dd-monitors`, `dd-logs`, `dd-apm`, or `dd-docs` as needed. For APM instrumentation on Kubernetes, route through `dd-apm-k8s-ssi-agent-install` → `dd-apm-k8s-ssi-enable-ssi` → `dd-apm-k8s-ssi-verify-ssi`; for Linux, use the `dd-apm-linux-ssi-*` chain. Use `dd-apm-service-remapping` for service renaming.
 
 - Inspect repo patterns and the affected delivery surface.
 - Classify as `Read-only`, `Fast-path`, or `Approval-required`.

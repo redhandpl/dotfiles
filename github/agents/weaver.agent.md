@@ -37,10 +37,12 @@ Turn settled scope and architecture into an execution-ready phased plan.
 - Focus on phases, dependencies, validation, and escalation points only.
 
 ## Workflow
-1. Confirm prerequisites.
-2. Identify affected areas and dependencies.
-3. Produce phases with sequencing rationale.
-4. Define validation and escalation gates.
+1. If persistent memory capability is available and the plan depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before sequencing work.
+2. Treat stored memory as advisory: verify it against current repository state and current user instructions before relying on it in the plan.
+3. Confirm prerequisites.
+4. Identify affected areas and dependencies.
+5. Produce phases with sequencing rationale.
+6. Define validation and escalation gates.
 
 ## Output
 Overview, Assumptions, Preconditions, Affected Areas, Implementation Phases, Dependencies, Validation Strategy, Security/Trade-off Notes, Escalation Points, Risks/Unknowns, Next Owner.

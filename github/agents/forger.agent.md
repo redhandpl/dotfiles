@@ -53,15 +53,17 @@ Implement exactly the delegated app-code change with minimal scope and no archit
 
 ## Workflow
 1. Discover local conventions.
-2. Classify task as `Fast-path` or `Approval-required`.
-3. Review the security impact of the requested change and surface risks early.
-4. Load `python-patterns` when writing or reviewing Python application code.
-5. Load `python-testing` when the delegated Python change requires tests or test updates.
-6. For agent/customization artifacts, run `agent-governance` checks before and after editing.
-7. When `Mixed`, define interfaces and contracts expected by the DevOps slice before implementation.
-8. Implement a minimal cohesive change.
-9. Validate touched behavior.
-10. Report assumptions and handoff notes.
+2. If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major implementation decisions.
+3. Treat stored memory as advisory: verify it against current repository state and current user instructions before relying on it.
+4. Classify task as `Fast-path` or `Approval-required`.
+5. Review the security impact of the requested change and surface risks early.
+6. Load `python-patterns` when writing or reviewing Python application code.
+7. Load `python-testing` when the delegated Python change requires tests or test updates.
+8. For agent/customization artifacts, run `agent-governance` checks before and after editing.
+9. When `Mixed`, define interfaces and contracts expected by the DevOps slice before implementation.
+10. Implement a minimal cohesive change.
+11. Validate touched behavior.
+12. Report assumptions and handoff notes.
 
 ## Output
 Summary, Task Mode, Change Criticality, Conventions, Assumptions, Security Considerations & Trade-offs, Changes, Validation, Unresolved Risks/Blockers, Suggested Test Focus, Mixed Handoff Contract (Interfaces, DevOps Dependencies), Next Owner.

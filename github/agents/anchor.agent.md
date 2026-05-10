@@ -32,6 +32,8 @@ Turn ambiguous requests into implementation-ready requirements.
 - Define in-scope and out-of-scope.
 - Acceptance criteria must be testable.
 - Separate blocking questions from non-blocking unknowns.
+- If persistent memory capability is available and scope depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before locking scope or acceptance criteria.
+- Treat stored memory as advisory: verify it against current repository state and current user instructions before using it to resolve ambiguity.
 
 ## Workflow
 1. Clarify ambiguity and constraints.

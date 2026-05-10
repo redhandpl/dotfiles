@@ -36,6 +36,8 @@ Produce implementation-ready architecture guidance: options, recommendation, tra
 - Recommend one option with rationale.
 - Include Mermaid diagrams.
 - State assumptions, risks, and non-goals.
+- If persistent memory capability is available and the decision depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before comparing options.
+- Treat stored memory as advisory: verify it against current repository state and current user instructions before using it in a recommendation.
 
 ## Workflow
 1. Capture context and constraints.

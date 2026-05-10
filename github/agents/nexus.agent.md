@@ -144,6 +144,9 @@ Before implementation, gather repository context:
 4. Check for related test files, documentation, and configuration.
 5. Identify relevant CI workflows that may be affected.
 
+- If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major design, planning, or implementation decisions.
+- Treat stored memory as advisory: verify it against current repository state and current user instructions, reuse it when relevant, and update it only with durable, high-signal facts worth preserving across sessions.
+
 Do not skip context discovery for standard and complex tasks. For trivial tasks, a quick pattern check is sufficient.
 
 ***

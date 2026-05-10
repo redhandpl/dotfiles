@@ -52,6 +52,8 @@ permission:
     "ansible-playbook * --syntax-check": allow
     "ansible --version": allow
     "ansible localhost *": allow
+    "ls": allow
+    "ls *": allow
   task: deny
   skill:
     "*": deny
