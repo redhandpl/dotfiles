@@ -11,6 +11,7 @@ path = /Users/krzysztof.pedrys/Projects/OWN/GIT/.gitconfig
 	required = true
 [alias]
 	st = status
+	gs = "!git -C \"$PWD\" status --short && printf '\\n---DIFFSTAT---\\n' && git -C \"$PWD\" diff --stat && printf '\\n---STAGED-DIFFSTAT---\\n' && git -C \"$PWD\" diff --cached --stat"
 	whoami = "!f() { \
 		echo \"user.name:  $(git config --show-origin user.name | sed '1!d')\"; \
 		echo \"user.email: $(git config --show-origin user.email | sed '1!d')\"; \
@@ -40,9 +41,11 @@ path = /Users/krzysztof.pedrys/Projects/OWN/GIT/.gitconfig
 	verbose = true
 [core]
 	excludesfile = /Users/krzysztof.pedrys/.gitignore
-#        pager = diffnav
+	pager = bat --style=plain
 [user]
 	name = Krzysztof Pędrys
 #	email = krzysztof.pedrys@huuugegames.com
 [init]
 	defaultBranch = master
+[pager]
+	diff = bat --style=plain --language diff
