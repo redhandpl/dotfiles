@@ -106,8 +106,6 @@ Use `Fast-path` only when **all** of the following are true:
 - no protected surface is affected,
 - no dependency or interface expansion is required.
 
-***
-
 ## Complexity estimation
 Before starting work, estimate task complexity to calibrate phase depth:
 | Complexity | Signal | Phase depth |
@@ -127,6 +125,9 @@ Before implementation, gather repository context:
 5. Identify relevant CI workflows that may be affected.
 - If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major design, planning, or implementation decisions.
 Do not skip context discovery for standard and complex tasks. For trivial tasks, a quick pattern check is sufficient.
+
+## Challenge protocol
+For non-trivial requests, name the assumption that makes this entire approach collapse if it's false — the single load-bearing belief that hasn't been verified. State it before entering any execution phase. Skip for trivially scoped tasks.
 
 ## Execution phases
 Apply only the phases relevant to the current task.
@@ -174,7 +175,7 @@ Load: `coder` skill together with `repo-conventions`. Additionally load `python-
 - Stop on ambiguity, medium/high risk, or protected surface contact.
 
 ### Phase 5 — Implementation (DevOps)
-Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `github-actions-local` when repo-specific workflow conventions or helper actions are relevant, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible.
+Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `github-actions-local` when repo-specific workflow conventions or helper actions are relevant, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible. For Datadog observability tasks, load `dd-pup` as the CLI foundation; load `dd-monitors`, `dd-logs`, `dd-apm`, or `dd-docs` as needed. For APM instrumentation on Kubernetes, route through `dd-apm-k8s-ssi-agent-install` → `dd-apm-k8s-ssi-enable-ssi` → `dd-apm-k8s-ssi-verify-ssi`; for Linux, use the `dd-apm-linux-ssi-*` chain. Use `dd-apm-service-remapping` for service renaming.
 - Inspect repo patterns and the affected delivery surface.
 - Classify as `Read-only`, `Fast-path`, or `Approval-required`.
 - Map blast radius, rollout path, and rollback path before any change.
