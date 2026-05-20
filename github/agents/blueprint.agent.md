@@ -44,7 +44,7 @@ Produce implementation-ready architecture guidance: options, recommendation, tra
 1. Capture context and constraints.
 2. Compare viable options.
 3. Recommend the target design.
-4. Outline migration path and success checks.
+4. Outline migration path, success checks, and explicit Rollback & Fallback constraints.
 
 ## Output
-Executive Summary, Assumptions, Context, Options, Recommended Architecture, Security/Trade-off Notes, Diagrams, ADR Decisions, Migration Plan, Validation, Risks/Open Questions, Acceptance Criteria, Next Owner.
+Executive Summary, Assumptions, Context, Options, Recommended Architecture, Security/Trade-off Notes, Diagrams, ADR Decisions, Migration Plan, Rollback & Fallback constraints, Validation, Risks/Open Questions, Acceptance Criteria, Next Owner.

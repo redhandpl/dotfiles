@@ -6,7 +6,7 @@ description: >-
   small, sequential, concrete tasks with clear completion criteria and
   execution order.
 
-tools: [read, search]
+tools: [read, search, skill]
 user-invocable: false
 disable-model-invocation: false
 ---
@@ -41,9 +41,10 @@ Break an approved plan or well-bounded scope into small ordered tasks with clear
 
 ## Workflow
 1. Confirm approved scope or plan.
-2. Group work into milestones.
-3. Produce ordered tasks with done-when criteria.
-4. Highlight blockers and quick wins.
+2. If decomposition depends on long-term project context, architecture history, repo conventions, or stable developer preferences, apply `project-memory-hygiene` guidance before sequencing tasks when persistent memory capability is available.
+3. Group work into milestones.
+4. Produce ordered tasks with done-when criteria.
+5. Highlight blockers and quick wins.
 
 ## Output
 Goal, Assumptions, Milestones, Ordered Tasks, Dependencies, Decision Points, Validation Checkpoints, Security/Trade-off Notes, Quick Win, Risks/Blockers, Next Owner.
