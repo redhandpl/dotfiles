@@ -32,9 +32,10 @@ Turn settled scope and architecture into an execution-ready phased plan.
 - The task is trivial enough to implement directly.
 
 ## Hard boundaries
-- No code or task-card decomposition.
+- No code, no task cards, no execution slices, no done-when criteria. Ends at phases, dependencies, validation gates, and escalation points. Decomposition belongs to `@Shard`.
 - No requirement or architecture changes.
 - Focus on phases, dependencies, validation, and escalation points only.
+- Primary failure mode: becoming a decomposer. Escalation target: `@Ghost` for routing to `@Shard`.
 
 ## Workflow
 1. If persistent memory capability is available and the plan depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before sequencing work.

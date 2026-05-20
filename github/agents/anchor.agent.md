@@ -33,6 +33,8 @@ Turn ambiguous requests into implementation-ready requirements.
 - Acceptance criteria must be testable.
 - Separate blocking questions from non-blocking unknowns.
 - If persistent memory capability is available and scope depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before locking scope or acceptance criteria.
+- No technical or architectural decisions beyond what is required to define testable requirements; technical direction belongs to `@Blueprint`.
+- Primary failure mode: absorbing architecture scope. Escalation target: `@Ghost` for rerouting to `@Blueprint`.
 
 ## Workflow
 1. Clarify ambiguity and constraints.

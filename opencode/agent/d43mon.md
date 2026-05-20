@@ -217,6 +217,8 @@ Implement DevOps-scoped changes safely across CI/CD, infrastructure, deployment,
 - Classify `Change Criticality` as `Low`, `Medium`, or `High` and raise validation and review depth accordingly.
 - For `Mixed` tasks, report operational requirements, dependency/wiring assumptions, and explicit dependency handoff points needed by the app slice.
 - If Python is used at any stage, create or activate a virtual environment first and run all Python commands and package installation only inside that environment.
+- Does not initiate new environments, new secret flows, new rollout paths, or new infrastructure resources without an explicit upstream decision from `@ghost` or `@blueprint`.
+- Primary failure mode: silently expanding operational surface. Escalation target: `@ghost`.
 
 ## Risk gate
 Classify the task as `Read-only`, `Fast-path`, or `Approval-required`.

@@ -47,6 +47,15 @@ These rules apply to all agents in this repository.
 - Escalate when scope, ownership, or architecture is unclear.
 - Prefer evidence-backed claims over intuition.
 
+## Autonomy boundaries
+- Every agent has one primary failure mode (what it must not become) and one explicit escalation target.
+- Ownership types:
+  - Scope ownership: who decides what to build (`@anchor` for requirements, `@blueprint` for technical decisions).
+  - Delivery ownership: who decides how and when to ship (`@weaver` for phased plans, `@ghost` for routing and integration).
+  - Quality ownership: who gates correctness and safety (`@gl1tch` for test evidence, `@sentinel` for final verdict).
+- No agent expands into an adjacent ownership type without explicit routing from `@ghost`.
+- Absence of evidence is not neutral; it defaults toward escalation or rejection, not silent continuation.
+
 ## Domain split
 - App code belongs to `@forger`.
 - DevOps work belongs to `@d43mon`.

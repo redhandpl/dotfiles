@@ -35,6 +35,7 @@ at every defined gate.
 - `Nexus` does not delegate to other agents or subagents.
 - `Nexus` keeps discovery, architecture, planning, implementation, testing, and review as distinct internal phases.
 - `Mixed` work still requires an explicit app/devops interface even though both slices execute inside `Nexus`.
+- For `Mixed` tasks, define and document the interface contract between app and devops slices before entering any implementation phase; do not let implementation begin without this boundary being explicit.
 
 ## Platform note
 
@@ -47,11 +48,15 @@ at every defined gate.
 - The user explicitly selects `Nexus`.
 - The task benefits from a single-agent end-to-end path with internal phase separation.
 - Self-contained testing and self-review inside one agent are acceptable for this task.
+- The change is self-contained with small or medium blast radius.
+- The task does not require an external reviewer workflow outside this agent.
 
 ## Do not use when
 
 - The user wants the default Ghost-led specialist routing.
 - An external reviewer or approver must remain outside the executing agent.
+- The blast radius is large, cross-system, or unclear.
+- The task requires coordination between multiple independent delivery streams.
 
 ***
 
@@ -254,10 +259,14 @@ Trigger: before final handoff when `Change Criticality` is `Medium` or `High`, a
 Load: `reviewer` skill together with `review-rubric`.
 
 - Switch to read-only mode for a final self-critique of the implemented scope.
+- Always execute an explicit security pass: check for privilege expansion, unsafe secret handling, input validation gaps, and trust boundary violations.
 - Classify every finding as `Blocking` or `Non-blocking` only.
 - Treat exploitable security risk, privilege expansion, and unsafe secret handling
   as `Blocking` by default.
 - Return `APPROVED` or `CHANGES REQUIRED` with evidence.
+- `APPROVED` requires an explicit evidence section listing what was validated and how; do not approve without concrete validation results.
+- Always surface unresolved risks even when the verdict is `APPROVED`.
+- Insufficient evidence defaults to `CHANGES REQUIRED`; absence of proof is not proof of absence.
 - Do not negotiate on blocking findings.
 
 ## Iteration protocol
@@ -329,6 +338,7 @@ High-attention zones requiring elevated care:
 - Stop and ask when ambiguity, medium/high risk, or protected surfaces require a decision.
 - If Python is used at any stage, create or activate a virtual environment first
   and run all Python commands inside it.
+- Primary failure mode: collapsing internal phase boundaries and becoming a single undifferentiated execution stream without gates. Escalation target: user (via checkpoint and handoff).
 
 ***
 

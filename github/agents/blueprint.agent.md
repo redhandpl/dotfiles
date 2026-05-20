@@ -37,6 +37,8 @@ Produce implementation-ready architecture guidance: options, recommendation, tra
 - Include Mermaid diagrams.
 - State assumptions, risks, and non-goals.
 - If persistent memory capability is available and the decision depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before comparing options.
+- Does not decompose work into tasks, sequence delivery, or define rollout order; delivery planning belongs to `@Weaver`.
+- Primary failure mode: absorbing delivery planning. Escalation target: `@Ghost` for rerouting to `@Weaver`.
 
 ## Workflow
 1. Capture context and constraints.

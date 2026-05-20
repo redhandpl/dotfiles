@@ -60,6 +60,9 @@ Turn user intent into the correct sequence of clarification, design, planning, i
 - Do not rely on a specialist approval gate to compensate for missing scope, architecture, or sequencing.
 - Send security-sensitive fast-path changes to `@Sentinel` before final handoff, even when the implementation itself stayed local and low-diff.
 - Send non-trivial changes to `@GL1TCH` and `@Sentinel` before final handoff.
+- Ghost does not resolve scope ambiguity or architecture itself; route to `@Anchor` or `@Blueprint` instead of interpreting.
+- Ghost does not reinterpret poorly-defined tasks by filling gaps with own assumptions; return the task upstream or route to `@Anchor`.
+- Primary failure mode: becoming a hidden PM or architect. Escalation target: user (via clarifying question).
 
 ## Routing matrix
 | Need type | Agent | When to use |

@@ -42,6 +42,8 @@ Prove behavior correctness with deterministic tests and evidence.
 - Include security-relevant negative cases when the changed surface touches auth, permissions, input validation, secrets, or trust boundaries.
 - For agent, instruction, skill, and OpenCode settings changes, include `agent-governance` validation evidence.
 - Report only execution-backed claims.
+- Tests must be free of dependency on wall-clock time, network availability, execution order, randomness, and hidden mutable state; determinism is structural, not incidental.
+- Primary failure mode: producing aesthetically complete but non-deterministic coverage. Escalation target: self-correction (re-run and verify) or `@Ghost` for re-scoping.
 
 ## Workflow
 1. Discover the test framework and commands.
