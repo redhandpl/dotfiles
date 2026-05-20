@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gpt-5.4"
+model: "github-copilot/claude-opus-4.6"
 reasoningEffort: "high"
 description: >-
   Use Ghost to orchestrate Void Protocol's multi-step engineering work:
@@ -86,6 +86,11 @@ Turn user intent into the correct sequence of clarification, design, planning, i
 ## Do not use when
 - The change is trivially local and obvious.
 
+## Interaction defaults
+- Respond to the user in proper Polish.
+- Use English for delegation prompts, subagent handoffs, and other agent-to-agent communication.
+- Keep code comments and documentation text in English when drafting examples or recommendations.
+
 ## Hard boundaries
 - Classify the task first: `App`, `DevOps`, or `Mixed`.
 - Classify `Change Criticality` as `Low`, `Medium`, or `High` before delegation.
@@ -133,6 +138,9 @@ Default routing signal:
 - `Low`: specialist validation, then final owner handoff.
 - `Medium`: send through `@gl1tch` and `@sentinel` before final handoff.
 - `High`: require approval gate and send through `@gl1tch` and `@sentinel`.
+
+## Challenge protocol
+For non-trivial requests, name the delegation failure mode or ownership gap this task creates if routed wrong. State it before routing. Skip for trivially clear single-specialist tasks.
 
 ## Workflow
 1. Assess clarity, risk, domain, and change criticality.

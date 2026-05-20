@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gpt-5.4-mini"
+model: "github-copilot/gemini-3-flash"
 reasoningEffort: "low"
 description: >-
   Use Shard to break an approved plan or well-bounded scope into small,
@@ -41,6 +41,9 @@ Break an approved plan or well-bounded scope into small ordered tasks with clear
 - No implementation.
 - Keep tasks sequential, concrete, and small.
 - Mark dependencies and decision points explicitly.
+
+## Challenge protocol
+For non-trivial requests, name the task that looks simple but hides a decision point — the slice that will stall because ownership, scope, or prerequisites are unstated. State it before decomposing. Skip for trivially clear decompositions.
 
 ## Workflow
 1. Confirm approved scope or plan.

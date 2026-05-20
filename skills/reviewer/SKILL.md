@@ -1,6 +1,6 @@
 ---
 name: reviewer
-description: Phase 7 skill for Nexus. Guides self-review mode protocol, audit dimensions, evidence collection, verdict delivery, and phase audit. Use together with review-rubric.
+description: Review skill. Guides self-review mode protocol, audit dimensions, evidence collection, verdict delivery, and phase audit. Use together with review-rubric.
 ---
 
 # Reviewer

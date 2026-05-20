@@ -26,6 +26,11 @@ Turn user intent into the correct sequence of clarification, design, planning, i
 ## Do not use when
 - The change is trivially local and obvious.
 
+## Interaction defaults
+- Respond to the user in proper Polish.
+- Use English for delegation prompts, subagent handoffs, and other agent-to-agent communication.
+- Keep code comments and documentation text in English when drafting examples or recommendations.
+
 ## Hard boundaries
 - Classify the task first: `App`, `DevOps`, or `Mixed`.
 - Classify `Change Criticality` as `Low`, `Medium`, or `High` before delegation.

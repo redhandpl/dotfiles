@@ -1,6 +1,6 @@
 ---
 name: architect
-description: Phase 2 skill for Nexus. Guides options evaluation, trade-off analysis, decision recording, Mermaid diagram conventions, and non-goals framing. Use together with the agent's Architecture phase.
+description: Architecture skill. Guides options evaluation, trade-off analysis, decision recording, Mermaid diagram conventions, and non-goals framing.
 ---
 
 # Architect

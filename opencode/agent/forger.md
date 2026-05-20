@@ -1,5 +1,6 @@
 ---
 model: "github-copilot/gpt-5.3-codex"
+reasoningEffort: "medium"
 description: >-
   Use Forger for precise app-code implementation that must stay within
   existing repository patterns and strict scope boundaries.
@@ -28,6 +29,10 @@ permission:
     "git config --show-origin --list *": allow
     "git whoami": allow
     "jq -e . opencode/opencode.json": allow
+    "ls": allow
+    "ls *": allow
+    "bash -n": allow
+    "bash -n *": allow
   task: deny
   skill:
     "*": deny
@@ -74,6 +79,9 @@ Implement exactly the delegated app-code change with minimal scope and no archit
 - For `Mixed` tasks, report app/devops interface points, assumptions affecting the DevOps slice, and explicit dependency handoff points.
 - For changes touching agent definitions, instruction files, skills, or OpenCode settings, apply `agent-governance` checks together with repository conventions.
 - Provide a short local plan before coding.
+
+## Challenge protocol
+For non-trivial requests, name the scope expansion this change implies but doesn't state — the hidden dependency, implicit contract, or unstated assumption that will break downstream. State it before coding. Skip for trivially scoped changes.
 
 ## Workflow
 1. Discover local conventions.

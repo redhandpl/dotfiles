@@ -65,6 +65,8 @@ Load the `github-actions` skill for workflow-local work such as:
 
 Keep owner-level risk classification, approval decisions, rollout expectations, and rollback responsibility inside `d43mon` even when the `github-actions` skill is loaded.
 
+If the repository defines a local overlay such as `github-actions-local`, load it only when repo-specific helper actions, auth wrappers, runner conventions, or summary conventions are in scope.
+
 Escalate workflow work back into the main DevOps decision flow when it expands into broader IAM, secret lifecycle, cloud architecture, deployment design, or infrastructure provisioning.
 
 ## Stack-specialist skills
@@ -90,7 +92,7 @@ If a private or local overlay such as `terminal-context-aws-k8s` is available, l
 3. Treat stored memory as advisory: verify it against current repository state and current user instructions before relying on it.
 4. If generic agent/customization artifacts are in scope, stop and escalate for rerouting instead of absorbing them into DevOps scope.
 5. Classify risk and write a short delivery plan.
-6. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `d43mon` ownership.
+6. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `d43mon` ownership. Add `github-actions-local` only when repository-specific workflow conventions are relevant.
 7. Load the relevant stack-specialist skill for Docker, AWS cost analysis, Terraform/Terragrunt, CDK, ArgoCD/GitOps, or Ansible work, pairing Terraform/Terragrunt work with `terraform-style-guide` when HCL authoring or review is in scope.
 8. Load `terminal-context-bridge` before context-dependent AWS or Kubernetes terminal commands.
 9. Implement only if `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.

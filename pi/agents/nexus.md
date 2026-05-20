@@ -203,7 +203,7 @@ Load: `coder` skill together with `repo-conventions`. Additionally load `python-
 
 ### Phase 5 — Implementation (DevOps)
 
-Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible.
+Load: `devops` skill together with `repo-conventions`. Additionally load `terminal-context-bridge` for AWS or Kubernetes terminal work, `github-actions` for workflow-local GitHub Actions changes, `github-actions-local` when repo-specific workflow conventions or helper actions are relevant, `docker-patterns` for Dockerfiles and Docker Compose work, `aws-cost-optimizer` for AWS cost analysis and savings recommendations, `terraform-terragrunt` for Terraform or Terragrunt or Atlantis work, `terraform-style-guide` alongside `terraform-terragrunt` when authoring or reviewing Terraform HCL, `cdk-aws` for AWS CDK, `argocd-gitops` for ArgoCD or GitOps work, and `ansible-ops` for Ansible.
 
 - Inspect repo patterns and the affected delivery surface.
 - Classify as `Read-only`, `Fast-path`, or `Approval-required`.

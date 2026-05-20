@@ -79,6 +79,8 @@ Load the `github-actions` skill for workflow-local work such as:
 
 Keep owner-level risk classification, approval decisions, rollout expectations, and rollback responsibility inside `@d43mon` even when the `github-actions` skill is loaded.
 
+If the repository defines a local overlay such as `github-actions-local`, load it only when repo-specific helper actions, auth wrappers, runner conventions, or summary conventions are in scope.
+
 Escalate workflow work back into the main DevOps decision flow when it expands into broader IAM, secret lifecycle, cloud architecture, deployment design, or infrastructure provisioning.
 
 ## Stack-specialist guidance
@@ -103,7 +105,7 @@ Use the narrowest matching guidance for the touched surface:
 2. If persistent memory capability is available and the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before major delivery or rollout decisions.
 3. If generic agent/customization artifacts are in scope, stop and escalate for rerouting instead of absorbing them into DevOps scope.
 4. Classify risk and write a short delivery plan.
-5. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `@d43mon` ownership.
+5. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `@d43mon` ownership. Add `github-actions-local` only when repository-specific workflow conventions are relevant.
 6. Apply the narrowest matching stack-specialist guidance for Docker, AWS cost analysis, Terraform/Terragrunt, AWS CDK, ArgoCD/GitOps, or Ansible work.
 7. Resolve execution context explicitly before context-dependent AWS or Kubernetes terminal commands.
 8. Implement only if `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.

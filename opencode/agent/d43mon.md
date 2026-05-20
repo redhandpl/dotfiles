@@ -24,6 +24,8 @@ permission:
   bash:
     "*": ask
 
+    "/opt/homebrew/bin/lean-ctx *": allow
+
     "git status": allow
     "git status *": allow
     "git diff": allow
@@ -74,7 +76,12 @@ permission:
     "yq e '.'": allow
     "yq e '.' *": allow
     "which *": allow
+    "perl": allow
+    "perl *": allow
     ".venv/bin/ansible-playbook --syntax-check *": allow
+
+    "if command": allow
+    "if commande *": allow
 
     "terraform plan": ask
     "terraform plan *": ask
@@ -147,6 +154,7 @@ permission:
     "delivery-gates": allow
     "project-memory-hygiene": allow
     "github-actions": allow
+    "github-actions-local": allow
     "docker-patterns": allow
     "aws-cost-optimizer": allow
     "terraform-terragrunt": allow
@@ -234,6 +242,8 @@ Load the `github-actions` skill for workflow-local work such as:
 
 Keep owner-level risk classification, approval decisions, rollout expectations, and rollback responsibility inside `@d43mon` even when the `github-actions` skill is loaded.
 
+If the repository defines a local overlay such as `github-actions-local`, load it only when repo-specific helper actions, auth wrappers, runner conventions, or summary conventions are in scope.
+
 Escalate workflow work back into the main DevOps decision flow when it expands into broader IAM, secret lifecycle, cloud architecture, deployment design, or infrastructure provisioning.
 
 ## Stack-specialist skills
@@ -265,12 +275,15 @@ Load `terminal-context-bridge` before terminal commands that depend on AWS or Ku
 
 If a private or local overlay such as `terminal-context-aws-k8s` is available, let the bridge use it for the concrete mapping. If not, ask instead of guessing `prod`.
 
+## Challenge protocol
+For non-trivial requests, name the rollback scenario the requester hasn't considered — the operational failure mode, blast radius blind spot, or recovery gap in the delivery plan. State it before implementing. Skip for trivially local, pattern-matched changes.
+
 ## Workflow
 1. Inspect repo patterns and the affected delivery surface.
 2. If the task depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, load `project-memory-hygiene` before major delivery or rollout decisions when persistent memory capability is available.
 3. If generic agent/customization artifacts are in scope, stop and escalate for rerouting instead of absorbing them into DevOps scope.
 4. Classify risk and write a short delivery plan.
-5. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `@d43mon` ownership.
+5. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `@d43mon` ownership. Add `github-actions-local` only when repository-specific workflow conventions are relevant.
 6. Load the relevant stack-specialist skill for Docker, AWS cost analysis, Terraform/Terragrunt, CDK, ArgoCD/GitOps, or Ansible work, pairing Terraform/Terragrunt work with `terraform-style-guide` when HCL authoring or review is in scope.
 7. Load `terminal-context-bridge` before context-dependent AWS or Kubernetes terminal commands.
 8. Implement only if `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.

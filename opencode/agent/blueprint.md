@@ -1,5 +1,6 @@
 ---
-model: "github-copilot/claude-sonnet-4.6"
+model: "github-copilot/gemini-3.1-pro"
+reasoningEffort: "medium"
 description: >-
   Use Blueprint for high-level architecture and system design: boundaries,
   trade-offs, technical decisions, and migration paths. No implementation.
@@ -47,6 +48,9 @@ Produce implementation-ready architecture guidance: options, recommendation, tra
 - Include Mermaid diagrams.
 - State assumptions, risks, and non-goals.
 - If the decision depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, load `project-memory-hygiene` before comparing options when persistent memory capability is available.
+
+## Challenge protocol
+For non-trivial requests, state the failure mode this design introduces — the architectural consequence the requester hasn't mapped yet. State it before recommending. Skip for trivially scoped decisions.
 
 ## Workflow
 1. Capture context and constraints.
