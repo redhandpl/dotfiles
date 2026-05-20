@@ -1,6 +1,6 @@
 ---
 name: planner
-description: Phase 3 skill for Nexus. Guides phase sequencing, validation gates, rollback path design, escalation points, dependency mapping, and task decomposition. Use together with delivery-gates.
+description: Planning skill. Guides phase sequencing, validation gates, rollback path design, escalation points, dependency mapping, and task decomposition. Use together with delivery-gates.
 ---
 
 # Planner

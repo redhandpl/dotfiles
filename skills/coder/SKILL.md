@@ -1,6 +1,6 @@
 ---
 name: coder
-description: Phase 4 skill for Nexus. Guides security impact pre-assessment, scope drift rejection, interface contracts for Mixed tasks, and minimal change discipline. Use together with repo-conventions.
+description: Application implementation skill. Guides security impact pre-assessment, scope drift rejection, interface contracts for Mixed tasks, and minimal change discipline. Use together with repo-conventions.
 ---
 
 # Coder

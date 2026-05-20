@@ -1,6 +1,6 @@
 ---
 name: devops
-description: Phase 5 skill for Nexus. Guides blast radius mapping, rollout or rollback design, stack dispatch, execution-context selection, and operational coupling analysis. Use together with repo-conventions, terminal-context-bridge when terminal execution is involved, and the relevant stack-specific skills.
+description: DevOps implementation skill. Guides blast radius mapping, rollout or rollback design, stack dispatch, execution-context selection, and operational coupling analysis. Use together with repo-conventions, terminal-context-bridge when terminal execution is involved, and the relevant stack-specific skills.
 ---
 
 # DevOps
@@ -11,6 +11,7 @@ This is the control-plane skill for Phase 5. It decides blast radius, rollout, r
 Complements `repo-conventions` with operational depth.
 Load additional specialist skills as required:
 - `github-actions` for workflow-local GitHub Actions authoring, validation, and hardening.
+- `github-actions-local` when repository-specific workflow conventions, helper actions, or auth wrappers matter.
 - `docker-patterns` for Dockerfiles, Docker Compose topology, image hardening, and container orchestration conventions.
 - `aws-cost-optimizer` for AWS cost analysis, Cost Explorer, rightsizing, and savings recommendations.
 - `terraform-terragrunt` for Terraform, Terragrunt, and Atlantis-driven repositories.
@@ -24,6 +25,7 @@ Load additional specialist skills as required:
 
 Choose the narrowest specialist skill set that matches the touched surface:
 - GitHub Actions workflow YAML, reusable workflows, composite actions, or workflow-local OIDC wiring -> `github-actions`
+- Repository-specific GitHub Actions helper actions, runner conventions, summary conventions, or auth wrappers -> `github-actions-local` together with `github-actions`
 - Dockerfiles, Docker Compose stacks, image hardening, container networking, or volume strategy -> `docker-patterns`
 - AWS cost analysis, Cost Explorer queries, rightsizing, waste detection, Savings Plans, or Reserved Instance evaluation -> `aws-cost-optimizer`
 - Terraform modules, Terragrunt live repos, Atlantis config, generated providers/backends, or shared HCL -> `terraform-terragrunt` plus `terraform-style-guide` when Terraform HCL authoring or review is in scope

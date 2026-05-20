@@ -10,7 +10,8 @@ These rules apply to all agents in this repository.
 - Choose a quote that fits the coding topic or task, then continue with the normal response.
 
 ## Language and writing
-- In chat, always respond in proper Polish.
+- Default working language across Void Protocol agents, delegation prompts, subagent handoffs, and agent-to-agent communication is English.
+- User-facing chat defaults to English unless the active agent explicitly overrides it.
 - Code comments must be written in English.
 - Documentation such as README files must be written in English.
 
@@ -45,6 +46,15 @@ These rules apply to all agents in this repository.
 - Surface assumptions explicitly; do not hide uncertainty.
 - Escalate when scope, ownership, or architecture is unclear.
 - Prefer evidence-backed claims over intuition.
+
+## Autonomy boundaries
+- Every agent has one primary failure mode (what it must not become) and one explicit escalation target.
+- Ownership types:
+  - Scope ownership: who decides what to build (`@anchor` for requirements, `@blueprint` for technical decisions).
+  - Delivery ownership: who decides how and when to ship (`@weaver` for phased plans, `@ghost` for routing and integration).
+  - Quality ownership: who gates correctness and safety (`@gl1tch` for test evidence, `@sentinel` for final verdict).
+- No agent expands into an adjacent ownership type without explicit routing from `@ghost`.
+- Absence of evidence is not neutral; it defaults toward escalation or rejection, not silent continuation.
 
 ## Domain split
 - App code belongs to `@forger`.
@@ -105,6 +115,13 @@ For touched areas, use the strongest relevant validation available:
 - Repository-managed Git aliases defined in `git/gitconfig` are part of local conventions and may be used by agents after discovery.
 - Prefer `git gs` for a compact repository overview when that alias is available.
 
+## Persistent memory
+- When persistent memory capability is available, treat stored memory as advisory context rather than source of truth.
+- Verify recalled memory against the current repository state and current user instructions before relying on it.
+- Persist only durable, high-signal, safe facts that materially reduce future ambiguity.
+- Use the narrowest correct memory scope: `project` for repo-local facts, `human` for cross-project user preferences, `persona` for cross-project assistant behavior defaults.
+- Keep operational workflow details in `skills/project-memory-hygiene/SKILL.md`.
+
 ## Output contract
 All agents should, at minimum, make clear:
 - what they assumed,
@@ -113,3 +130,23 @@ All agents should, at minimum, make clear:
 - what they validated,
 - what remains risky or unresolved,
 - who should act next.
+
+# lean-ctx — Context Engineering Layer
+<!-- lean-ctx-rules-v10 -->
+
+## Mode Selection
+- Editing the file? → `full` first, then `diff` for re-reads
+- Context only? → `map` or `signatures`
+- Large file? → `aggressive` or `entropy`
+- Specific lines? → `lines:N-M`
+- Unsure? → `auto`
+
+Anti-pattern: NEVER use `full` for files you won't edit — use `map` or `signatures`.
+
+## File Editing
+Use native Edit/Write/StrReplace — unchanged. lean-ctx replaces READ only.
+If Edit requires Read and Read is unavailable, use `ctx_edit(path, old_string, new_string)`.
+NEVER loop on Edit failures — switch to ctx_edit immediately.
+
+Fallback only if a lean-ctx tool is unavailable: use native equivalents.
+<!-- /lean-ctx -->

@@ -7,26 +7,69 @@ description: Specialist skill for workflow-local GitHub Actions work. Covers aut
 
 Use this skill when changing workflow YAML, reusable workflows, composite actions, action metadata, helper scripts called by workflows, or workflow-local authentication and rollout controls.
 Pair it with `devops` for approval posture.
+Pair it with a repository-local overlay when helper actions, auth wrappers, runner conventions, or summary conventions are repository-specific.
 
 ## Repository patterns to inspect first
 
-- `workflow_call` inputs, outputs, defaults, and type declarations.
-- Reusable workflow chains that call composite actions or scripts.
-- Helper scripts under repository-local action or script directories.
-- Cross-repository checkout, GitHub App token generation, or workflow-local GitOps update paths.
-- Environment protection, concurrency groups, artifact naming, cache keys, and summary conventions.
-- Workflow docs or examples that describe public inputs or behavior.
+- Workflow entry points under `.github/workflows/` and any linked docs/runbooks.
+- Reusable workflow contracts (`on.workflow_call.inputs`, `outputs`, defaults, required flags).
+- Current composition style in the repository (for example: **reusable workflow -> composite action -> script**).
+- Event-routing rules for `push`, `pull_request`, `workflow_dispatch`, `workflow_run`, and `repository_dispatch`.
+- Output contracts between parent and child workflows (step IDs, job outputs, workflow outputs).
+- Security-sensitive paths: OIDC, cloud secrets access, GitHub App/PAT usage, cross-repo checkout or push, and GitOps sync or wait steps.
 
 ## Authoring defaults
 
-- Prefer reusable workflow -> composite action -> script for reusable runtime logic.
-- Keep `workflow_call` inputs and outputs strongly typed, named consistently, and documented.
-- Prefer explicit `permissions` over inherited broad defaults.
-- Prefer environment variables over direct `${{ }}` shell interpolation in `run` blocks when values cross trust boundaries.
-- Keep long business logic in scripts or composite actions, not in large inline shell blocks.
-- When Bash logic grows beyond a small inline step, move it into a dedicated repository script and invoke or source that script from the workflow or composite action.
-- Use GitHub annotation logs and job summaries for actionable failures.
-- Key concurrency to the mutable surface, for example target repository plus environment.
+- Keep reusable interfaces strongly typed (`string`, `boolean`, `number`) with explicit defaults and stable descriptions.
+- Preserve existing input/output names unless a repository owner requests migration in the tracked change request (issue/PR/plan).
+- Keep `permissions` explicit at workflow and job level.
+- Keep runner resolution aligned with existing typed-input and runner-selection patterns.
+- Use `actions/checkout@v4` with `fetch-depth: 1` and `persist-credentials: false` unless dedicated write access is intentionally required.
+- Keep logic-heavy behavior in composite actions/scripts; reusable workflows should orchestrate.
+- In shell steps, pass untrusted or dynamic values via `env` instead of direct `${{ }}` interpolation.
+- Keep operator-facing summaries deterministic.
+
+## Portable conventions
+
+### 1) Orchestration and contracts
+
+- Keep parent workflows as orchestrators and child units as execution components with stable contracts.
+- Derive run context once, pass via outputs, and avoid duplicating routing logic.
+- Use a final summary job with `if: always()` and explicit `needs` wiring.
+- Treat output key renames as breaking changes; use a compatibility window when consumers exist.
+
+### 2) Event-routing logic
+
+- Keep branch and event conditions explicit and mutually consistent.
+- Define one deploy policy per event type (`push`, `pull_request`, `workflow_dispatch`, `repository_dispatch`).
+- If `repository_dispatch` is used, document supported action types and execution modes.
+- Centralize routing decisions and reuse outputs in downstream jobs.
+
+### 3) Quality and integration gate patterns
+
+- Use two-stage enablement for external quality systems: eligibility (policy) and effective enablement (precheck output).
+- When required configuration is missing, skip quality/integration jobs intentionally and report the reason in the summary.
+- Resolve integration mode centrally and gate downstream jobs from shared outputs.
+- Keep role/mode enums explicit and aligned across parent/child workflows.
+
+### 4) Missing dependency remediation pattern
+
+- Validate required external dependencies before heavy jobs start.
+- Prefer controlled remediation through issue/PR automation in the owning infrastructure repository.
+- Keep remediation deterministic: detect, create/reuse ticket or PR, report next steps.
+
+### 5) GitOps or deployment update pattern
+
+- Use environment protection and per-target concurrency controls for deployment update workflows.
+- Make concurrency keys map to the mutable surface (app/repository + environment/region/cluster).
+- Prefer short-lived GitHub App credentials for cross-repository commits and pushes.
+
+### 6) Security and secret handling patterns
+
+- Prefer short-lived auth: OIDC (`id-token: write`) for cloud/secret-manager exchange and GitHub App tokens for cross-repo writes.
+- Use guarded conditions for secret-bearing steps and minimize exposure.
+- Clean up sensitive temporary files in `if: always()` cleanup steps.
+- Keep comments for known security limitations and planned remediations.
 
 ## Security and hardening
 
@@ -38,14 +81,35 @@ Pair it with `devops` for approval posture.
 - Keep artifacts minimal, intentional, and retention-bounded.
 - If a workflow updates a GitOps repo or waits for external sync, fail fast and emit actionable summaries.
 
-## Validation
+## Validation (repository baseline)
 
-- `actionlint`
-- YAML parse validation with `yq eval '.'`
-- `bash -n` and `shellcheck` for touched helper scripts when applicable
-- Parse composite action metadata files and validate required inputs or outputs
-- Review branch filters, path filters, concurrency groups, cache keys, artifact retention, and permissions
-- Update workflow docs, examples, or interface notes when reusable workflow interfaces change
+- Workflow syntax and expression lint:
+  - `actionlint`
+- YAML parse checks:
+  - `yq e '.' .github/workflows/<workflow>.yml >/dev/null`
+- Helper script validation when scripts are touched:
+  - `bash -n <path-to-scripts>/*.sh`
+  - `shellcheck <path-to-scripts>/*.sh` (if installed)
+- Composite metadata parse checks:
+  - `yq e '.' <path-to-composite-action>/action.yml >/dev/null`
+- Optional YAML lint:
+  - `yamllint .github/workflows`
+
+## Documentation parity rules
+
+- If reusable workflow interface or behavior changes, update matching docs/runbooks in the same change.
+- Keep examples and parameter tables aligned with actual defaults in YAML.
+- Document event-routing or contract changes (especially quality gates, integration modes, dependency remediation, and deploy gating).
+
+## High-signal review checklist for workflow PRs
+
+- Are new `workflow_call` inputs typed and documented?
+- Are parent-child outputs still wired correctly?
+- Are event conditions mutually consistent?
+- Are permissions minimized at workflow/job scope?
+- Are cross-repo writes using GitHub App token flow?
+- Are deterministic summary steps (`if: always()`) still present?
+- Did matching docs/runbooks change with interface/behavior changes?
 
 ## Escalation triggers
 
@@ -56,12 +120,15 @@ Pair it with `devops` for approval posture.
 
 ## Anti-patterns
 
-- Workflow rewrites when a targeted edit would suffice.
+- Rewriting whole workflows when a targeted edit is enough.
 - Untyped or weakly documented `workflow_call` interfaces.
-- Inline shell blocks that hide business logic or secret handling.
-- Large Bash implementations embedded directly in workflow YAML instead of living in versioned repository scripts.
-- Broad `contents: write` or repo-wide tokens when a narrower scope is enough.
+- Inline shell that hides business logic or secret handling.
+- Large Bash blocks in workflow YAML instead of versioned scripts.
+- Broad `contents: write` or repo-wide tokens where narrower scope is sufficient.
 - Unbounded concurrency, caches, or artifact retention.
+- Breaking parent-child output contracts without migration.
+- Changing push/deploy routing without updating docs and summary behavior.
+- Replacing GitHub App token write-paths with long-lived PATs.
 
 ## Output
 

@@ -39,13 +39,14 @@ OpenCode remains the authoritative enforcement target for permission allowlists 
 ## Private or local overlays
 
 - terminal-context-aws-k8s (keep account, profile, and cluster mappings out of the public repo)
+- github-actions-local (repository-specific GitHub Actions conventions layered on top of the shared `github-actions` skill)
 
 ## Suggested usage
 
 ### Multi-agent (Void Protocol)
 
 - `coder` -> repo-conventions, delivery-gates, test-strategy, plus `python-patterns` for Python app code and `python-testing` for Python tests
-- `devops-specialist` -> repo-conventions, delivery-gates, terminal-context-bridge, github-actions, plus the relevant stack-specialist skill (`docker-patterns`, `aws-cost-optimizer`, `terraform-terragrunt` with `terraform-style-guide` for Terraform HCL, `cdk-aws`, `argocd-gitops`, `ansible-ops`)
+- `devops-specialist` -> repo-conventions, delivery-gates, terminal-context-bridge, github-actions, plus `github-actions-local` when repo-specific workflow conventions apply, plus the relevant stack-specialist skill (`docker-patterns`, `aws-cost-optimizer`, `terraform-terragrunt` with `terraform-style-guide` for Terraform HCL, `cdk-aws`, `argocd-gitops`, `ansible-ops`)
 - `github-actions` replaces a dedicated GitHub Actions child agent
 - `tester` -> repo-conventions, test-strategy
 - `code-reviewer` -> repo-conventions, review-rubric
@@ -59,7 +60,7 @@ Nexus is the official opt-in single-agent exception. It loads skills per executi
 - Phase 2 (Architecture) -> architect, documentalist
 - Phase 3 (Planning) -> planner, delivery-gates
 - Phase 4 (App Implementation) -> coder, repo-conventions, plus python-patterns for Python app work
-- Phase 5 (DevOps Implementation) -> devops, repo-conventions, plus stack-specific skills as needed: terminal-context-bridge, github-actions, docker-patterns, aws-cost-optimizer, terraform-terragrunt with terraform-style-guide for Terraform HCL, cdk-aws, argocd-gitops, ansible-ops
+- Phase 5 (DevOps Implementation) -> devops, repo-conventions, plus stack-specific skills as needed: terminal-context-bridge, github-actions, `github-actions-local` for repo-specific workflow conventions, docker-patterns, aws-cost-optimizer, terraform-terragrunt with terraform-style-guide for Terraform HCL, cdk-aws, argocd-gitops, ansible-ops
 - Phase 6 (Testing) -> tester, test-strategy, plus python-testing for Python test implementation
 - Phase 7 (Final Review) -> reviewer, review-rubric
 - Agent/customization artifact changes -> agent-governance

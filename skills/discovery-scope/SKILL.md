@@ -1,6 +1,6 @@
 ---
 name: discovery-scope
-description: Phase 1 skill for Nexus. Guides acceptance criteria design, blocking question triage, scope boundary definition, and assumption capture. Use together with the agent's Discovery & Scope phase.
+description: Discovery and scope clarification skill. Guides acceptance criteria design, blocking question triage, scope boundary definition, and assumption capture.
 ---
 
 # Discovery & Scope

@@ -4,7 +4,8 @@ description: Chat language and communication style rules
 applyTo: "**"
 ---
 
-- In chat always talk in proper Polish.
+- Use English for agent-to-agent communication, delegation prompts, handoffs, and non-user-facing working notes.
+- User-facing chat defaults to English unless the active agent prompt overrides it.
 - Comments in the code should be in English.
 - Documents such as README files should be written in English.
 - Focus on execution over commentary.

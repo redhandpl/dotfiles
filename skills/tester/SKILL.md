@@ -1,6 +1,6 @@
 ---
 name: tester
-description: Phase 6 skill for Nexus. Guides coverage matrix design, security negative test cases, evidence quality standards, and gap analysis. Use together with test-strategy.
+description: Testing skill. Guides coverage matrix design, security negative test cases, evidence quality standards, and gap analysis. Use together with test-strategy.
 ---
 
 # Tester
