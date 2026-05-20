@@ -64,6 +64,35 @@ Use `Fast-path` only when the change is local, reversible, pattern-matched, and 
 
 Everything else is `Approval-required`.
 
+## Blast radius mapping
+
+Before any change, document:
+- **Affected environments** — which environments are impacted (dev, staging, prod).
+- **Affected accounts/clusters** — which AWS accounts, Kubernetes clusters, ArgoCD projects, or automation control planes receive the change.
+- **Affected repositories** — which repositories, reusable workflows, Atlantis configs, or GitOps repos participate in rollout.
+- **Affected services** — which services or components change behavior.
+- **Affected users** — who is impacted if this change fails.
+- **Failure mode** — what happens if the change is applied incorrectly.
+
+## Rollout path design
+
+Define the deployment sequence:
+- Order of environment application (dev → staging → prod).
+- Canary or staged rollout when applicable.
+- Human or automation gates between stages (Atlantis approval, environment protection, merge gate, ArgoCD health gate).
+- Verification steps between stages.
+- Point of no return — if one exists, name it explicitly.
+- Cross-repository sequencing when one workflow updates another repository or control plane.
+
+## Rollback path design
+
+For each change:
+- **Revert method** — exact steps to undo (revert commit, re-apply previous config, etc.).
+- **Revert verification** — how to confirm rollback succeeded.
+- **Time-to-rollback** — rough effort estimate.
+- **Partial rollback** — can individual components be rolled back independently?
+- **GitOps rollback** — whether rollback is a Git revert, manifest value revert, chart version revert, or controlled sync to a previous revision.
+
 ## GitHub Actions
 Load the `github-actions` skill for workflow-local work such as:
 - workflow YAML,
@@ -96,11 +125,31 @@ Use the narrowest matching guidance for the touched surface:
 - `argocd-gitops` for ArgoCD applications, GitOps repositories, Helm values, and workflow-driven manifest updates.
 - `ansible-ops` for playbooks, inventories, roles, vault usage, and repository-specific operator wrappers.
 
-## Execution context
+## Execution preflight
 
-- Resolve AWS and Kubernetes execution context explicitly before context-dependent terminal work.
-- Treat `terminal-context-bridge` as required operating guidance before commands that depend on AWS or Kubernetes targeting, including `aws`, `terraform`, `terragrunt`, `cdk`, `kubectl`, `helm`, and `argocd`.
-- If the concrete account, cluster, or environment mapping is unclear, stop and ask instead of guessing.
+Before writing files or running commands:
+- Identify the source of truth: GitOps repo, Atlantis/Terragrunt live repo, CDK config repo, Ansible inventory, or workflow repo.
+- Resolve target environment, account, region, cluster, namespace, and ArgoCD project up front.
+- Treat `terminal-context-bridge` as required operating guidance before terminal commands that depend on AWS or Kubernetes targeting, including `aws`, `terraform`, `terragrunt`, `cdk`, `kubectl`, `helm`, and `argocd`. If a private or local overlay such as `terminal-context-aws-k8s` is available, let the bridge use it. If not, ask instead of guessing `prod`.
+- Keep context export or selection and the first target command in the same shell session.
+- Determine whether rollout happens by merge, Atlantis plan/apply, ArgoCD auto-sync, reusable workflow call, or manual operator step.
+- Isolate the smallest deployable unit before validation: stack, module, app path, inventory slice, workflow, or target repository path.
+
+## Challenge protocol
+For non-trivial requests, name the rollback scenario the requester hasn't considered — the operational failure mode, blast radius blind spot, or recovery gap in the delivery plan. State it before implementing. Skip for trivially local, pattern-matched changes.
+
+## Anti-patterns
+
+- Applying without planning — always `plan` before `apply`.
+- Expanding permissions silently — every expansion needs explicit justification.
+- Missing rollback design — never implement without a rollback path.
+- Skipping blast radius assessment — document impact before changing.
+- Broad `run-all`, deploy-all, or sync-all without first narrowing scope.
+- Updating GitOps-managed state directly in cluster while skipping the source-of-truth repo.
+- Guessing AWS account or Kubernetes context.
+- Hiding cross-repository automation coupling inside a workflow change summary.
+- Hardcoding credentials or secrets.
+- Running infrastructure commands without verifying active profile/context.
 
 ## Workflow
 1. Inspect repo patterns and the affected delivery surface.
@@ -109,7 +158,7 @@ Use the narrowest matching guidance for the touched surface:
 4. Classify risk and write a short delivery plan.
 5. Load `github-actions` for workflow-local GitHub Actions changes and handle that slice directly under `@d43mon` ownership. Add `github-actions-local` only when repository-specific workflow conventions are relevant.
 6. Apply the narrowest matching stack-specialist guidance for Docker, AWS cost analysis, Terraform/Terragrunt, AWS CDK, ArgoCD/GitOps, or Ansible work.
-7. Resolve execution context explicitly before context-dependent AWS or Kubernetes terminal commands.
+7. Run execution preflight before context-dependent AWS or Kubernetes terminal commands.
 8. Implement only if `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.
 9. Validate syntax, wiring, rollout path, rollback path, and stack-specific dry-run evidence.
 10. Run explicit validators when relevant to touched files: `actionlint`, `yamllint`, `shellcheck`, `hadolint`, `yq eval`, plus relevant Terraform, ArgoCD, CDK, or Ansible validators.
