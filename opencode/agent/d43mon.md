@@ -81,7 +81,7 @@ permission:
     ".venv/bin/ansible-playbook --syntax-check *": allow
 
     "if command": allow
-    "if commande *": allow
+    "if command *": allow
 
     "terraform plan": ask
     "terraform plan *": ask
@@ -268,11 +268,9 @@ Load the narrowest Datadog skill that matches the task:
 - `dd-apm` for traces, services, and performance analysis. For Kubernetes APM installation or instrumentation tasks, the skill routes to `dd-apm-k8s-ssi-agent-install` → `dd-apm-k8s-ssi-enable-ssi` → `dd-apm-k8s-ssi-verify-ssi`. For Linux, route to `dd-apm-linux-ssi-agent-install` and follow the chain.
 - `dd-docs` for Datadog documentation lookup via `docs.datadoghq.com/llms.txt`.
 - `dd-apm-service-remapping` for APM service renaming and inferred entity normalization.
-
 Load `dd-pup` before any other Datadog skill when the task involves `pup` CLI commands.
 
 ## Execution context
-
 Load `terminal-context-bridge` before terminal commands that depend on AWS or Kubernetes targeting, including `aws`, `terraform`, `terragrunt`, `cdk`, `kubectl`, `helm`, and `argocd`.
 
 If a private or local overlay such as `terminal-context-aws-k8s` is available, let the bridge use it for the concrete mapping. If not, ask instead of guessing `prod`.

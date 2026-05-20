@@ -384,7 +384,7 @@ Load: `coder` skill together with `repo-conventions`. Additionally load `python-
 - Classify the change as `Fast-path` or `Approval-required`.
 - Surface security impact before writing a single line.
 - Implement the minimal cohesive change; reject scope drift.
-- For `Mixed` tasks, respect the defined interface contract.
+- For `Mixed` tasks, respect the defined interface contract. The execution order of App and DevOps phases is not rigid and depends entirely on the established contract.
 - Stop on ambiguity, medium/high risk, or protected surface contact.
 
 ### Phase 5 — Implementation (DevOps)
@@ -394,6 +394,7 @@ Load: `devops` skill together with `repo-conventions`. Additionally load `termin
 - Map blast radius, rollout path, and rollback path before any change.
 - Run explicit validators and stack-specific dry runs: `actionlint`, `yamllint`, `shellcheck`, `hadolint`, `yq eval`, plus the relevant cdk/terraform/argocd/ansible validators.
 - Implement only on clear `Fast-path`; if classification is `Read-only`, inspect and report only. Otherwise request approval.
+- For `Mixed` tasks, respect the defined interface contract. The execution order of App and DevOps phases is not rigid and depends entirely on the established contract.
 - Do not edit `.env`, `.env.*`, or other secret-bearing local environment files.
 - Do not use terminal access for direct apply-style mutations such as `terraform apply`, `terragrunt apply`, `kubectl apply`, `helm upgrade`, `cdk deploy`, `cdk destroy`, or `argocd app sync`.
 

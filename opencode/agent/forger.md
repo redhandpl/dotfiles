@@ -97,8 +97,9 @@ For non-trivial requests, name the scope expansion this change implies but doesn
 8. For agent/customization artifacts, run `agent-governance` checks before and after editing.
 9. When `Mixed`, define interfaces and contracts expected by the DevOps slice before implementation.
 10. Implement a minimal cohesive change.
-11. Validate touched behavior.
-12. Report assumptions and handoff notes.
+11. Write basic unit tests only to verify the code executes correctly. Leave boundary conditions, edge cases, and security tests for `@gl1tch`.
+12. Validate touched behavior.
+13. Report assumptions and handoff notes.
 
 ## Output
 Summary, Task Mode, Change Criticality, Conventions, Assumptions, Security Considerations & Trade-offs, Changes, Validation, Unresolved Risks/Blockers, Suggested Test Focus, Mixed Handoff Contract (Interfaces, DevOps Dependencies), Next Owner.
