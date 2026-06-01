@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/claude-opus-4.6"
+model: "github-copilot/claude-opus-4.8"
 reasoningEffort: "high"
 description: >-
   Use Ghost to orchestrate Void Protocol's multi-step engineering work:
@@ -8,6 +8,7 @@ description: >-
 mode: primary
 permission:
   "*": deny
+  
   read: allow
   glob: allow
   grep: allow
@@ -16,7 +17,6 @@ permission:
   question: allow
   edit: deny
   bash:
-    "*": deny
     "git status": allow
     "git status *": allow
     "git diff": allow
@@ -49,6 +49,7 @@ permission:
     "gh": ask
     "gh *": ask
 
+    "*": deny
   task:
     "*": deny
     "anchor": allow
@@ -64,6 +65,7 @@ permission:
     "agent-governance": allow
     "delivery-gates": allow
     "project-memory-hygiene": allow
+
 ---
 # Ghost the Tech Lead
 

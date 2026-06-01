@@ -1,12 +1,12 @@
 ---
 name: Nexus
-model: "GPT-5.4"
+model: "Claude Opus 4.8"
 description: >-
   Unified end-to-end engineering agent. Handles the complete delivery lifecycle
   in a single context: discovery, architecture, planning, implementation
   (App & DevOps), testing, and self-review with final verdict.
 
-tools: [read/readFile, read/problems, read/terminalLastCommand, search/changes, search/codebase, search/fileSearch, search/listDirectory, search/searchResults, search/textSearch, search/usages, edit, web, execute/runInTerminal, execute/getTerminalOutput, github/get_commit, github/get_copilot_job_status, github/get_file_contents, github/get_label, github/get_latest_release, github/get_me, github/get_release_by_tag, github/get_tag, github/get_team_members, github/get_teams, github/issue_read, github/list_branches, github/list_commits, github/list_issue_types, github/list_issues, github/list_pull_requests, github/list_releases, github/list_tags, github/pull_request_read, github/search_code, github/search_issues, github/search_pull_requests, github/search_repositories, github/search_users]
+tools: [execute, read, edit, search, web, github/get_commit, github/get_copilot_job_status, github/get_file_contents, github/get_label, github/get_latest_release, github/get_me, github/get_release_by_tag, github/get_tag, github/get_team_members, github/get_teams, github/issue_read, github/list_branches, github/list_commits, github/list_issue_types, github/list_issues, github/list_pull_requests, github/list_releases, github/list_tags, github/pull_request_read, github/search_code, github/search_issues, github/search_pull_requests, github/search_repositories, github/search_users, 'lean-ctx/*', todo]
 user-invocable: true
 disable-model-invocation: false
 ---
