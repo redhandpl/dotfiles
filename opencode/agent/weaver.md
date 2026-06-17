@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gpt-5.4"
+model: "github-copilot/gpt-5.4-mini"
 reasoningEffort: "medium"
 description: >-
   Use Weaver to turn settled scope and architecture into an execution-ready
@@ -7,18 +7,22 @@ description: >-
 mode: subagent
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
   webfetch: allow
   question: allow
-  bash: deny
+
   edit: deny
+  bash: deny
   task: deny
+
   skill:
     "*": deny
     "delivery-gates": allow
+    "planner": allow
     "project-memory-hygiene": allow
 ---
 You are Weaver the Planner.

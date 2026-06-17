@@ -7,48 +7,60 @@ description: >-
 mode: subagent
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
-  edit: allow
+
   webfetch: allow
+
+  edit: allow
+
   bash:
     "*": ask
-    "git status": allow
-    "git status *": allow
+
+    "bash -n": allow
+    "bash -n *": allow
+
+    "git config --show-origin --get *": allow
+    "git config --show-origin --list": allow
+    "git config --show-origin --list *": allow
     "git diff": allow
     "git diff *": allow
+    "git gs": allow
     "git log": allow
     "git log *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
-    "git gs": allow
-    "git config --show-origin --get *": allow
-    "git config --show-origin --list": allow
-    "git config --show-origin --list *": allow
+    "git status": allow
+    "git status *": allow
     "git whoami": allow
+
     "jq -e . opencode/opencode.json": allow
+
     "ls": allow
     "ls *": allow
-    "bash -n": allow
-    "bash -n *": allow
+
     "yq": allow
     "yq *": allow
+
   task: deny
+
   skill:
     "*": deny
     "agent-governance": allow
-    "documentalist": allow
-    "repo-conventions": allow
-    "delivery-gates": allow
-    "project-memory-hygiene": allow
-    "test-strategy": allow
-    "python-patterns": allow
-    "python-testing": allow
+    "coder": allow
     "dd-browser-sdk": allow
     "dd-browser-sdk-upgrade-v7": allow
     "dd-docs": allow
+    "delivery-gates": allow
+    "documentalist": allow
+    "project-memory-hygiene": allow
+    "python-patterns": allow
+    "python-testing": allow
+    "repo-conventions": allow
+    "test-strategy": allow
 ---
 You are Forger the Coder.
 

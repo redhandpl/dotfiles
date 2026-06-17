@@ -1,5 +1,5 @@
 ---
-model: "github-copilot/gemini-3.1-pro"
+model: "github-copilot/gpt-5.4"
 reasoningEffort: "medium"
 description: >-
   Use Blueprint for high-level architecture and system design: boundaries,
@@ -7,17 +7,21 @@ description: >-
 mode: subagent
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
   webfetch: allow
   question: allow
-  bash: deny
+
   edit: deny
+  bash: deny
   task: deny
+
   skill:
     "*": deny
+    "architect": allow
     "documentalist": allow
     "project-memory-hygiene": allow
 ---

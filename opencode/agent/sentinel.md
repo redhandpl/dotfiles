@@ -1,59 +1,65 @@
 ---
-model: "github-copilot/claude-opus-4.8"
-reasoningEffort: "high"
+model: "github-copilot/gpt-5.5"
+reasoningEffort: "medium"
 description: >-
   Use Sentinel as the final read-only quality gate before commit, push, or
   merge.
 mode: primary
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
+
+  edit: deny
+
   bash:
     "*": deny
 
     "/opt/homebrew/bin/lean-ctx *": allow
 
-    "git status": allow
-    "git status *": allow
     "git diff": allow
     "git diff *": allow
+    "git gs": allow
     "git log": allow
     "git log *": allow
-    "git show": allow
-    "git show *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
-    "git gs": allow
-    "yq e '.'": allow
-    "yq e '.' *": allow
-    "yq eval '.'": allow
-    "yq eval '.' *": allow
+    "git show": allow
+    "git show *": allow
+    "git status": allow
+    "git status *": allow
+
     "actionlint": allow
     "actionlint *": allow
-    "yamllint": allow
-    "yamllint *": allow
-    "shellcheck": allow
-    "shellcheck *": allow
+    "bash -n": allow
+    "bash -n *": allow
     "hadolint": allow
     "hadolint *": allow
+    "ls": allow
+    "ls *": allow
     "printf": allow
     "printf *": allow
     "read": allow
     "read *": allow
-    "bash -n": allow
-    "bash -n *": allow
-    "ls": allow
-    "ls *": allow
-  edit: deny
+    "shellcheck": allow
+    "shellcheck *": allow
+    "yamllint": allow
+    "yamllint *": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
+    "yq eval '.'": allow
+    "yq eval '.' *": allow
+
   task: deny
 
   skill:
     "*": deny
     "agent-governance": allow
     "repo-conventions": allow
+    "reviewer": allow
     "review-rubric": allow
 ---
 You are Sentinel the Code Reviewer.

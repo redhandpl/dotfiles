@@ -7,67 +7,122 @@ description: >-
 mode: subagent
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
+
+  webfetch: allow
+
   edit: allow
-  webfetch: ask
+
   bash:
     "*": ask
-    "git status": allow
-    "git status *": allow
+
+    "/opt/homebrew/bin/lean-ctx *": allow
+
+    ". .venv/bin/activate": allow
+    ". .venv/bin/activate && *": allow
+
+    "actionlint": allow
+    "actionlint *": allow
+    "ansible localhost *": allow
+    "ansible --version": allow
+    "ansible-playbook --version": allow
+    "ansible-playbook * --syntax-check": allow
+    "aws sts get-caller-identity *": allow
+    "cat": allow
+    "cat *": allow
+    "echo": allow
+    "echo *": allow
     "git diff": allow
     "git diff *": allow
+    "git gs": allow
     "git log": allow
     "git log *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
-    "git gs": allow
+    "git status": allow
+    "git status *": allow
     "git tag -l": allow
     "git tag -l *": allow
-    "yq e '.'": allow
-    "yq e '.' *": allow
-    "yq eval '.'": allow
-    "yq eval '.' *": allow
-    "actionlint": allow
-    "actionlint *": allow
-    "yamllint": allow
-    "yamllint *": allow
-    "shellcheck": allow
-    "shellcheck *": allow
+    "grep": allow
+    "grep *": allow
     "hadolint": allow
     "hadolint *": allow
+    "head": allow
+    "head *": allow
+    "ls": allow
+    "ls *": allow
     "printf": allow
     "printf *": allow
     "read": allow
     "read *": allow
-    "echo": allow
-    "echo *": allow
+    "sed": allow
+    "sed *": allow
+    "shellcheck": allow
+    "shellcheck *": allow
     "source .venv/bin/activate": allow
     "source .venv/bin/activate && *": allow
-    ". .venv/bin/activate": allow
-    ". .venv/bin/activate && *": allow
-    "ansible-playbook --version": allow
-    "ansible-playbook * --syntax-check": allow
-    "ansible --version": allow
-    "ansible localhost *": allow
-    "ls": allow
-    "ls *": allow
+
+    "terraform -chdir=* fmt -check": allow
+    "terraform -chdir=* fmt -check *": allow
+    "terraform -chdir=* init -backend=false": allow
+    "terraform -chdir=* init -backend=false *": allow
+    "terraform -chdir=* validate": allow
+    "terraform -chdir=* validate *": allow
+    "terraform apply": deny
+    "terraform apply *": deny
+    "terraform fmt *": allow
+    "terraform fmt -check": allow
+    "terraform fmt -check *": allow
+    "terraform plan": ask
+    "terraform plan *": ask
+    "terraform validate": allow
+    "terraform validate *": allow
+
+    "terragrunt --help": allow
+    "terragrunt apply": deny
+    "terragrunt apply *": deny
+    "terragrunt hcl --help": allow
+    "terragrunt hcl fmt": allow
+    "terragrunt hcl fmt *": allow
+    "terragrunt hcl validate": allow
+    "terragrunt hcl validate *": allow
+    "terragrunt hclfmt": allow
+    "terragrunt hclfmt *": allow
+    "terragrunt output": allow
+    "terragrunt output *": allow
+    "terragrunt plan": ask
+    "terragrunt plan *": ask
+    "terragrunt run -- hclfmt *": allow
+    "terragrunt validate": allow
+    "terragrunt validate *": allow
+
     "true": allow
     "true *": allow
-    "/opt/homebrew/bin/lean-ctx *": allow
-    "head": allow
-    "head *": allow
-    "cat": allow
-    "cat *": allow
-    "bash": allow
+    "which": allow
+    "which *": allow
+    "yamllint": allow
+    "yamllint *": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
+    "yq eval '.'": allow
+    "yq eval '.' *": allow
+
   task: deny
+
   skill:
     "*": deny
     "agent-governance": allow
+    "python-patterns": allow
+    "python-testing": allow
     "repo-conventions": allow
+    "terminal-context-aws-k8s": allow
+    "terminal-context-bridge": allow
     "test-strategy": allow
+    "tester": allow
 ---
 You are GL1TCH the Tester.
 

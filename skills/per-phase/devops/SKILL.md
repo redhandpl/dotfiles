@@ -110,7 +110,7 @@ Run per touched file type:
 - `.github/workflows/*.yml` → `actionlint`
 - `action.yml` / `action.yaml` → `yq eval '.'`
 - `*.tf` → `terraform fmt -check`
-- `*.hcl` → repository-standard HCL formatter such as `terragrunt hclfmt`
+- `*.hcl` → repository-standard Terragrunt HCL validation/formatting such as `terragrunt hcl fmt --check --diff` and `terragrunt hcl validate` when Terragrunt config is in scope
 - `*.yml` / `*.yaml` → `yamllint`
 - `*.sh` → `shellcheck`
 - `Dockerfile` → `hadolint`

@@ -13,187 +13,213 @@ permission:
   grep: allow
   list: allow
 
+  webfetch: allow
+
   edit:
     "*": allow
     "*.env": deny
     "**/.env": deny
     "**/.env.*": deny
 
-  webfetch: allow
-
   bash:
     "*": ask
 
     "/opt/homebrew/bin/lean-ctx *": allow
 
-    "git status": allow
-    "git status *": allow
+    ".venv/bin/ansible-playbook --syntax-check *": allow
+
+    "actionlint": allow
+    "actionlint *": allow
+    "awk": allow
+    "awk *": allow
+    "bash -n": allow
+    "bash -n *": allow
+    "cat": allow
+    "cat *": allow
+    "echo *": allow
+    "find": allow
+    "find *": allow
+    "git branch": allow
+    "git branch *": allow
     "git diff": allow
     "git diff *": allow
+    "git gs": allow
     "git log": allow
     "git log *": allow
     "git rev-parse": allow
     "git rev-parse *": allow
-    "git gs": allow
     "git show": allow
     "git show *": allow
-    "git branch": allow
-    "git branch *": allow
+    "git status": allow
+    "git status *": allow
 
-    "ls": allow
-    "ls *": allow
-    "pwd": allow
-    "cat": allow
-    "cat *": allow
-    "head": allow
-    "head *": allow
-    "tail": allow
-    "tail *": allow
-    "find": allow
-    "find *": allow
     "grep": allow
     "grep *": allow
-    "sed": allow
-    "sed *": allow
-    "awk": allow
-    "awk *": allow
-    "printf": allow
-    "printf *": allow
-    "read": allow
-    "read *": allow
-    "bash -n": allow
-    "bash -n *": allow
-    "yq eval '.'": allow
-    "yq eval '.' *": allow
-    "actionlint": allow
-    "actionlint *": allow
-    "yamllint": allow
-    "yamllint *": allow
-    "shellcheck": allow
-    "shellcheck *": allow
     "hadolint": allow
     "hadolint *": allow
-    "yq e '.'": allow
-    "yq e '.' *": allow
-    "which *": allow
-    "python3": allow
-    "python3 *": allow
-    "perl": allow
-    "perl *": allow
-    "rg": allow
-    "rg *": allow
-    "wc": allow
-    "wc *": allow
-    "echo *": allow
-    "tr": allow
-    "tr *": allow
-
-    ".venv/bin/ansible-playbook --syntax-check *": allow
+    "head": allow
+    "head *": allow
 
     "if command": allow
     "if command *": allow
 
-    "terraform plan": ask
-    "terraform plan *": ask
+    "ls": allow
+    "ls *": allow
+    "perl": allow
+    "perl *": allow
+    "printf": allow
+    "printf *": allow
+    "pwd": allow
+    "python3": allow
+    "python3 *": allow
+    "read": allow
+    "read *": allow
+    "rg": allow
+    "rg *": allow
+    "sed": allow
+    "sed *": allow
+    "shellcheck": allow
+    "shellcheck *": allow
+    "tail": allow
+    "tail *": allow
+    "tr": allow
+    "tr *": allow
+    "wc": allow
+    "wc *": allow
+    "which *": allow
+    "yamllint": allow
+    "yamllint *": allow
+    "yq e '.'": allow
+    "yq e '.' *": allow
+    "yq eval '.'": allow
+    "yq eval '.' *": allow
+
+    "terraform -chdir=* fmt -check": allow
+    "terraform -chdir=* fmt -check *": allow
+    "terraform -chdir=* init -backend=false": allow
+    "terraform -chdir=* init -backend=false *": allow
+    "terraform -chdir=* validate": allow
+    "terraform -chdir=* validate *": allow
     "terraform apply": deny
     "terraform apply *": deny
     "terraform fmt *": allow
-    "terragrunt plan": ask
-    "terragrunt plan *": ask
+    "terraform fmt -check": allow
+    "terraform fmt -check *": allow
+    "terraform plan": ask
+    "terraform plan *": ask
+    "terraform validate": allow
+    "terraform validate *": allow
+
+    "terragrunt --help": allow
     "terragrunt apply": deny
     "terragrunt apply *": deny
+    "terragrunt hcl --help": allow
+    "terragrunt hcl fmt": allow
+    "terragrunt hcl fmt *": allow
+    "terragrunt hcl validate": allow
+    "terragrunt hcl validate *": allow
+    "terragrunt hclfmt": allow
     "terragrunt hclfmt *": allow
+    "terragrunt plan": ask
+    "terragrunt plan *": ask
     "terragrunt run -- hclfmt *": allow
+    "terragrunt validate": allow
+    "terragrunt validate *": allow
+
+    "argocd app delete": deny
+    "argocd app delete *": deny
+    "argocd app sync": deny
+    "argocd app sync *": deny
+
     "cdk deploy": deny
     "cdk deploy *": deny
     "cdk destroy": deny
     "cdk destroy *": deny
+
+    "kubectl apply": deny
+    "kubectl apply *": deny
+    "kubectl describe": ask
+    "kubectl describe *": ask
     "kubectl diff": ask
     "kubectl diff *": ask
     "kubectl get": ask
     "kubectl get *": ask
-    "kubectl describe": ask
-    "kubectl describe *": ask
-    "kubectl apply": deny
-    "kubectl apply *": deny
-    "helm template": ask
-    "helm template *": ask
+
     "helm lint": ask
     "helm lint *": ask
+    "helm template": ask
+    "helm template *": ask
     "helm upgrade": deny
     "helm upgrade *": deny
-    "argocd app sync": deny
-    "argocd app sync *": deny
-    "argocd app delete": deny
-    "argocd app delete *": deny
 
-    "gh pr view": allow
-    "gh pr view *": allow
-    "gh pr list": allow
-    "gh pr list *": allow
-    "gh run view": allow
-    "gh run view *": allow
-    "gh run list": allow
-    "gh run list *": allow
+    "gh": ask
+    "gh *": ask
+    "gh api repos/*": ask
     "gh issue view": allow
     "gh issue view *": allow
     "gh issue list": allow
     "gh issue list *": allow
-    "gh repo view": allow
-    "gh repo view *": allow
-    "gh api repos/*": ask
-    "gh workflow": ask
-    "gh workflow *": ask
-    "gh pr": ask
-    "gh pr *": ask
     "gh issue": ask
     "gh issue *": ask
+    "gh org": deny
+    "gh org *": deny
+    "gh pr": ask
+    "gh pr *": ask
+    "gh pr list": allow
+    "gh pr list *": allow
+    "gh pr view": allow
+    "gh pr view *": allow
     "gh release": ask
     "gh release *": ask
+    "gh repo view": allow
+    "gh repo view *": allow
+    "gh run list": allow
+    "gh run list *": allow
+    "gh run view": allow
+    "gh run view *": allow
     "gh secret": deny
     "gh secret *": deny
     "gh variable": ask
     "gh variable *": ask
-    "gh org": deny
-    "gh org *": deny
-    "gh": ask
-    "gh *": ask
+    "gh workflow": ask
+    "gh workflow *": ask
 
   task: deny
 
   skill:
     "*": deny
-    "repo-conventions": allow
-    "delivery-gates": allow
-    "project-memory-hygiene": allow
-    "github-actions": allow
-    "github-actions-local": allow
-    "docker-patterns": allow
-    "aws-cost-optimizer": allow
-    "terraform-terragrunt": allow
-    "terraform-style-guide": allow
-    "cdk-aws": allow
-    "argocd-gitops": allow
     "ansible-ops": allow
-    "terminal-context-bridge": allow
-    "terminal-context-aws-k8s": allow
-    "documentalist": allow
-    "dd-pup": allow
-    "dd-monitors": allow
-    "dd-logs": allow
+    "argocd-gitops": allow
+    "aws-cost-optimizer": allow
+    "cdk-aws": allow
     "dd-apm": allow
-    "dd-docs": allow
     "dd-apm-k8s-ssi-agent-install": allow
     "dd-apm-k8s-ssi-enable-ssi": allow
-    "dd-apm-k8s-ssi-verify-ssi": allow
-    "dd-apm-k8s-ssi-troubleshoot-ssi": allow
     "dd-apm-k8s-ssi-onboarding-summary": allow
+    "dd-apm-k8s-ssi-troubleshoot-ssi": allow
+    "dd-apm-k8s-ssi-verify-ssi": allow
     "dd-apm-linux-ssi-agent-install": allow
     "dd-apm-linux-ssi-enable-ssi": allow
-    "dd-apm-linux-ssi-verify-ssi": allow
-    "dd-apm-linux-ssi-troubleshoot-ssi": allow
     "dd-apm-linux-ssi-onboarding-summary": allow
+    "dd-apm-linux-ssi-troubleshoot-ssi": allow
+    "dd-apm-linux-ssi-verify-ssi": allow
     "dd-apm-service-remapping": allow
+    "dd-docs": allow
+    "dd-logs": allow
+    "dd-monitors": allow
+    "dd-pup": allow
+    "delivery-gates": allow
+    "devops": allow
+    "docker-patterns": allow
+    "documentalist": allow
+    "github-actions": allow
+    "github-actions-local": allow
+    "project-memory-hygiene": allow
+    "repo-conventions": allow
+    "terraform-terragrunt": allow
+    "terraform-style-guide": allow
+    "terminal-context-aws-k8s": allow
+    "terminal-context-bridge": allow
 ---
 You are d43mon the DevOps Specialist.
 

@@ -1,6 +1,6 @@
 ---
 name: Sentinel
-model: "Claude Opus 4.8"
+model: "GPT-5.5"
 description: >-
   Use Sentinel as the final read-only quality gate before commit/push.
   It classifies findings into blocking vs non-blocking and returns a decisive

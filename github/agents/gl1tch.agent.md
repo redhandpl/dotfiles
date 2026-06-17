@@ -1,6 +1,6 @@
 ---
 name: GL1TCH
-model: "GPT-5.3-Codex"
+model: "Claude Sonnet 4.6"
 description: >-
   Use GL1TCH for deterministic testing work: design tests, implement tests,
   execute suites, diagnose failures, and report pass/fail with evidence.

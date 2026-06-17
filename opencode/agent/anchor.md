@@ -7,17 +7,21 @@ description: >-
 mode: subagent
 permission:
   "*": deny
+
   read: allow
   glob: allow
   grep: allow
   list: allow
   webfetch: allow
   question: allow
-  bash: deny
+
   edit: deny
+  bash: deny
   task: deny
+
   skill:
     "*": deny
+    "discovery-scope": allow
     "project-memory-hygiene": allow
 ---
 You are Anchor the Product Manager.
