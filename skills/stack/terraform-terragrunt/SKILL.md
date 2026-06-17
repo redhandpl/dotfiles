@@ -39,14 +39,19 @@ Classify the touched surface before editing:
 
 ## Validation
 
-- `terraform fmt -check`
-- `terraform validate`
-- Repository-standard HCL formatting such as `terragrunt hclfmt`
-- `terragrunt plan` or `terraform plan` on the smallest affected unit
+- For module-only Terraform validation, prefer `terraform -chdir="<module>" init -backend=false` before `terraform -chdir="<module>" validate` when providers or child modules must be resolved locally.
+- Run targeted Terraform formatting checks with `terraform fmt -check` or `terraform -chdir="<module>" fmt -check`.
+- For unit-scoped Terragrunt validation, `terragrunt validate` is allowed when validating the current unit directory is the intended check.
+- For Terragrunt HCL, prefer the current CLI syntax: `terragrunt hcl fmt --check --diff --working-dir "<unit-or-dir>"`.
+- Validate Terragrunt HCL with `terragrunt hcl validate --working-dir "<unit-or-dir>"`.
+- `terragrunt plan` or `terraform plan` on the smallest affected unit when approval posture and execution context allow it.
 - `yq eval '.' atlantis.yaml` for Atlantis configuration changes
 - Review Atlantis workflow environment such as parallelism, plugin cache, and custom plan/apply steps when `atlantis.yaml` changes
 - Refresh `terraform-docs`, `module.md`, or README sections when module inputs or outputs change
 - Apply `terraform-style-guide` conventions when touching `*.tf`: file layout, naming, descriptions, block ordering, and variable or output completeness
+
+Prefer `terragrunt hcl fmt` over the legacy `terragrunt hclfmt` spelling in new guidance. Keep legacy commands only when the repository or installed Terragrunt version still depends on them.
+Prefer invoking `terragrunt` via `PATH` instead of absolute binary paths such as `/opt/homebrew/bin/terragrunt`, unless the repository or execution environment explicitly requires a pinned binary location.
 
 ## Guardrails
 

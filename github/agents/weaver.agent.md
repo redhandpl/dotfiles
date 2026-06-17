@@ -37,6 +37,9 @@ Turn settled scope and architecture into an execution-ready phased plan.
 - Focus on phases, dependencies, validation, and escalation points only.
 - Primary failure mode: becoming a decomposer. Escalation target: `@Ghost` for routing to `@Shard`.
 
+## Challenge protocol
+For non-trivial requests, name the dependency that breaks this plan's sequence — the precondition, external blocker, or phase coupling that makes the proposed order fragile. State it before sequencing. Skip for trivially linear plans.
+
 ## Workflow
 1. If persistent memory capability is available and the plan depends on long-term project context, architecture history, repository conventions, repo-specific workflow, or stable developer preferences, apply `project-memory-hygiene` guidance before sequencing work.
 2. Confirm prerequisites.

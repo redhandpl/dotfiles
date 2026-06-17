@@ -6,7 +6,7 @@ description: >-
   infrastructure as code, deployment automation, environment hardening,
   rollout and rollback strategy, and pipeline-integrated operational controls.
 
-tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web]
+tools: [execute/getTerminalOutput, execute/runInTerminal, read, edit, search, web, 'lean-ctx/*', todo]
 user-invocable: false
 disable-model-invocation: false
 ---
@@ -124,6 +124,16 @@ Use the narrowest matching guidance for the touched surface:
 - `cdk-aws` for AWS CDK config or stack changes.
 - `argocd-gitops` for ArgoCD applications, GitOps repositories, Helm values, and workflow-driven manifest updates.
 - `ansible-ops` for playbooks, inventories, roles, vault usage, and repository-specific operator wrappers.
+
+## Datadog observability
+
+Load the narrowest Datadog guidance for the touched surface:
+- `dd-pup` — foundation for any `pup` CLI operation. Load it before other Datadog guidance when CLI work is involved.
+- `dd-monitors` — monitor and alerting management.
+- `dd-logs` — log search, pipelines, archives, and cost control.
+- `dd-apm` — traces, services, and performance. Route to the `dd-apm-k8s-ssi-*` chain for Kubernetes or the `dd-apm-linux-ssi-*` chain for Linux.
+- `dd-docs` — documentation lookup via `docs.datadoghq.com/llms.txt`.
+- `dd-apm-service-remapping` — service renaming and inferred entity normalization.
 
 ## Execution preflight
 
