@@ -19,7 +19,7 @@ metadata:
 ```bash
 [ -f environment ] && source environment
 echo "DD_API_KEY set: $([ -n "${DD_API_KEY:-}" ] && echo yes || echo no)"
-echo "DD_SITE: ${DD_SITE:-not set}"
+echo "DD_SITE: ${DD_SITE:-not set (default: us5.datadoghq.com)}"
 echo "helm: $(helm version --short 2>/dev/null || echo NOT FOUND)"
 ```
 
@@ -42,12 +42,12 @@ Do not proceed until `helm` is available.
 >
 > **1. Datadog API Key** — used to authenticate the Agent with your Datadog account. You can find or create one at: https://app.datadoghq.com/organization-settings/api-keys
 >
-> **2. Datadog Site** — the region your Datadog account is on. Most accounts use `datadoghq.com`. Check your Datadog URL to confirm (e.g. `app.datadoghq.eu` → site is `datadoghq.eu`). Other options: `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`.
+> **2. Datadog Site** — the region your Datadog account is on. Default in this repository is `us5.datadoghq.com`. Check your Datadog URL to confirm (e.g. `app.datadoghq.eu` → site is `datadoghq.eu`). Other options: `datadoghq.com`, `us3.datadoghq.com`, `ap1.datadoghq.com`.
 >
 > Please run the following in this chat to set your credentials (the `!` prefix executes it in this session):
 > ```
 > ! export DD_API_KEY=your-api-key-here
-> ! export DD_SITE=datadoghq.com
+> ! export DD_SITE=us5.datadoghq.com
 > ```
 
 Wait for the user to run the commands, then re-run the check above before continuing.
@@ -79,7 +79,7 @@ Wait for the user to run the commands, then re-run the check above before contin
 | Variable | How to resolve |
 |---|---|
 | `CLUSTER_NAME` | Check repo IaC, scripts, or `kubectl config current-context` |
-| `DD_SITE` | Ask the user. Default: `datadoghq.com`. Common options: `datadoghq.eu`, `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`. Full list: https://docs.datadoghq.com/getting_started/site/ |
+| `DD_SITE` | Ask the user. Default: `us5.datadoghq.com`. Common options: `datadoghq.com`, `datadoghq.eu`, `us3.datadoghq.com`, `ap1.datadoghq.com`. Full list: https://docs.datadoghq.com/getting_started/site/ |
 | `AGENT_NAMESPACE` | Use `datadog` unless the repo already uses `datadog-agent` consistently |
 | `CHART_VERSION` | Run `helm search repo datadog/datadog-operator --versions \| head -5` and use the latest stable |
 

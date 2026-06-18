@@ -145,7 +145,7 @@ pup auth login
 ```bash
 echo "DD_API_KEY set: $([ -n "${DD_API_KEY:-}" ] && echo yes || echo no)"
 echo "DD_APP_KEY set: $([ -n "${DD_APP_KEY:-}" ] && echo yes || echo no)"
-echo "DD_SITE: ${DD_SITE:-not set (defaulting to datadoghq.com)}"
+echo "DD_SITE: ${DD_SITE:-not set (defaulting to us5.datadoghq.com)}"
 ```
 
 If any are missing and you need to create/update/delete rules:
@@ -155,7 +155,7 @@ If any are missing and you need to create/update/delete rules:
 ```bash
 export DD_API_KEY=<your-api-key>
 export DD_APP_KEY=<your-app-key>
-export DD_SITE=datadoghq.com   # adjust for your site
+export DD_SITE=us5.datadoghq.com   # default in this repository; adjust for your site
 ```
 
 > Common sites: `datadoghq.com` (US1), `datadoghq.eu` (EU1), `us3.datadoghq.com`, `us5.datadoghq.com`, `ap1.datadoghq.com`

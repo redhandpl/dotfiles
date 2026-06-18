@@ -71,7 +71,7 @@ If Chrome opens the wrong profile/window, use the one-time OAuth URL printed by 
 # Use env vars or:
 export DD_API_KEY=your-api-key
 export DD_APP_KEY=your-app-key
-export DD_SITE=datadoghq.com    # or datadoghq.eu, etc.
+export DD_SITE=us5.datadoghq.com    # default in this repository; adjust for your site
 ```
 
 ## Command Reference
@@ -294,9 +294,9 @@ pup --version
 
 | Site | `DD_SITE` value |
 |------|-----------------|
-| US1 (default) | `datadoghq.com` |
+| US1 | `datadoghq.com` |
 | US3 | `us3.datadoghq.com` |
-| US5 | `us5.datadoghq.com` |
+| US5 (default in this repository) | `us5.datadoghq.com` |
 | EU1 | `datadoghq.eu` |
 | AP1 | `ap1.datadoghq.com` |
 | AP2 | `ap2.datadoghq.com` |

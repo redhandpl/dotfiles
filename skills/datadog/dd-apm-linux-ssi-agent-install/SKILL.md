@@ -31,7 +31,7 @@ Do NOT invoke this skill if:
 ```bash
 [ -f environment ] && source environment
 echo "DD_API_KEY set: $([ -n "${DD_API_KEY:-}" ] && echo yes || echo no)"
-echo "DD_SITE: ${DD_SITE:-not set}"
+echo "DD_SITE: ${DD_SITE:-not set (default: us5.datadoghq.com)}"
 ```
 
 **If `DD_API_KEY` is already set** — proceed directly to gathering infrastructure info.
@@ -41,7 +41,7 @@ echo "DD_SITE: ${DD_SITE:-not set}"
 > Please run the following in this chat to set your credentials (the `!` prefix executes it in this session):
 > ```
 > ! export DD_API_KEY=your-api-key-here
-> ! export DD_SITE=datadoghq.com
+> ! export DD_SITE=us5.datadoghq.com
 > ```
 
 Wait for the user to run the commands, then re-run the check above before continuing.
@@ -106,7 +106,7 @@ ERROR: Architecture is `armv7l` (32-bit ARM) or unsupported OS — stop. Datadog
 | Variable | How to resolve |
 |---|---|
 | `DD_API_KEY` | Check `echo $DD_API_KEY` first — if set, use it. Otherwise ask the user for their API key from Datadog UI: Organization Settings → API Keys. Never log or print the key. |
-| `DD_SITE` | Check `echo $DD_SITE` first — if set, use it. Otherwise ask the user. Default: `datadoghq.com`. Options: `datadoghq.com`, `us3.datadoghq.com`, `us5.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com` |
+| `DD_SITE` | Check `echo $DD_SITE` first — if set, use it. Otherwise ask the user. Default: `us5.datadoghq.com`. Options: `us5.datadoghq.com`, `datadoghq.com`, `us3.datadoghq.com`, `datadoghq.eu`, `ap1.datadoghq.com` |
 | `SSH_KEY` | Ask the user for the path to their SSH private key, or check `CLAUDE.md` |
 | `SSH_USER` | Ask the user for the SSH username. Default: `root` |
 | `SSH_HOST` | Ask the user for the hostname or IP of the target host |

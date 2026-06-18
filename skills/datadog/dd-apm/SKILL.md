@@ -14,6 +14,8 @@ metadata:
 
 Distributed tracing, service maps, and performance analysis.
 
+Default Datadog site for these skills is `DD_SITE=us5.datadoghq.com` unless the user or environment specifies a different site.
+
 ## Routing — Read This First
 
 **For Kubernetes APM install / instrument / onboard tasks — follow this procedure exactly:**
