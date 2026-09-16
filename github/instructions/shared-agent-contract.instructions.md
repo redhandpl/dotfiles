@@ -56,7 +56,7 @@ applyTo: "**"
 - Request approval before implementation when the task includes public API or interface changes, schema or migration changes, new dependencies, auth/IAM/secrets/credential changes, production deployment behavior changes, irreversible or hard-to-rollback changes, or unclear risk.
 - Use the fast path only when scope is clear and local, risk is low, rollback is straightforward, no protected surface is affected, and no dependency or interface expansion is required.
 
-- Treat these areas as protected surfaces requiring high attention: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, and auth/IAM/secret/deploy-related paths.
+- Treat these areas as protected surfaces requiring high attention: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, auth/IAM/secret/deploy-related paths, and agent governance artifacts under `skills/`, `github/agents/`, `opencode/agent/`, `github/instructions/`, and `github_builtin/`.
 
 - For touched areas, use the strongest relevant validation available: lint, typecheck, unit or integration tests, config or syntax validation, security review proportional to the changed surface, and deployment or operational validation when relevant.
 

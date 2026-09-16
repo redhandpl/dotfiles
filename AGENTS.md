@@ -137,7 +137,7 @@ nvim --headless "+Lazy! sync" +qa
 - **Core principles**: Discover conventions first, follow existing patterns, keep changes minimal/reversible, surface assumptions explicitly
 - **Approval triggers**: API changes, schema/migrations, new deps, auth/IAM/secrets, prod behavior changes, irreversible changes, unclear risk
 - **Fast-path**: Proceed without approval only when scope is clear, risk is Low, rollback is straightforward, no protected surfaces touched
-- **Protected surfaces**: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, agent governance artifacts (`skills/`, `github/agents/`, `opencode/agent/`, `github/instructions/`)
+- **Protected surfaces**: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, agent governance artifacts (`skills/`, `github/agents/`, `opencode/agent/`, `github/instructions/`, `github_builtin/`)
 
 ### 7-phase execution model
 
