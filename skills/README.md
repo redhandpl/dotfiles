@@ -37,25 +37,6 @@ skills/
 ├── terminal-context/                  # AWS/K8s context selection
 │   ├── terminal-context-bridge/
 │   └── terminal-context-aws-k8s/
-├── datadog/                           # DD-specific (not loaded by default)
-│   ├── dd-apm/
-│   ├── dd-apm-k8s-ssi-agent-install/
-│   ├── dd-apm-k8s-ssi-enable-ssi/
-│   ├── dd-apm-k8s-ssi-verify-ssi/
-│   ├── dd-apm-k8s-ssi-troubleshoot-ssi/
-│   ├── dd-apm-k8s-ssi-onboarding-summary/
-│   ├── dd-apm-linux-ssi-agent-install/
-│   ├── dd-apm-linux-ssi-enable-ssi/
-│   ├── dd-apm-linux-ssi-verify-ssi/
-│   ├── dd-apm-linux-ssi-troubleshoot-ssi/
-│   ├── dd-apm-linux-ssi-onboarding-summary/
-│   ├── dd-apm-service-remapping/
-│   ├── dd-browser-sdk/
-│   ├── dd-browser-sdk-upgrade-v7/
-│   ├── dd-docs/
-│   ├── dd-logs/
-│   ├── dd-monitors/
-│   └── dd-pup/
 └── project-memory-hygiene/            # Memory between sessions
 ```
 
@@ -77,5 +58,4 @@ An agent loads skills per execution phase. Each per-phase skill complements cros
 - Phase 6 (Testing) -> `tester`, `test-strategy`, plus `python-testing` for Python tests
 - Phase 7 (Final Review) -> `reviewer`, `review-rubric`
 - Agent/customization artifact changes -> `agent-governance`
-- Datadog work (when context requires) -> load from `datadog/` subdirectory
 - Memory between sessions -> `project-memory-hygiene`

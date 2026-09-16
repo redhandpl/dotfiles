@@ -73,6 +73,16 @@ Constrain the review to the actual change surface:
 Do not review files that were not touched and are not direct dependencies of the change.
 Do not flag pre-existing issues unless they are made exploitable by the current change.
 
+## GitHub PR source acquisition
+
+For GitHub PR review, prefer read-only PR-native sources before materializing files:
+
+1. Use `gh pr view` for metadata, refs, commits, and changed files.
+2. Use `gh pr diff` or `gh api .../pulls/<number>/files` for review scope.
+3. Read individual file contents only when the diff is insufficient.
+4. Materialize a full tree under `tmp/<task-id>/` only when validation or tooling requires local files.
+5. Do not download or extract full repository snapshots just to inspect a PR diff, count changed files, or list paths.
+
 ## Verdict protocol
 
 Return exactly one of:
