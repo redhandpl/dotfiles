@@ -11,6 +11,7 @@ Complements `repo-conventions` with security assessment, scope control, and mixe
 ## Pre-implementation checks
 
 Before writing any code, assess:
+
 - **Security impact** — does this change affect auth, input validation, permissions, secrets, or trust boundaries? If yes, document the impact and flag it.
 - **Attack surface** — does this change expand the attack surface? New endpoints, new input paths, new data exposure, new privilege grants.
 - **Dependency check** — does this require new dependencies? If yes, stop and request approval.
@@ -32,7 +33,8 @@ Before writing any code, assess:
 
 ## Mixed task contracts
 
-For `Mixed` domain tasks, before writing app code:
+For `Mixed` domain tasks, before touching files:
+
 - Define the app/devops interface — what the app code expects from infrastructure.
 - Document dependency handoff points — what the DevOps phase needs to wire.
 - State wiring assumptions — environment variables, secrets, service endpoints, config paths.
@@ -50,12 +52,14 @@ For `Mixed` domain tasks, before writing app code:
 Distinguish necessary structural changes from scope creep:
 
 **Required refactoring** (part of the change):
+
 - Updating imports, exports, or type signatures that break due to the requested change.
 - Renaming references when the requested change renames a public symbol.
 - Adjusting call sites when the requested change modifies a function signature.
 - Fixing tests that fail solely because the production code changed as requested.
 
 **Scope creep** (flag as follow-up, do not implement):
+
 - "While I'm here" cleanups unrelated to the requested behavior.
 - Extracting abstractions for code that works correctly and is not being changed.
 - Reformatting or restyling files beyond the touched lines.
@@ -67,6 +71,7 @@ If the requested change works without the refactoring, it is scope creep.
 ## Stop conditions
 
 Stop and surface the blocker when:
+
 - Request is ambiguous after scope lock attempt.
 - Change is medium/high risk and no approval was given.
 - Protected surface is about to be touched.

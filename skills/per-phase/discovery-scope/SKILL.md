@@ -11,6 +11,7 @@ Complements the agent's phase trigger logic with operational depth for scope cla
 ## Question triage
 
 Separate blocking from non-blocking before asking anything:
+
 - **Blocking** — the answer changes what gets built, how it is validated, or whether implementation can start at all.
 - **Non-blocking** — the answer refines an approach but does not change the deliverable. Capture as an explicit assumption and move on.
 
@@ -27,6 +28,7 @@ Define these explicitly before proceeding to architecture or implementation:
 ## Acceptance criteria format
 
 Each criterion must be:
+
 - **Testable** — there is a concrete way to verify it (automated test, manual check, validator output).
 - **Observable** — the result is visible in code, config, output, or behavior.
 - **Independent** — verifiable without relying on another unfinished criterion.
@@ -36,6 +38,7 @@ Format: `Given <precondition>, when <action>, then <expected result>`.
 ## Edge case checklist
 
 Evaluate these dimensions for relevant edge cases:
+
 - Security boundaries — auth bypass, permission escalation, input injection, trust boundary crossing.
 - Error paths — invalid input, missing dependencies, partial failure, timeout, retry behavior.
 - Concurrency — race conditions, duplicate execution, state conflicts.
@@ -45,10 +48,20 @@ Evaluate these dimensions for relevant edge cases:
 ## Dependency identification
 
 Capture external dependencies that affect implementation:
+
 - Services or APIs the change depends on.
 - Data contracts or schemas.
 - Environment prerequisites (tools, runtimes, credentials).
 - Other in-flight changes that could conflict.
+
+## Phase and gate handoff
+
+Before leaving discovery:
+
+- Classify domain, complexity, criticality, and task mode.
+- Identify approval triggers.
+- State which later phases are triggered and which are skipped.
+- Record the next phase and its entry conditions.
 
 ## Anti-patterns
 
@@ -59,4 +72,4 @@ Capture external dependencies that affect implementation:
 
 ## Output
 
-Requirements Summary, Scope Boundaries (In/Out/Deferred), Acceptance Criteria, Assumptions, Edge Cases, Dependencies, Blocking Questions, Non-blocking Unknowns, Next Phase.
+Requirements Summary, Scope Boundaries (In/Out/Deferred), Acceptance Criteria, Assumptions, Edge Cases, Dependencies, Task Assessment, Phase Trigger Decision, Blocking Questions, Non-blocking Unknowns, Next Phase.

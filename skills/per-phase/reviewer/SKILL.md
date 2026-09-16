@@ -11,6 +11,7 @@ Complements `review-rubric` with self-review protocol, phase audit, and operatio
 ## Self-review mode switch
 
 When entering the review phase:
+
 - Explicitly transition to read-only mode — no further edits during review.
 - Review only the scope that was implemented — do not expand review to unrelated areas.
 - If the review finds a blocking issue, exit review, fix the issue, then re-enter review from the start.
@@ -32,6 +33,7 @@ Review every change across these dimensions:
 ## Security-first classification
 
 These findings are **Blocking** by default — non-negotiable:
+
 - Exploitable security vulnerability.
 - Privilege expansion without explicit justification.
 - Unsafe secret handling (hardcoded, logged, exposed in responses).
@@ -43,6 +45,7 @@ Do not downgrade these to non-blocking unless the risk is explicitly mitigated a
 ## Evidence collection
 
 Every finding must be backed by specific evidence:
+
 - **Diff reference** — which file and line(s) the finding applies to.
 - **Execution evidence** — test results, linter output, validator output that supports the finding.
 - **Behavioral evidence** — observed behavior that demonstrates the issue.
@@ -52,6 +55,7 @@ Findings without evidence are not findings — they are opinions. Do not include
 ## Agent artifact review focus
 
 For agent, instruction, skill, and OpenCode settings changes, verify:
+
 - explicit exception language and user-facing clarity,
 - permission enforcement versus descriptive-only guardrails,
 - tool and skill allowlist consistency,
@@ -64,7 +68,7 @@ Use `agent-governance` findings as supporting evidence when applicable.
 
 Constrain the review to the actual change surface:
 
-1. **Start from the diff** — use `git diff --cached` or `git diff HEAD~1` to identify touched files and lines.
+1. **Start from the actual review diff** — use `git diff` for unstaged changes, `git diff --cached` for staged changes, or `git diff HEAD` for all uncommitted changes.
 2. **Review touched lines first** — correctness, security, and maintainability of the changed code.
 3. **Follow imports one level** — check direct callers and callees of changed functions/types. Do not review the entire dependency graph.
 4. **Check test coverage** — verify that touched behavior has corresponding test evidence.
@@ -86,6 +90,7 @@ For GitHub PR review, prefer read-only PR-native sources before materializing fi
 ## Verdict protocol
 
 Return exactly one of:
+
 - `APPROVED` — no blocking findings; non-blocking suggestions may exist.
 - `CHANGES REQUIRED` — one or more blocking findings exist.
 
@@ -95,6 +100,7 @@ Do not negotiate on blocking findings. Fix and re-review.
 ## Phase audit
 
 Verify that each executed phase produced its expected artifacts:
+
 - **Discovery** — scope boundaries and acceptance criteria documented?
 - **Architecture** — decision recorded with rationale?
 - **Planning** — phases with validation gates defined?
@@ -106,6 +112,7 @@ Missing phase artifacts for executed phases should be flagged as non-blocking un
 ## Operational exposure check
 
 For changes with production impact:
+
 - What is the blast radius if this change fails in production?
 - What are the failure modes? (graceful degradation, hard failure, data corruption)
 - Is there monitoring or alerting that would detect the failure?

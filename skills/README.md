@@ -40,6 +40,17 @@ skills/
 └── project-memory-hygiene/            # Memory between sessions
 ```
 
+## Frontmatter contract
+
+| Artifact | Required fields | Selection |
+|---|---|---|
+| `skills/**/SKILL.md` | `name`, `description` | Explicit phase, stack, or named-skill dispatch |
+| `github/instructions/*.instructions.md` | `name`, `description`, `applyTo` | Instruction glob matching |
+| `github_builtin/instructions/*.instructions.md` | `name`, `description`, `applyTo` | GitHub Built-in instruction matching |
+| `pi/SYSTEM.md` | None | Pi runtime prompt |
+
+Optional skill provenance fields such as `origin`, `source`, `date_added`, and `risk` are informational unless a validator explicitly enforces them.
+
 ## Suggested usage
 
 An agent loads skills per execution phase. Each per-phase skill complements cross-cutting skills:

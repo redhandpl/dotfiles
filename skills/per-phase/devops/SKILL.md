@@ -10,6 +10,7 @@ This is the control-plane skill for Phase 5. It decides blast radius, rollout, r
 
 Complements `repo-conventions` with operational depth.
 Load additional specialist skills as required:
+
 - `github-actions` for workflow-local GitHub Actions authoring, validation, and hardening.
 - `github-actions-local` when repository-specific workflow conventions, helper actions, or auth wrappers matter.
 - `docker-patterns` for Dockerfiles, Docker Compose topology, image hardening, and container orchestration conventions.
@@ -24,6 +25,7 @@ Load additional specialist skills as required:
 ## Stack dispatch
 
 Choose the narrowest specialist skill set that matches the touched surface:
+
 - GitHub Actions workflow YAML, reusable workflows, composite actions, or workflow-local OIDC wiring -> `github-actions`
 - Repository-specific GitHub Actions helper actions, runner conventions, summary conventions, or auth wrappers -> `github-actions-local` together with `github-actions`
 - Dockerfiles, Docker Compose stacks, image hardening, container networking, or volume strategy -> `docker-patterns`
@@ -39,6 +41,7 @@ Multiple specialist skills may be loaded together when the change crosses surfac
 ## Blast radius mapping
 
 Before any change, document:
+
 - **Affected environments** — which environments are impacted (dev, staging, prod).
 - **Affected accounts/clusters/control planes** — which AWS accounts, Kubernetes clusters, ArgoCD projects, or automation control planes receive the change.
 - **Affected repositories and automation paths** — which repositories, reusable workflows, Atlantis configs, or GitOps repos participate in rollout.
@@ -49,16 +52,19 @@ Before any change, document:
 ## Execution preflight
 
 Before writing files or running commands:
+
 - Identify the source of truth: GitOps repo, Atlantis/Terragrunt live repo, CDK config repo, Ansible inventory, or workflow repo.
 - Resolve target environment, account, region, cluster, namespace, and ArgoCD project up front.
 - If terminal work depends on AWS or Kubernetes context, load `terminal-context-bridge`; if a private or local overlay such as `terminal-context-aws-k8s` is available, let the bridge use it. Otherwise ask and do not guess `prod`.
 - Keep context export or selection and the first target command in the same shell session.
 - Determine whether rollout happens by merge, Atlantis plan/apply, ArgoCD auto-sync, reusable workflow call, or manual operator step.
+- Never execute direct infrastructure mutations such as `terraform apply` or `kubectl apply`; use plan, diff, synth, lint, or check outputs for validation.
 - Isolate the smallest deployable unit before validation: stack, module, app path, inventory slice, workflow, or target repository path.
 
 ## Rollout path design
 
 Define the sequence of deployment:
+
 - Order of environment application (dev → staging → prod).
 - Canary or staged rollout when applicable.
 - Human or automation gates between stages (for example Atlantis approval, environment protection, merge gate, or ArgoCD health gate).
@@ -69,7 +75,8 @@ Define the sequence of deployment:
 ## Rollback path design
 
 For each change:
-- **Revert method** — exact steps to undo (revert commit, re-apply previous config, etc.).
+
+- **Revert method** — exact steps to undo (revert commit or restore the previous config through the approved mechanism).
 - **Revert verification** — how to confirm rollback succeeded.
 - **Time-to-rollback** — rough effort estimate.
 - **Partial rollback** — can individual components be rolled back independently?
@@ -78,13 +85,15 @@ For each change:
 ## Risk classification
 
 Classify as:
+
 - `Read-only` — inspection, dry-run, plan output only.
-- `Fast-path` — local, reversible, pattern-matched, no secrets/IAM/new deployment paths.
+- `Fast-path` — local, reversible, pattern-matched, no secrets/IAM/new deployment paths, no protected surface, and no production or deployment behavior changes.
 - `Approval-required` — everything else.
 
-Repository mutation happens only in `Fast-path`. `Read-only` remains inspection, dry-run, or plan output only.
+Repository mutation is allowed only in `Fast-path` after delivery gates permit it. `Read-only` remains inspection, dry-run, or plan output only.
 
 Triggers for `Approval-required`:
+
 - New cloud roles or IAM grants.
 - New deployment paths or environments.
 - Infrastructure provisioning or destroy operations.
@@ -98,6 +107,7 @@ Triggers for `Approval-required`:
 ## Validation baseline
 
 Run the appropriate specialist validator before implementation:
+
 - Terraform/Terragrunt — `terraform plan` / `terragrunt plan`, plus repo-specific format and validate steps.
 - CDK — `cdk synth` / `cdk diff` scoped to the exact stack.
 - GitOps/Helm/Kubernetes — `helm lint` / `helm template`, `kubectl diff`, or `argocd app diff` when the task and approval posture allow it.
@@ -107,6 +117,7 @@ Run the appropriate specialist validator before implementation:
 ## Static validators
 
 Run per touched file type:
+
 - `.github/workflows/*.yml` → `actionlint`
 - `action.yml` / `action.yaml` → `yq eval '.'`
 - `*.tf` → `terraform fmt -check`
@@ -128,6 +139,7 @@ Run per touched file type:
 ## Permission tightening
 
 Default posture: tighten, never expand.
+
 - Prefer narrow IAM policies over broad ones.
 - Prefer scoped tokens over full-access tokens.
 - Prefer read-only when write is not required.
@@ -136,6 +148,7 @@ Default posture: tighten, never expand.
 ## Escalation triggers
 
 Stop and escalate when:
+
 - Change requires new cloud roles or broader IAM grants.
 - New deployment path or environment is being introduced.
 - Workflow starts provisioning infrastructure or mutating additional control-plane repositories.
@@ -145,7 +158,7 @@ Stop and escalate when:
 
 ## Anti-patterns
 
-- Applying without planning — always `plan` before `apply`.
+- Treating `plan` as permission to apply — direct infrastructure mutations remain prohibited.
 - Expanding permissions silently — every expansion needs explicit justification.
 - Missing rollback design — never implement without a rollback path.
 - Skipping blast radius assessment — document impact before changing.

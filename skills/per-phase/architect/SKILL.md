@@ -11,6 +11,7 @@ or open boundary questions. Complements `documentalist` for ADR creation.
 ## Options evaluation format
 
 Present 2–3 viable options. For each option:
+
 - **Description** — what the approach does and how it fits existing patterns.
 - **Trade-offs** — pros and cons relative to the current system.
 - **Risk** — what could go wrong, operational impact, reversibility.
@@ -22,6 +23,7 @@ Do not present a single option disguised as a comparison. If only one approach i
 ## Recommendation format
 
 After presenting options:
+
 - Recommend one with clear rationale tied to the specific constraints of this task.
 - State consequences — what changes downstream, what becomes easier, what becomes harder.
 - Define the migration path from current state to recommended state.
@@ -29,6 +31,7 @@ After presenting options:
 ## Diagram conventions
 
 Use Mermaid diagrams when the design involves:
+
 - Component relationships or dependencies.
 - Data flow across system boundaries.
 - Sequence of operations across services.
@@ -37,6 +40,7 @@ Use Mermaid diagrams when the design involves:
 Skip diagrams when the design is a single-file local change with no structural impact.
 
 Preferred diagram types:
+
 - `graph TD` or `graph LR` — component/dependency relationships.
 - `sequenceDiagram` — cross-service or cross-boundary interactions.
 - `flowchart` — decision logic or workflow routing.
@@ -45,6 +49,7 @@ Preferred diagram types:
 ## Decision recording
 
 For non-trivial decisions, capture ADR-lite format:
+
 - **Context** — what prompted the decision.
 - **Decision** — what was chosen and why.
 - **Consequences** — what changes as a result.
@@ -53,6 +58,7 @@ For non-trivial decisions, capture ADR-lite format:
 ## Boundary definition
 
 Explicitly define:
+
 - **System boundaries** — what is inside the changed system, what is external.
 - **Interface contracts** — data formats, protocols, error contracts at boundaries.
 - **Trust boundaries** — where authentication, authorization, and input validation apply.
@@ -60,6 +66,7 @@ Explicitly define:
 ## Non-goals
 
 List what the design intentionally does NOT address:
+
 - Features, optimizations, or integrations deferred by design.
 - Problems that exist but are out of scope for this architecture decision.
 
@@ -72,4 +79,4 @@ List what the design intentionally does NOT address:
 
 ## Output
 
-Context, Constraints, Options, Recommendation, Rationale, Diagrams, Boundary Definitions, Non-goals, Assumptions, Risks, Migration Path, Next Phase.
+Context, Constraints, Options, Decision, Recommendation, Rationale, Diagrams (if applicable), Boundary Definitions, Non-goals, Assumptions, Risks, Migration Path, Next Phase.

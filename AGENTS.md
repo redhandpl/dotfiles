@@ -36,9 +36,11 @@ Git config    ──→ git/gitconfig (aliases, LFS, preferences)
 ```
 
 **Agent routing chain** (default, all paths):
+
 ```
 Ghost → Anchor / Weaver / Blueprint → (optional) Shard → Forger / d43mon → GL1TCH → Sentinel
 ```
+
 **Standalone exception**: `User → Nexus` (end-to-end, no delegation)
 
 ### Environment selection
@@ -72,7 +74,6 @@ Ghost → Anchor / Weaver / Blueprint → (optional) Shard → Forger / d43mon �
 | `omp/SYSTEM.md` | Nexus master prompt for OMP (oh-my-pi). Full copy of pi.dev's Nexus, adapted for cloud/OMP. |
 | `pi/SYSTEM.md` | Nexus master prompt for pi.dev (weapon of choice). |
 | `git/gitconfig` | Git configuration: aliases (gs, whoami), LFS filter, preferences |
-| `docs/` | Documentation (skill-structure.md) |
 | `media/` | Agent portraits and branding assets |
 
 ## Development Commands
@@ -102,7 +103,8 @@ nvim --headless "+Lazy! sync" +qa
 ## Code Conventions & Common Patterns
 
 ### File conventions
-- **Agent files**: `skills/<category>/<name>/SKILL.md` — skill definitions use frontmatter (`name`, `description`, `applyTo`) and Markdown body
+
+- **Skill files**: `skills/<category>/<name>/SKILL.md` — skill definitions require frontmatter (`name`, `description`) and a Markdown body; provenance fields are optional
 - **Agent prompts**: `opencode/agent/<name>.md` and `github/agents/<name>.agent.md` — per-agent system prompts
 - **Instructions**: `github/instructions/<name>.instructions.md` — shared rules with frontmatter (`name`, `description`, `applyTo`)
 - **Config**: `opencode/opencode.json` — JSON with `$schema`, `plugin`, `provider` sections
@@ -110,10 +112,12 @@ nvim --headless "+Lazy! sync" +qa
 - **Agent files (GitHub Copilot)**: `github/agents/<name>.agent.md` — extended YAML (`name`, `model`, `description`, `tools`, `agents`, invocability flags)
 
 ### Directory boundary rule
+
 - Keep directory responsibilities isolated (`git/`, `nvim/`, `opencode/`, `github/`, `skills/`) unless the task explicitly requires cross-platform synchronization.
 - If synchronization is required, keep intent and role boundaries equivalent across all affected platforms.
 
-### Cross-platform synchronization checklist (for equivalent roles):
+### Cross-platform synchronization checklist (for equivalent roles)
+
 - Update role intent and boundaries in both supported variants:
   - `opencode/agent/<role>.md`
   - `github/agents/<role>.agent.md`
@@ -127,6 +131,7 @@ nvim --headless "+Lazy! sync" +qa
 - For `nexus`, keep the standalone-exception semantics aligned across `opencode/agent/nexus.md` and `github/agents/nexus.agent.md`; if GitHub Copilot lags OpenCode in hard enforcement, document the difference explicitly and treat OpenCode as authoritative.
 
 ### Agent contract (shared across all agents)
+
 - **Language**: English for communication, code comments, and docs. Chat defaults may vary by agent (Nexus → Polish)
 - **Communication guardrails**: No enthusiasm inflation, no hedging phrases, no performative narration, no filler transitions
 - **Core principles**: Discover conventions first, follow existing patterns, keep changes minimal/reversible, surface assumptions explicitly
@@ -135,6 +140,7 @@ nvim --headless "+Lazy! sync" +qa
 - **Protected surfaces**: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, agent governance artifacts (`skills/`, `github/agents/`, `opencode/agent/`, `github/instructions/`)
 
 ### 7-phase execution model
+
 1. **Discovery & Scope** — Acceptance criteria, scope boundaries, edge cases
 2. **Architecture** — Options with trade-offs, interface/trust boundaries
 3. **Planning** — Phased rollout, validation gates, rollback paths
@@ -144,12 +150,14 @@ nvim --headless "+Lazy! sync" +qa
 7. **Final Review** — Read-only self-critique, security pass, verdict
 
 ### Skill loading protocol
+
 1. Read `skills/README.md` to identify the correct per-phase skill
 2. Load that skill (and relevant stack overlays for DevOps work)
 3. Cross-cutting skills loaded when scope matches — not all at once
 4. Datadog skills never loaded by default
 
 ### Python environment discipline
+
 - Always create or activate a virtual environment before using Python
 - All Python commands and package installations run inside the active venv
 
@@ -178,11 +186,13 @@ nvim --headless "+Lazy! sync" +qa
 ## Risk and Routing
 
 Classify work before implementation and route ownership accordingly:
+
 - `App`: application code changes.
 - `DevOps`: CI/CD, IaC, deployment automation, IAM/secrets automation.
 - `Mixed`: explicit app/devops interface split is required.
 
 Ownership defaults:
+
 - App implementation stays with app-focused agents.
 - CI/CD, IaC, deploy automation, pipeline IAM, and secret automation stay with DevOps-focused agents.
 - Mixed work requires explicit ownership split and interface definition.
@@ -209,6 +219,7 @@ No test framework or test suite exists in this repository. Validation is perform
 - **Iteration protocol**: Max 3 review cycles; failures escalate to user
 
 When modifying agent definitions, instructions, skills, or runtime config:
+
 1. Run `agent-governance` as mandatory validation
 2. Check frontmatter/schema consistency (where applicable)
 3. Verify permission/tool alignment

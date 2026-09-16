@@ -11,6 +11,7 @@ or multi-step execution. Complements `delivery-gates` with sequencing and rollba
 ## Phase design
 
 Each phase must include:
+
 - **Preconditions** — what must be true before this phase can start.
 - **Changes** — what gets modified in this phase.
 - **Validation gate** — how to verify the phase succeeded before moving to the next.
@@ -19,8 +20,9 @@ Each phase must include:
 ## Sequencing rationale
 
 Default ordering principles:
-1. Infrastructure before application (schema before code, config before runtime).
-2. Non-destructive before destructive (additive changes first, removals last).
+
+1. Order work by dependency, reversibility, and validation readiness.
+2. Prefer additive or expand changes before destructive or contract changes.
 3. Independently testable phases before dependent ones.
 4. Security-sensitive changes isolated in their own phase when possible.
 
@@ -29,6 +31,7 @@ State explicitly why phases are ordered the way they are. If phases can run in p
 ## Rollback path design
 
 For medium/high criticality changes, each phase needs:
+
 - **Revert method** — exact steps to undo the phase.
 - **Revert verification** — how to confirm the rollback succeeded.
 - **Blast radius of revert** — what else is affected if this phase is rolled back.
@@ -39,6 +42,7 @@ For low criticality, a single-line rollback note is sufficient.
 ## Escalation points
 
 Define conditions where planned execution must stop:
+
 - Unexpected test failures.
 - Discovered dependencies not in the original plan.
 - Scope expansion detected during implementation.
@@ -48,6 +52,7 @@ Define conditions where planned execution must stop:
 ## Dependency mapping
 
 Capture:
+
 - **Cross-phase dependencies** — phase B cannot start until phase A's validation gate passes.
 - **External dependencies** — services, APIs, or resources needed.
 - **Parallel-safe phases** — phases with no mutual dependency that can execute concurrently.
@@ -56,12 +61,24 @@ Capture:
 ## Task decomposition
 
 When phases need further breakdown:
+
 - Group work into milestones with explicit done-when criteria.
 - Produce ordered tasks within each milestone.
 - Mark decision points — steps where a choice must be made before continuing.
 - Separate quick wins (low risk, high value, independent) from the critical path.
 
 Do not decompose if the phase is already a single atomic change.
+
+## Quick wins
+
+A quick win is a low-risk, independently deliverable change with clear value that does not block the critical path.
+For each quick win, state:
+
+- why it is independently deliverable;
+- how it will be validated;
+- how it can be reverted.
+
+Do not label work a quick win when it touches approval-triggering surfaces, introduces hidden dependencies, or has unclear rollback.
 
 ## Anti-patterns
 
@@ -73,4 +90,4 @@ Do not decompose if the phase is already a single atomic change.
 
 ## Output
 
-Preconditions, Phases, Sequencing Rationale, Validation Gates, Rollback Paths, Escalation Points, Dependencies, Task Decomposition (if applicable), Quick Wins, Risks, Next Phase.
+Preconditions, Phases, Sequencing Rationale, Validation Gates, Rollback Paths, Escalation Points, Dependencies, Task Decomposition (if applicable), Quick Wins (if applicable), Risks, Next Phase.

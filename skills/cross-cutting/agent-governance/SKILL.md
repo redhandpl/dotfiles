@@ -49,6 +49,15 @@ Validate:
 - Denied surfaces stay denied unless an explicit change was intended and approved.
 - Prompt body does not claim capabilities that permissions do not support.
 
+### Skill artifacts
+
+Validate:
+
+- Every `SKILL.md` contains `name` and `description`.
+- `applyTo` is not required for skill artifacts and must not be added without a loader contract.
+- Optional provenance metadata (`origin`, `source`, `date_added`, `risk`) is informational unless a validator explicitly enforces it.
+- Skill selection remains explicit through phase, stack, or named-skill dispatch.
+
 ### Pi prompt artifacts
 
 Validate:
@@ -74,6 +83,7 @@ Validate:
 Validate:
 
 - Frontmatter fields required by the platform are present.
+- For `*.instructions.md`, `applyTo` is required when the platform uses instruction glob matching.
 - Skill or instruction purpose matches where it is referenced.
 - Cross-cutting rules live in shared skills/contracts rather than drifting into multiple role files.
 
