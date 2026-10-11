@@ -1,106 +1,57 @@
 ---
 name: Skill Policy
-description: Canonical skill-selection policy for GitHub Copilot built-in Void Protocol profile
+description: Skill loading protocol and phase-to-skill mapping for Nexus in GitHub built-in profile
 applyTo: "**"
 ---
 
-Use this file as the source of truth for when to apply guidance from `@skills/*`.
+Use this file as the source of truth for loading guidance from `skills/*`.
 
-## Policy intent
-- Keep skill selection deterministic across sessions.
-- Prefer the narrowest matching skill for the touched surface.
-- Keep OpenCode as the enforcement source of truth when behavior diverges.
+## Mandatory loading protocol
+Before any phase executes:
+1. Read `~/.copilot/skills/README.md`.
+2. Load the correct per-phase skill.
+3. Load cross-cutting skills only when their scope matches.
+4. Load stack overlays only for relevant DevOps/App stack work.
+5. Never load Datadog skills by default.
 
-## Selection order
-1. Classify domain: `App`, `DevOps`, `Mixed`.
-2. Apply cross-cutting governance skills if triggered.
-3. Apply role-specific skills for the selected specialist semantics.
-4. Apply one or more stack-specialist skills for the exact touched technology.
-5. Apply testing/review skills when validation or final gate is required.
+## Phase-to-skill mapping
+- Phase 1 (Discovery & Scope): `discovery-scope`.
+- Phase 2 (Architecture): `architect`.
+- Phase 3 (Planning): `planner` + `delivery-gates`.
+- Phase 4 (Implementation App): `coder` + `repo-conventions`.
+- Phase 5 (Implementation DevOps): `devops` + `repo-conventions` + relevant stack overlays.
+- Phase 6 (Testing): `tester` + `test-strategy`.
+- Phase 7 (Final Review): `reviewer` + `review-rubric`.
 
 ## Cross-cutting triggers
-- `repo-conventions`: any implementation or review touching repository files.
-- `delivery-gates`: before deciding `Read-only` / `Fast-path` / `Approval-required`.
-- `project-memory-hygiene`: when decisions depend on long-term repo context or prior architecture/workflow choices.
-- `documentalist`: when behavior, setup, API/config, or operations docs must change.
-- `agent-governance`: when editing agent/instruction/skill/OpenCode governance artifacts.
+- `repo-conventions`: any repository mutation.
+- `delivery-gates`: any task mode or approval-gate decision.
+- `agent-governance`: agent/instruction/skill governance artifact changes.
+- `documentalist`: creating or updating technical documentation.
+- `project-memory-hygiene`: task depends on durable decisions from prior sessions.
 
-## Role and phase triggers
+## Stack overlays
+Load only when the touched surface matches:
+- `github-actions` (+ `github-actions-local` where applicable)
+- `terminal-context-bridge`
+- `docker-patterns`
+- `terraform-terragrunt` (+ `terraform-style-guide`)
+- `cdk-aws`
+- `argocd-gitops`
+- `ansible-ops`
+- `aws-cost-optimizer`
+- `python-patterns`
+- `python-testing`
 
-### Ghost semantics
-- Use `delivery-gates` for mode/risk gating.
-- Use `agent-governance` when routing touches agent customization artifacts.
+## Datadog rule
+Datadog skills under `skills/datadog/` are opt-in.
+Load only when the task explicitly requires Datadog work.
 
-### Anchor semantics
-- Primary skill: `discovery-scope`.
-- Companion skills: `delivery-gates` (for fast-path vs approval), `project-memory-hygiene` when historical context affects scope.
-
-### Blueprint semantics
-- Primary skill: `architect`.
-- Companion skills: `documentalist` (when ADR/design docs are required), `project-memory-hygiene` when prior architecture decisions must be reused.
-
-### Weaver semantics
-- Primary skill: `planner`.
-- Companion skills: `delivery-gates` (for explicit phase gates and approval points), `project-memory-hygiene` when prior rollout constraints exist.
-
-### Shard semantics
-- Primary skill: none (decomposition behavior).
-- Companion skills: `planner` only when decomposition must preserve phase dependencies from an approved plan.
-
-### Forger semantics
-- Primary skills: `coder` + `repo-conventions`.
-- Companion skills: `delivery-gates` (risk mode), `python-patterns` for Python app code, `python-testing` for Python test code, `agent-governance` for agent/instruction/skill/OpenCode artifacts, `documentalist` when implementation changes docs.
-
-### d43mon semantics
-- Primary skills: `devops` + `repo-conventions` + `delivery-gates`.
-- Companion skills (by surface):
-  - `github-actions` for workflow-local GitHub Actions,
-  - `terminal-context-bridge` for AWS/Kubernetes context-sensitive terminal tasks,
-  - `docker-patterns`, `aws-cost-optimizer`, `terraform-terragrunt` (+ `terraform-style-guide` for HCL), `cdk-aws`, `argocd-gitops`, `ansible-ops`,
-  - `documentalist` for operational docs/runbooks,
-  - `project-memory-hygiene` when rollout history or environment conventions affect execution.
-
-### GL1TCH semantics
-- Primary skills: `tester` + `test-strategy`.
-- Companion skills: `python-testing` for Python tests, `agent-governance` when validating agent/instruction/skill/OpenCode changes.
-
-### Sentinel semantics
-- Primary skills: `reviewer` + `review-rubric`.
-- Companion skills: `agent-governance` when reviewing agent/instruction/skill/OpenCode artifacts.
-
-## Surface quick reference
-- App specifics: `python-patterns` for Python app code, `python-testing` for Python tests.
-- DevOps specifics under `d43mon` semantics: `github-actions`, `terminal-context-bridge`, `docker-patterns`, `aws-cost-optimizer`, `terraform-terragrunt` (+ `terraform-style-guide` for HCL), `cdk-aws`, `argocd-gitops`, `ansible-ops`.
-
-## Datadog policy
-- Use `dd-pup` as CLI foundation for Datadog operational tasks.
-- `dd-docs`: documentation lookup or product behavior clarification.
-- `dd-monitors`: monitor lifecycle/search/create/update practices.
-- `dd-logs`: log pipelines/search/archives/cost control.
-- `dd-apm`: generic APM onboarding/instrumentation/analysis when SSI chain is not the direct task.
-- `dd-apm-service-remapping`: service renaming/normalization/remapping rules.
-- `dd-browser-sdk`: Browser SDK setup/migration/troubleshooting.
-- `dd-browser-sdk-upgrade-v7`: explicit v6 -> v7 migration and removed-option remediation.
-
-### Datadog SSI chain (Kubernetes)
-- If Agent is missing -> `dd-apm-k8s-ssi-agent-install`.
-- Then -> `dd-apm-k8s-ssi-enable-ssi`.
-- Then -> `dd-apm-k8s-ssi-verify-ssi`.
-- If traces/injection fail -> `dd-apm-k8s-ssi-troubleshoot-ssi`.
-- After successful install+enable -> `dd-apm-k8s-ssi-onboarding-summary`.
-
-### Datadog SSI chain (Linux)
-- If Agent is missing -> `dd-apm-linux-ssi-agent-install`.
-- Then -> `dd-apm-linux-ssi-enable-ssi`.
-- Then -> `dd-apm-linux-ssi-verify-ssi`.
-- If traces/injection fail -> `dd-apm-linux-ssi-troubleshoot-ssi`.
-- After successful install+enable -> `dd-apm-linux-ssi-onboarding-summary`.
-
-## Conflict and fallback rules
-- When multiple skills match, use the narrowest stack skill plus required cross-cutting skills.
-- Do not replace approval gates with skill selection.
-- If no specialist skill matches, stay with `repo-conventions` + role semantics and escalate ambiguity.
+## Conflict handling
+- Use the narrowest matching skill set that covers the touched surface.
+- Keep approval gates independent from skill selection.
+- If no specialist applies, keep `repo-conventions` + relevant per-phase skill and surface ambiguity.
 
 ## Platform note
-- This GitHub built-in profile is instruction-enforced.
-- OpenCode remains the authoritative source for hard permission enforcement and skill allowlists.
+- This profile is instruction-enforced.
+- OpenCode remains authoritative for hard permissions and skill allowlists.

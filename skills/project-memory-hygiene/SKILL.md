@@ -7,9 +7,7 @@ description: Shared guidance for reusing and maintaining durable project memory 
 
 Use this skill when durable project knowledge may materially affect discovery, design, planning, implementation, or review.
 
-This skill is designed to work with persistent memory integrations such as [`opencode-agent-memory`](https://github.com/joshuadavidthomas/opencode-agent-memory).
 Use the platform's current memory read or update primitives rather than hard-coding one tool name. If persistent memory capability is unavailable, skip memory reuse or update and proceed from current repository evidence and current user instructions.
-When the active persistent memory backend is `opencode-agent-memory`, use the backend-specific reference in `reference/opencode-agent-memory.md` if additional operational guidance is needed.
 
 ## Use when
 - The task depends on prior architecture or workflow decisions.
@@ -59,9 +57,8 @@ When the active persistent memory backend is `opencode-agent-memory`, use the ba
 1. Decide whether durable project context is likely to affect the task.
 2. If yes and persistent memory capability is available, read relevant memory before major decisions.
 3. Verify recalled memory against current repository state and current user instructions.
-4. If the active backend is `opencode-agent-memory` and extra operational detail is needed, follow the backend reference in this skill directory.
-5. Complete the task using current evidence plus validated durable context.
-6. Before handoff, if a new durable fact or correction was established and it materially reduces future ambiguity, update the narrowest correct memory scope proactively without waiting for an explicit user request.
+4. Complete the task using current evidence plus validated durable context.
+5. Before handoff, if a new durable fact or correction was established and it materially reduces future ambiguity, update the narrowest correct memory scope proactively without waiting for an explicit user request.
 
 ## Decision test before writing
 Write or update memory only if the fact is:

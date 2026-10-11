@@ -37,27 +37,19 @@ skills/
 ├── terminal-context/                  # AWS/K8s context selection
 │   ├── terminal-context-bridge/
 │   └── terminal-context-aws-k8s/
-├── datadog/                           # DD-specific (not loaded by default)
-│   ├── dd-apm/
-│   ├── dd-apm-k8s-ssi-agent-install/
-│   ├── dd-apm-k8s-ssi-enable-ssi/
-│   ├── dd-apm-k8s-ssi-verify-ssi/
-│   ├── dd-apm-k8s-ssi-troubleshoot-ssi/
-│   ├── dd-apm-k8s-ssi-onboarding-summary/
-│   ├── dd-apm-linux-ssi-agent-install/
-│   ├── dd-apm-linux-ssi-enable-ssi/
-│   ├── dd-apm-linux-ssi-verify-ssi/
-│   ├── dd-apm-linux-ssi-troubleshoot-ssi/
-│   ├── dd-apm-linux-ssi-onboarding-summary/
-│   ├── dd-apm-service-remapping/
-│   ├── dd-browser-sdk/
-│   ├── dd-browser-sdk-upgrade-v7/
-│   ├── dd-docs/
-│   ├── dd-logs/
-│   ├── dd-monitors/
-│   └── dd-pup/
 └── project-memory-hygiene/            # Memory between sessions
 ```
+
+## Frontmatter contract
+
+| Artifact | Required fields | Selection |
+|---|---|---|
+| `skills/**/SKILL.md` | `name`, `description` | Explicit phase, stack, or named-skill dispatch |
+| `github/instructions/*.instructions.md` | `name`, `description`, `applyTo` | Instruction glob matching |
+| `github_builtin/instructions/*.instructions.md` | `name`, `description`, `applyTo` | GitHub Built-in instruction matching |
+| `pi/SYSTEM.md` | None | Pi runtime prompt |
+
+Optional skill provenance fields such as `origin`, `source`, `date_added`, and `risk` are informational unless a validator explicitly enforces them.
 
 ## Suggested usage
 
@@ -77,5 +69,4 @@ An agent loads skills per execution phase. Each per-phase skill complements cros
 - Phase 6 (Testing) -> `tester`, `test-strategy`, plus `python-testing` for Python tests
 - Phase 7 (Final Review) -> `reviewer`, `review-rubric`
 - Agent/customization artifact changes -> `agent-governance`
-- Datadog work (when context requires) -> load from `datadog/` subdirectory
 - Memory between sessions -> `project-memory-hygiene`

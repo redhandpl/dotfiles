@@ -24,6 +24,7 @@ Document the matrix before implementing. Not every dimension applies to every ch
 ## Security negative cases
 
 Required when the change touches:
+
 - **Auth** — test that unauthenticated and unauthorized requests are rejected.
 - **Permissions** — test that privilege escalation is blocked.
 - **Input validation** — test that malformed, oversized, and injection-laden inputs are rejected.
@@ -49,6 +50,7 @@ Format: "Given <actor without privilege>, when <action requiring privilege>, the
 ## Convention discovery
 
 Before writing tests:
+
 1. Find the existing test framework and runner.
 2. Identify naming conventions (file names, test names, describe/it structure).
 3. Locate existing fixtures, helpers, and setup patterns.
@@ -57,6 +59,7 @@ Before writing tests:
 ## Non-runtime artifact validation
 
 When the change targets agent definitions, instruction files, skills, or OpenCode settings:
+
 - Pair this skill with `agent-governance`.
 - Prefer schema, permission, routing, and cross-platform parity checks over synthetic runtime tests.
 - Still report only validators and manual checks that were actually executed.
@@ -80,6 +83,7 @@ Start from the nearest existing test to the changed code and work outward.
 ## Gap analysis
 
 After test execution:
+
 - Identify what remains untested and why.
 - Assess risk of uncovered paths — is the gap acceptable or does it need follow-up?
 - Recommend specific follow-up tests if gaps are medium/high risk.
@@ -95,4 +99,4 @@ After test execution:
 
 ## Output
 
-Coverage Matrix, Tests Implemented, Execution Evidence, Security Test Focus, Determinism Check, Gaps, Recommended Follow-up, Next Phase.
+Coverage Matrix, Tests or Checks Implemented, Execution Evidence, Security Test Focus, Determinism Check, Gaps, Recommended Follow-up, Next Phase.

@@ -1,4 +1,5 @@
 .DS_Store
 considerations/
 priv/
+tmp/
 skills/terminal-context/terminal-context-aws-k8s
