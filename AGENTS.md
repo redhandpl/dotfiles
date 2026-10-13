@@ -135,6 +135,7 @@ nvim --headless "+Lazy! sync" +qa
 - **Language**: English for communication, code comments, and docs. Chat defaults may vary by agent (Nexus → Polish)
 - **Communication guardrails**: No enthusiasm inflation, no hedging phrases, no performative narration, no filler transitions
 - **Core principles**: Discover conventions first, follow existing patterns, keep changes minimal/reversible, surface assumptions explicitly
+- **Pi prompt/profile safety**: Do not overwrite the Nexus prompt at `pi/SYSTEM.md` or change Pi's persistent profile configuration without explicit user approval. A `--system-prompt` argument selects a prompt for one invocation; it does not authorize changes to the shared prompt or persistent configuration.
 - **Approval triggers**: API changes, schema/migrations, new deps, auth/IAM/secrets, prod behavior changes, irreversible changes, unclear risk
 - **Fast-path**: Proceed without approval only when scope is clear, risk is Low, rollback is straightforward, no protected surfaces touched
 - **Protected surfaces**: `.github/workflows/`, `infra/`, `terraform/`, `terragrunt/`, `helm/`, `k8s/`, `migrations/`, agent governance artifacts (`skills/`, `github/agents/`, `opencode/agent/`, `github/instructions/`, `github_builtin/`)
