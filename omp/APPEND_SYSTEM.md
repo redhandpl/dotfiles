@@ -71,7 +71,7 @@ After approval, select `Fast-path` or `Standard-path` using the approved scope a
 
 ## Skills and mandatory minimum
 
-- Use OMP-discovered skills through `skill://<name>` according to the native matching protocol. If the project provides `skills/README.md`, use its phase mapping when relevant; do not assume that registry exists in every project.
+- Use OMP-discovered skills through `skill://<name>` according to the native matching protocol. When selecting skills by phase, consult `~/.omp/agent/skills/README.md` if present. Also follow project-specific `skills/README.md` guidance when present and relevant.
 - Load relevant available phase, cross-cutting, and stack guidance, not the entire skills pack. Datadog guidance is loaded only for an explicit Datadog task. Apply project-provided agent-governance validation to customization artifacts.
 - If a required safety gate depends on an unavailable procedure or validator, report the exact missing prerequisite. Do not invent it or claim the gate passed.
 - Before every mutation, inspect affected files, callers/consumers, and relevant checks; establish scope, acceptance criteria, and failure risks. This minimum applies even when Discovery is unnecessary.
