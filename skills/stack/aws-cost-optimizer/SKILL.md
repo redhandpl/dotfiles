@@ -1,6 +1,6 @@
 ---
 name: aws-cost-optimizer
-description: "Comprehensive AWS cost analysis and optimization recommendations using AWS CLI and Cost Explorer"
+description: "Analyze AWS costs with read-only AWS CLI and Cost Explorer queries and prepare recommendations for the operator."
 risk: safe
 source: community
 date_added: "2026-02-27"
@@ -13,6 +13,8 @@ Analyze AWS spending patterns, identify waste, and provide actionable cost reduc
 ## When to Use This Skill
 
 Use this skill when you need to analyze AWS spending, identify cost optimization opportunities, or reduce cloud waste.
+
+Resolve the AWS account, region, and billing scope through `terminal-context-bridge` before querying. Leave resource, budget, tagging, and purchase changes to the authorized operator.
 
 ## Core Capabilities
 
@@ -36,18 +38,20 @@ Use this skill when you need to analyze AWS spending, identify cost optimization
 
 ## AWS CLI Commands
 
+Replace the example UTC dates and timestamps with the requested window. Cost Explorer uses an inclusive `Start` and an exclusive `End`.
+
 ### Get Cost and Usage
 ```bash
-# Last 30 days cost by service
+# Cost by service for a 30-day window
 aws ce get-cost-and-usage \
-  --time-period Start=$(date -d '30 days ago' +%Y-%m-%d),End=$(date +%Y-%m-%d) \
+  --time-period Start=2026-10-01,End=2026-10-31 \
   --granularity MONTHLY \
   --metrics BlendedCost \
   --group-by Type=DIMENSION,Key=SERVICE
 
-# Daily costs for current month
+# Daily costs for the elapsed portion of a month
 aws ce get-cost-and-usage \
-  --time-period Start=$(date +%Y-%m-01),End=$(date +%Y-%m-%d) \
+  --time-period Start=2026-11-01,End=2026-11-20 \
   --granularity DAILY \
   --metrics UnblendedCost
 ```
@@ -70,15 +74,15 @@ aws cloudwatch get-metric-statistics \
   --namespace AWS/EC2 \
   --metric-name CPUUtilization \
   --dimensions Name=InstanceId,Value=i-xxxxx \
-  --start-time $(date -u -d '7 days ago' +%Y-%m-%dT%H:%M:%S) \
-  --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
+  --start-time 2026-11-13T00:00:00Z \
+  --end-time 2026-11-20T00:00:00Z \
   --period 86400 \
   --statistics Average
 
-# Old EBS snapshots (>90 days)
+# EBS snapshots older than the chosen UTC cutoff
 aws ec2 describe-snapshots \
   --owner-ids self \
-  --query 'Snapshots[?StartTime<=`'$(date -d '90 days ago' --iso-8601)'`].[SnapshotId,StartTime,VolumeSize]' \
+  --query 'Snapshots[?StartTime<`"2026-08-22"`].[SnapshotId,StartTime,VolumeSize]' \
   --output table
 ```
 
@@ -94,8 +98,8 @@ aws cloudwatch get-metric-statistics \
   --namespace AWS/RDS \
   --metric-name CPUUtilization \
   --dimensions Name=DBInstanceIdentifier,Value=mydb \
-  --start-time $(date -u -d '30 days ago' +%Y-%m-%dT%H:%M:%S) \
-  --end-time $(date -u +%Y-%m-%dT%H:%M:%S) \
+  --start-time 2026-10-21T00:00:00Z \
+  --end-time 2026-11-20T00:00:00Z \
   --period 86400 \
   --statistics Average,Maximum
 ```
@@ -107,35 +111,28 @@ aws cloudwatch get-metric-statistics \
    - Identify top 5 spending services
    - Calculate growth rate
 
-2. **Quick Wins**
-   - Delete unattached EBS volumes
-   - Release unused Elastic IPs
-   - Stop/terminate idle EC2 instances
-   - Delete old snapshots
+2. **Cleanup Candidates**
+   - Inventory unattached EBS volumes, unused Elastic IPs, idle EC2 instances, and old snapshots.
+   - Estimate savings and identify owners, dependencies, and recovery prerequisites for review before recommending removal or shutdown.
 
 3. **Strategic Optimization**
    - Analyze Reserved Instance coverage
    - Review instance types vs. workload
-   - Implement S3 lifecycle policies
+   - Assess S3 lifecycle policies and their retention implications.
    - Consider Spot instances for non-critical workloads
 
 4. **Ongoing Monitoring**
-   - Set up AWS Budgets with alerts
-   - Enable Cost Anomaly Detection
-   - Tag resources for cost allocation
+   - Review budget alerts, Cost Anomaly Detection, and cost allocation tag coverage.
    - Monthly cost review meetings
 
 ## Cost Optimization Checklist
 
-- [ ] Enable AWS Cost Explorer
-- [ ] Set up cost allocation tags
-- [ ] Create AWS Budget with alerts
-- [ ] Review and delete unused resources
+- [ ] Check Cost Explorer availability and cost allocation tag coverage
+- [ ] Review AWS Budget alerts and resource cleanup candidates with their owners
 - [ ] Analyze Reserved Instance opportunities
-- [ ] Implement S3 Intelligent-Tiering
+- [ ] Assess S3 Intelligent-Tiering
 - [ ] Review data transfer costs
-- [ ] Optimize Lambda memory allocation
-- [ ] Use CloudWatch Logs retention policies
+- [ ] Assess Lambda memory allocation and CloudWatch Logs retention
 - [ ] Consider multi-region cost differences
 
 ## Example Prompts
@@ -151,20 +148,18 @@ aws cloudwatch get-metric-statistics \
 - "Suggest Reserved Instance purchases based on usage"
 - "Calculate savings from deleting snapshots older than 90 days"
 
-**Implementation**
-- "Create a script to delete unattached volumes"
-- "Set up a budget alert for $1000/month"
+**Reporting**
+- "Recommend cleanup candidates with savings, dependencies, and recovery notes"
+- "Recommend a budget alert for $1000/month"
 - "Generate a cost optimization report for leadership"
 
 ## Best Practices
 
-- Always test in non-production first
-- Verify resources are truly unused before deletion
-- Document all cost optimization actions
-- Calculate ROI for optimization efforts
-- Automate recurring optimization tasks
+- Verify ownership, retention, and actual usage before recommending any resource change.
+- Document assumptions, projected savings, and operational trade-offs.
+- Calculate ROI before recommending recurring commitments.
 - Use AWS Trusted Advisor recommendations
-- Enable AWS Cost Anomaly Detection
+- Check whether AWS Cost Anomaly Detection is enabled
 
 ## Integration with Kiro CLI
 
@@ -180,11 +175,8 @@ kiro-cli chat "Create a cost optimization plan using aws-cost-optimizer"
 
 ## Safety Notes
 
-- **Risk Level: Low** - Read-only analysis is safe
-- **Deletion Actions: Medium Risk** - Always verify before deleting resources
-- **Production Changes: High Risk** - Test rightsizing in dev/staging first
-- Maintain backups before any deletion
-- Use `--dry-run` flag when available
+- Read costs and inventory in the resolved account; report missing access instead of changing permissions or enabling services.
+- Send resource changes and financial commitments to the owner with evidence, prerequisites, and recovery notes. A dry-run flag does not authorize a write.
 
 ## Additional Resources
 

@@ -15,7 +15,7 @@ When entering the review phase:
 - Explicitly transition to read-only mode — no further edits during review.
 - Review only the scope that was implemented — do not expand review to unrelated areas.
 - If the review finds a blocking issue, exit review, fix the issue, then re-enter review from the start.
-- For standalone `Nexus`, this review remains an internal read-only phase and does not imply delegation to `@Sentinel`.
+- Keep self-review with the accountable agent. Helper findings are supporting evidence when the active profile permits delegation.
 
 ## Audit dimensions
 
@@ -54,13 +54,13 @@ Findings without evidence are not findings — they are opinions. Do not include
 
 ## Agent artifact review focus
 
-For agent, instruction, skill, and OpenCode settings changes, verify:
+For agent prompt, instruction, skill, and runtime settings changes, verify:
 
 - explicit exception language and user-facing clarity,
 - permission enforcement versus descriptive-only guardrails,
 - tool and skill allowlist consistency,
 - routing and ownership consistency,
-- cross-platform parity or documented intentional divergence.
+- parity among profiles that share a maintained contract, or documented deliberate differences.
 
 Use `agent-governance` findings as supporting evidence when applicable.
 

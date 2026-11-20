@@ -84,7 +84,9 @@ Produce a full, ready-to-use Markdown document using either:
 - the general document schema, or
 - a type-specific template when one applies
 
-### Step 5 — Mark review needs
+### Step 5 — Verify publication and mark review needs
+
+Check changed links and essential instructions against the intended delivery target. Confirm that relative links, scripts, and prerequisites are tracked or included in the intended additions; check ignore rules when something exists only in the working tree. Label intentional local-only references.
 
 Explicitly call out when the draft requires technical review before publication.
 
@@ -209,10 +211,7 @@ Require or recommend technical review when the document includes any of the foll
 - public interface contracts or non-obvious implementation behavior
 - statements whose correctness depends on code, config, or environment details that were not directly verified
 
-When applicable, identify the likely reviewer:
-- `@blueprint` for ADRs and architecture documentation
-- `@d43mon` for runbooks, release procedures, and operational docs
-- `@forger` for implementation-facing technical docs tied to app/config behavior
+When review is required, identify the responsible owner for the documented design, operational procedure, or implementation. Assign independent review only when the active profile and project permit it.
 
 ## Rules
 

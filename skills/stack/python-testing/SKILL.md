@@ -1,48 +1,31 @@
 ---
 name: python-testing
-description: Python testing strategies using pytest, TDD methodology, fixtures, mocking, parametrization, and coverage requirements.
+description: Select and write deterministic pytest tests using existing fixtures, parametrization, and mocks; follow repository coverage policy.
 origin: ECC
 ---
 
 # Python Testing Patterns
 
-Comprehensive testing strategies for Python applications using pytest, TDD methodology, and best practices.
+Use pytest when it is the repository's test framework. Pair this skill with `test-strategy`.
 
 ## When to Activate
 
-- Writing new Python code (follow TDD: red, green, refactor)
+- Writing or changing Python behavior that needs validation
 - Designing test suites for Python projects
 - Reviewing Python test coverage
 - Setting up testing infrastructure
 
 ## Core Testing Philosophy
 
-### Test-Driven Development (TDD)
+### Choosing tests
 
-Always follow the TDD cycle:
+- Start with the existing tests and the reported failure or a reproduction. Use red-green-refactor when the repository requires it or a failing test is useful for isolating the behavior.
+- Add the smallest test set that distinguishes the expected behavior from plausible failures. Cover error and security paths when the change affects them.
 
-1. **RED**: Write a failing test for the desired behavior
-2. **GREEN**: Write minimal code to make the test pass
-3. **REFACTOR**: Improve code while keeping tests green
+### Coverage
 
-```python
-# Step 1: Write failing test (RED)
-def test_add_numbers():
-    result = add(2, 3)
-    assert result == 5
-
-# Step 2: Write minimal implementation (GREEN)
-def add(a, b):
-    return a + b
-
-# Step 3: Refactor if needed (REFACTOR)
-```
-
-### Coverage Requirements
-
-- **Target**: 80%+ code coverage
-- **Critical paths**: 100% coverage required
-- Use `pytest --cov` to measure coverage
+- Follow thresholds configured by the repository. Without a threshold, use coverage to find gaps in changed behavior and critical paths.
+- Measure with the repository's configured coverage command when needed. For example:
 
 ```bash
 pytest --cov=mypackage --cov-report=term-missing --cov-report=html
@@ -638,13 +621,13 @@ class TestUserService:
 
 ### DO
 
-- **Follow TDD**: Write tests before code (red-green-refactor)
+- **Follow repository test policy**: Prefer existing tests, fixtures, and check commands.
 - **Test one thing**: Each test should verify a single behavior
 - **Use descriptive names**: `test_user_login_with_invalid_credentials_fails`
 - **Use fixtures**: Eliminate duplication with fixtures
 - **Mock external dependencies**: Don't depend on external services
 - **Test edge cases**: Empty inputs, None values, boundary conditions
-- **Aim for 80%+ coverage**: Focus on critical paths
+- **Focus on risky paths**: Use coverage to identify missing behavior checks.
 - **Keep tests fast**: Use marks to separate slow tests
 
 ### DON'T

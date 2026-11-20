@@ -44,7 +44,8 @@ Classify the touched surface before editing:
 - For unit-scoped Terragrunt validation, `terragrunt validate` is allowed when validating the current unit directory is the intended check.
 - For Terragrunt HCL, prefer the current CLI syntax: `terragrunt hcl fmt --check --diff --working-dir "<unit-or-dir>"`.
 - Validate Terragrunt HCL with `terragrunt hcl validate --working-dir "<unit-or-dir>"`.
-- `terragrunt plan` or `terraform plan` on the smallest affected unit when approval posture and execution context allow it.
+- Run `terragrunt plan` or `terraform plan` on the smallest affected unit when the execution context and approval scope allow it. Check backend mode, remote runs, wrappers, hooks, and shared state locks before executing. Keep normal locking enabled; if the effects are outside scope, use static checks or inspect a previously approved plan.
+- Inspect planned actions and concrete values after planning; exit status alone is insufficient. If values that would be applied come from mocks, label the plan diagnostic only. Keep potentially sensitive saved plans and JSON out of shared output.
 - `yq eval '.' atlantis.yaml` for Atlantis configuration changes
 - Review Atlantis workflow environment such as parallelism, plugin cache, and custom plan/apply steps when `atlantis.yaml` changes
 - Refresh `terraform-docs`, `module.md`, or README sections when module inputs or outputs change

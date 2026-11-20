@@ -7,10 +7,13 @@ description: Shared decision gates for read-only work, fast-path changes, approv
 
 Use this skill to standardize when work can proceed directly and when it must stop for approval.
 
-## Shared states
-- `Read-only`: inspection, analysis, planning, review, or documentation with no repo mutation.
-- `Fast-path`: a clear, local, low-risk, reversible change that does not affect protected surfaces or expand dependencies.
-- `Approval-required`: any change outside the fast path.
+## Decide whether work may proceed
+
+1. Apply the active profile, repository, and host restrictions before classifying the work. Approval cannot authorize a prohibited operation.
+2. Classify actual effects, including automation triggered downstream. `Read-only` means inspection or analysis without changes to repository files, shared state, or external targets. Local diagnostic artifacts follow the active profile's artifact rules. Publishing, remote workflow dispatch, and a merge that triggers deployment are mutations.
+3. For permitted mutations, stop before implementation if a required approval is missing. Otherwise use `Fast-path` when it qualifies, or `Standard-path` when the active profile explicitly provides it. For profiles without `Standard-path`, retain their existing rules; when no rule covers the work, stop for a scope decision outside `Fast-path`.
+
+Use criticality to choose validation depth. Under a profile that defines `Standard-path`, `Medium` alone does not trigger approval.
 
 ## Approval triggers
 Request approval before implementation when any of the following is true:
@@ -19,11 +22,12 @@ Request approval before implementation when any of the following is true:
 - new dependencies,
 - auth, IAM, secrets, or credential changes,
 - production deployment behavior changes,
+- protected surface changes,
 - irreversible or hard-to-rollback changes,
-- risk is unclear.
+- risk, scope, or rollback is unclear.
 
 ## Fast-path test
-Proceed without explicit approval only when all of the following are true:
+Use `Fast-path` only when all of the following are true:
 - scope is clear and local,
 - risk is low,
 - rollback is straightforward,
@@ -36,7 +40,7 @@ For touched areas, use the strongest relevant validation available:
 - typecheck,
 - unit or integration tests,
 - config or syntax validation,
-- deployment or operational validation when relevant.
+- deployment or operational validation when permitted; inspect target, side effects, and approval scope before running it.
 
 ## Handoff contract
 Every execution-oriented response should make clear:

@@ -1,6 +1,6 @@
 ---
 name: github-actions-local
-description: Repository-local overlay for GitHub Actions conventions in this repo. Layers concrete helper action, runner, summary, and auth-wrapper patterns on top of the shared `github-actions` skill.
+description: Repository-local GitHub Actions overlay for existing helper, runner, summary, auth-wrapper, and dependency lockfile conventions.
 ---
 
 # GitHub Actions Local Overlay
@@ -12,6 +12,7 @@ It captures repository-specific workflow conventions that should stay out of the
 
 - Existing workflows in this repository already depend on the local conventions below.
 - The task touches helper actions, runner wiring, summary rendering, or auth wrappers that are specific to this repository.
+- The task concerns `.github/workflows/actions.lock` or its consumers in `huuuge-org/devops-github-actions`, including lockfile-only changes.
 - The shared `github-actions` baseline is too generic to preserve repository consistency on its own.
 
 ## Repository-local conventions
@@ -21,7 +22,7 @@ It captures repository-specific workflow conventions that should stay out of the
 - Use dedicated `render-*` composite actions for deterministic summary rendering only if those actions are already defined in this repository.
 - Preserve repository-approved short-lived auth wrappers instead of replacing them with ad hoc inline shell logic.
 - Preserve explicit cleanup steps for sensitive temporary files when repository workflows materialize them during builds or releases.
-- In `huuuge-org/devops-github-actions`, preserve `.github/workflows/actions.lock` when changing workflow or action dependencies. Follow the shared lockfile guidance and check the installed `gh actions-lock --help` before updating or verifying it.
+- In `huuuge-org/devops-github-actions`, keep `.github/workflows/actions.lock` aligned with its workflows. Use the shared skill's lockfile procedure and follow any verification policy already configured in the repository.
 
 ## Repository-local examples to keep consistent
 

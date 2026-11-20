@@ -1,13 +1,13 @@
 ---
 name: github-actions
-description: Specialist skill for workflow-local GitHub Actions work. Covers authoring, review, interface design, validation, and hardening for reusable workflows, composite actions, helper scripts, and workflow-local auth.
+description: Author, review, and validate GitHub Actions workflows, reusable workflows, composite actions, helper scripts, workflow-local auth, and dependency lockfiles such as actions.lock.
 ---
 
 # GitHub Actions
 
-Use this skill when changing workflow YAML, reusable workflows, composite actions, action metadata, helper scripts called by workflows, or workflow-local authentication and rollout controls.
+Use this skill for workflow YAML, reusable workflows, composite actions, workflow helper scripts, workflow-local authentication and rollout controls, or `.github/workflows/actions.lock`.
 Pair it with `devops` for approval posture.
-Pair it with a repository-local overlay when helper actions, auth wrappers, runner conventions, or summary conventions are repository-specific.
+Pair it with a repository-local overlay when helpers, auth wrappers, runners, summaries, or lockfile conventions are repository-specific.
 
 ## Repository patterns to inspect first
 
@@ -86,8 +86,9 @@ When authoring or reviewing workflow YAML, consult the relevant section of [GitH
 ### Workflow dependency lockfiles
 
 - If the repository uses [gh-actions-lock](https://github.com/github/gh-actions-lock), inspect `.github/workflows/actions.lock` and its existing verification policy before changing workflow dependencies. Preserve the lockfile and workflow changes together; do not edit the generated lockfile manually.
-- After changes to workflow `uses:` references or transitive action dependencies, use the installed tool's `--help` and repository policy to update the lockfile. A plain `gh actions-lock` can rewrite workflows and requires network access; review its full diff and stay within the approved scope.
-- Validate with `gh actions-lock --verify-local` for offline coverage and `gh actions-lock --verify` for network-backed provenance. Report unavailable checks rather than treating the offline check as equivalent.
+- After changes to workflow `uses:` references or transitive action dependencies, identify the affected workflows and check the installed version's `--help`. Regenerate with `gh actions-lock` scoped to those workflow paths where possible. A full-directory run is needed to prune deleted workflows and must be in scope. Generation requires network access and may rewrite workflow YAML; review the entire resulting diff.
+- Use `--relock` only for an explicitly scoped refresh of upstream pins. Routine coverage repairs use normal generation.
+- Use `gh actions-lock --verify-local` for offline coverage and `gh actions-lock --verify` for network-backed provenance when permitted. Report unavailable checks. Network modes can also write a local run log; check the installed tool's behavior.
 - The lockfile does not cover external reusable workflows called through `jobs.<id>.uses`, container images, or local `./` actions. Review these dependencies separately. Investigate moved pins before accepting them; do not automate `--accept-moved`.
 - For repositories without a lockfile, follow their existing pinning policy; adopting a lockfile is a separate change.
 
