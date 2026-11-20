@@ -58,10 +58,10 @@ Before writing tests:
 
 ## Non-runtime artifact validation
 
-When the change targets agent definitions, instruction files, skills, or OpenCode settings:
+When the change targets agent prompts, instructions, skills, or runtime settings:
 
 - Pair this skill with `agent-governance`.
-- Prefer schema, permission, routing, and cross-platform parity checks over synthetic runtime tests.
+- Check schema, permissions, and routing. Check parity only between profiles that share a maintained contract; exercise changed runtime behavior when applicable.
 - Still report only validators and manual checks that were actually executed.
 
 ## Technology discovery checklist

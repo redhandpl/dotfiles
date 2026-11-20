@@ -36,7 +36,8 @@ Pair it with `devops`; keep Python and Ansible execution inside `.venv`.
 
 - `ansible-playbook --syntax-check`
 - `ansible-lint` when available
-- `ansible-playbook --check --diff` on the smallest safe host set when dry-run meaningfully reflects the real behavior
+- Before `ansible-playbook --check`, inspect the wrapper, selected plays, roles, includes, handlers, and delegated or local tasks for effects outside simulation. A reachable task with `check_mode: false` can make changes; skip the run if it cannot be safely excluded.
+- Run check mode on the smallest safe host set only when it meaningfully represents the behavior. Add `--diff` only when the reachable tasks cannot expose secrets or other sensitive content; otherwise omit it.
 - Run targeted validations through the repository wrapper when it is the supported entrypoint
 - Verify inventory and variable precedence when behavior depends on `host_vars` or `group_vars`
 - Validate tag or stage selection when the repository uses tag-based orchestration or staged setup flows

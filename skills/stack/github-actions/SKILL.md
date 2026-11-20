@@ -1,13 +1,13 @@
 ---
 name: github-actions
-description: Specialist skill for workflow-local GitHub Actions work. Covers authoring, review, interface design, validation, and hardening for reusable workflows, composite actions, helper scripts, and workflow-local auth.
+description: Author, review, and validate GitHub Actions workflows, reusable workflows, composite actions, helper scripts, workflow-local auth, and dependency lockfiles such as actions.lock.
 ---
 
 # GitHub Actions
 
-Use this skill when changing workflow YAML, reusable workflows, composite actions, action metadata, helper scripts called by workflows, or workflow-local authentication and rollout controls.
+Use this skill for workflow YAML, reusable workflows, composite actions, workflow helper scripts, workflow-local authentication and rollout controls, or `.github/workflows/actions.lock`.
 Pair it with `devops` for approval posture.
-Pair it with a repository-local overlay when helper actions, auth wrappers, runner conventions, or summary conventions are repository-specific.
+Pair it with a repository-local overlay when helpers, auth wrappers, runners, summaries, or lockfile conventions are repository-specific.
 
 ## Repository patterns to inspect first
 
@@ -20,11 +20,13 @@ Pair it with a repository-local overlay when helper actions, auth wrappers, runn
 
 ## Authoring defaults
 
+When authoring or reviewing workflow YAML, consult the relevant section of [GitHub's Workflow syntax reference (Markdown)](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax.md) to verify supported keys, values, and defaults.
+
 - Keep reusable interfaces strongly typed (`string`, `boolean`, `number`) with explicit defaults and stable descriptions.
 - Preserve existing input/output names unless a repository owner requests migration in the tracked change request (issue/PR/plan).
 - Keep `permissions` explicit at workflow and job level.
 - Keep runner resolution aligned with existing typed-input and runner-selection patterns.
-- Use `actions/checkout@v4` with `fetch-depth: 1` and `persist-credentials: false` unless dedicated write access is intentionally required.
+- Use `actions/checkout` with the repository's pinning convention, `fetch-depth: 1`, and `persist-credentials: false` unless dedicated write access is intentionally required.
 - Keep logic-heavy behavior in composite actions/scripts; reusable workflows should orchestrate.
 - In shell steps, pass untrusted or dynamic values via `env` instead of direct `${{ }}` interpolation.
 - Keep operator-facing summaries deterministic.
@@ -80,6 +82,15 @@ Pair it with a repository-local overlay when helper actions, auth wrappers, runn
 - Scope caches carefully and avoid poisoning shared caches.
 - Keep artifacts minimal, intentional, and retention-bounded.
 - If a workflow updates a GitOps repo or waits for external sync, fail fast and emit actionable summaries.
+
+### Workflow dependency lockfiles
+
+- If the repository uses [gh-actions-lock](https://github.com/github/gh-actions-lock), inspect `.github/workflows/actions.lock` and its existing verification policy before changing workflow dependencies. Preserve the lockfile and workflow changes together; do not edit the generated lockfile manually.
+- After changes to workflow `uses:` references or transitive action dependencies, identify the affected workflows and check the installed version's `--help`. Regenerate with `gh actions-lock` scoped to those workflow paths where possible. A full-directory run is needed to prune deleted workflows and must be in scope. Generation requires network access and may rewrite workflow YAML; review the entire resulting diff.
+- Use `--relock` only for an explicitly scoped refresh of upstream pins. Routine coverage repairs use normal generation.
+- Use `gh actions-lock --verify-local` for offline coverage and `gh actions-lock --verify` for network-backed provenance when permitted. Report unavailable checks. Network modes can also write a local run log; check the installed tool's behavior.
+- The lockfile does not cover external reusable workflows called through `jobs.<id>.uses`, container images, or local `./` actions. Review these dependencies separately. Investigate moved pins before accepting them; do not automate `--accept-moved`.
+- For repositories without a lockfile, follow their existing pinning policy; adopting a lockfile is a separate change.
 
 ## Validation (repository baseline)
 

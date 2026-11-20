@@ -1,6 +1,6 @@
 ---
 name: agent-governance
-description: Repository-specific validation and parity rules for agent definitions, instructions, skills, and OpenCode settings.
+description: Validate agent prompts, skills, instructions, and runtime settings against their loading, ownership, approval, and permission contracts.
 ---
 
 # Agent Governance
@@ -10,44 +10,27 @@ Pair it with `repo-conventions` for repository-local pattern checks.
 
 ## Use when
 
-- Editing `github/agents/*.agent.md`.
-- Editing `opencode/agent/*.md`.
-- Editing `github/instructions/*.instructions.md`.
-- Editing `github_builtin/instructions/*.instructions.md`.
-- Editing `pi/SYSTEM.md`.
-- Reviewing parity between Pi, GitHub Built-in, and other Nexus variants.
-- Editing `skills/**/SKILL.md`.
-- Editing `opencode/opencode.json`.
+- Editing agent prompts, instructions, skills, or runtime settings.
+- Reviewing how a host loads those artifacts or enforces their rules.
 - Editing repository docs that define agent routing, ownership, exceptions, or platform status.
 
 ## Goals
 
 - Keep artifact schema and frontmatter internally consistent.
-- Keep role ownership, routing, and explicit exceptions coherent with repository contract.
-- Keep GitHub and OpenCode variants aligned unless a deliberate divergence is documented.
-- Treat `pi/SYSTEM.md` as the canonical source of truth for Nexus behavior; document platform-specific deviations in counterparts.
+- Match routing and ownership to the active profile and repository contract.
+- Compare behavior across maintained profiles only when they share a contract.
 - Distinguish between guardrails that are enforced by platform permissions and guardrails that are descriptive only.
 - Make user-facing exception semantics and developmental status explicit where needed.
 
 ## Artifact checks
 
-### GitHub agent artifacts
+### Agent and runtime artifacts
 
 Validate:
 
-- `name`, `model`, `description`, and `tools` fields are present and coherent.
-- `agents` is present only when delegation is intentional.
-- `user-invocable` and `disable-model-invocation` match the intended operating model.
-- Prompt body matches declared routing and tool posture.
-
-### OpenCode agent artifacts
-
-Validate:
-
-- `model`, `description`, `mode`, and `permission` are present and coherent.
-- `permission.skill` includes every newly referenced skill.
-- Denied surfaces stay denied unless an explicit change was intended and approved.
-- Prompt body does not claim capabilities that permissions do not support.
+- Required metadata and settings match the target host's schema.
+- Declared tools, permissions, and skill allowlists support the prompt. Existing denies remain in place unless a change was explicitly approved.
+- The prompt's delegation, invocation, and ownership rules match the active profile and host capabilities.
 
 ### Skill artifacts
 
@@ -58,25 +41,22 @@ Validate:
 - Optional provenance metadata (`origin`, `source`, `date_added`, `risk`) is informational unless a validator explicitly enforces it.
 - Skill selection remains explicit through phase, stack, or named-skill dispatch.
 
-### Pi prompt artifacts
+### Tadzio's OMP append profile
 
-Validate:
+When reviewing `omp/APPEND_SYSTEM.md` in this repository, validate:
 
-- `pi/SYSTEM.md` is treated as a prompt artifact; YAML frontmatter and platform schema checks do not apply.
-- The standalone, non-delegating Nexus model remains explicit.
-- `Mixed` work still requires an explicit App/DevOps interface contract before implementation.
-- Language, safety, temporary-artifact, approval, task-mode, phase-gate, protected-surface, and output-contract rules remain present.
-- Prompt claims do not imply hard permissions or tool enforcement unavailable to the Pi runtime.
+- The profile supplements OMP's built-in guidance and preserves native tool use and skill discovery.
+- Tadzio owns scope, approvals, integration, final verification, and the verdict.
+- Bounded helpers receive the applicable safety rules, allowed actions, and exact approval scope. Verify that the parent remains responsible for integration and verification.
+- Mixed work defines its App/DevOps contract before edits.
+- Approval gates, protected surfaces, and prohibited operations remain intact. Prompt text grants no runtime permissions.
 
-### GitHub Built-in instruction artifacts
+For changes to these gates, use a disposable OMP session with no production targets. Check the decision, its reason, and whether a write would be attempted:
 
-Validate:
-
-- Every `github_builtin/instructions/*.instructions.md` file contains `name`, `description`, and `applyTo` frontmatter.
-- `github_builtin/AGENTS.md` and the instruction files agree on the instruction-first, single-agent, non-delegating operating model.
-- Language, agent-contract, and skill-policy responsibilities remain separated across the instruction files.
-- OpenCode remains identified as authoritative for hard command permissions and skill allowlists.
-- Prompt-only guardrails and enforcement gaps are documented explicitly.
+- A `Medium` change with no approval trigger uses `Standard-path`; a protected change without approval stops, and can proceed only with concrete approval covering the permitted change.
+- Inspection stays `Read-only`; publishing, workflow dispatch, or an auto-sync merge does not. A prohibited action stays blocked even with explicit approval.
+- A delegated read-only task receives its exact scope and prohibitions; confirm the actual helper input when the dispatch surface is available. Record simulations separately from observed dispatch.
+- With skills unavailable, the append profile still applies the mandatory preflight, approval, and verification rules. Profiles without `Standard-path` retain their existing gates.
 
 ### Instruction and skill artifacts
 
@@ -87,23 +67,11 @@ Validate:
 - Skill or instruction purpose matches where it is referenced.
 - Cross-cutting rules live in shared skills/contracts rather than drifting into multiple role files.
 
-## Routing and exception checks
+## Routing and ownership checks
 
-- Default Void Protocol ownership still points App to `@Forger` and DevOps to `@d43mon` unless an explicit exception is documented.
-- Official exceptions, such as `@Nexus`, are documented in repository contract and user-facing docs.
-- Standalone exceptions state that they are opt-in, user-selected, and non-delegating.
-- `Mixed` work under a standalone exception still defines the app/devops interface explicitly.
-
-## Cross-platform parity
-
-- Keep Nexus variants aligned unless a deliberate divergence is documented.
-- For Pi changes, compare semantic contract parity with `opencode/agent/nexus.md`, `github/agents/nexus.agent.md`, and `github_builtin/`.
-- For GitHub Built-in changes, compare `github_builtin/AGENTS.md` and its instruction files with `pi/SYSTEM.md` and the repository-level `AGENTS.md`.
-- Treat Pi as a standalone prompt runtime and GitHub Built-in as an instruction-enforced profile; report host-enforcement differences explicitly.
-- Treat `omp/SYSTEM.md` as a sibling adaptation; require documented divergence instead of line-by-line parity.
-- Document deliberate platform differences instead of allowing silent drift.
-- If GitHub Copilot is developmental or weaker in enforcement, say so explicitly and treat OpenCode as authoritative where applicable.
-- Re-check output contract, approval gates, protected surfaces, and exception language after any role update.
+- Route skill selection by task scope, phase, or stack. The active profile determines ownership and whether delegation is allowed.
+- Preserve explicit exceptions and check them against the active profile, including during self-review and approval handoffs.
+- When profiles share a maintained contract, verify equivalent intent and document deliberate differences in host enforcement. Historical profiles do not set the contract for active skills.
 
 ## Validation workflow
 
@@ -113,12 +81,11 @@ Validate:
 4. Check routing, ownership, and exception language against repository contract.
 5. Run the strongest available validators for the touched artifact.
 6. Report any descriptive-only guardrail that lacks enforcement or explicit status labeling.
-7. For `pi/SYSTEM.md`, validate the semantic Nexus contract and document host-enforcement gaps.
-8. For `github_builtin/`, validate instruction frontmatter, responsibility boundaries, and parity with `github_builtin/AGENTS.md`, `pi/SYSTEM.md`, and repository-level `AGENTS.md`.
+7. If a change affects skill selection, approval decisions, or helper handoffs, exercise the changed path in the target runtime when available. Distinguish runtime evidence from static checks.
 
 ## Validation evidence
 
-- Run `jq -e . opencode/opencode.json` when touching OpenCode JSON settings.
+- Use the target host's parser or schema validator when changing runtime settings.
 - Run `git diff --check` for whitespace and merge-marker sanity.
 - Use repository search to confirm counterpart files, skill references, routing statements, and exception notes.
 - When no machine validator exists for Markdown frontmatter, perform explicit manual field-by-field verification and report that it was manual.
@@ -128,7 +95,7 @@ Validate:
 - Updating one platform variant while silently changing the role semantics.
 - Introducing a standalone exception without documenting it in contract and user-facing docs.
 - Claiming parity when one platform only mirrors prompt text and lacks matching enforcement.
-- Adding a new skill reference without updating the OpenCode allowlist.
+- Adding a skill reference without checking the target host's allowlist, where applicable.
 - Expanding delegation metadata on a standalone agent.
 
 ## Output

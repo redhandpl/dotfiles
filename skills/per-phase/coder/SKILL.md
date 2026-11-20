@@ -73,8 +73,7 @@ If the requested change works without the refactoring, it is scope creep.
 Stop and surface the blocker when:
 
 - Request is ambiguous after scope lock attempt.
-- Change is medium/high risk and no approval was given.
-- Protected surface is about to be touched.
+- The active approval policy blocks the change or the required approval does not cover the protected surface being touched. Use `delivery-gates` for the shared decision rules.
 - Scope expansion is needed to satisfy the criteria.
 - Security impact is non-trivial and was not addressed in the architecture phase.
 

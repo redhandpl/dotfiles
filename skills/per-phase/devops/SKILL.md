@@ -6,13 +6,13 @@ description: DevOps implementation skill. Guides blast radius mapping, rollout o
 # DevOps
 
 Use this skill when implementing CI/CD, IaC, deployment, IAM, secrets, or infrastructure changes.
-This is the control-plane skill for Phase 5. It decides blast radius, rollout, rollback, approval posture, and which specialist skill must be loaded next.
+This skill maps blast radius, rollout, rollback, and stack dispatch. Use `delivery-gates` and the active profile for task mode and approval.
 
 Complements `repo-conventions` with operational depth.
 Load additional specialist skills as required:
 
-- `github-actions` for workflow-local GitHub Actions authoring, validation, and hardening.
-- `github-actions-local` when repository-specific workflow conventions, helper actions, or auth wrappers matter.
+- `github-actions` for workflow-local GitHub Actions and dependency lockfiles.
+- `github-actions-local` when repository-specific workflow or lockfile conventions apply.
 - `docker-patterns` for Dockerfiles, Docker Compose topology, image hardening, and container orchestration conventions.
 - `aws-cost-optimizer` for AWS cost analysis, Cost Explorer, rightsizing, and savings recommendations.
 - `terraform-terragrunt` for Terraform, Terragrunt, and Atlantis-driven repositories.
@@ -26,8 +26,8 @@ Load additional specialist skills as required:
 
 Choose the narrowest specialist skill set that matches the touched surface:
 
-- GitHub Actions workflow YAML, reusable workflows, composite actions, or workflow-local OIDC wiring -> `github-actions`
-- Repository-specific GitHub Actions helper actions, runner conventions, summary conventions, or auth wrappers -> `github-actions-local` together with `github-actions`
+- GitHub Actions workflow YAML, reusable workflows, composite actions, workflow-local OIDC, or `.github/workflows/actions.lock` -> `github-actions`
+- Repository-specific helpers, runners, summaries, auth wrappers, or lockfile conventions -> `github-actions-local` together with `github-actions`
 - Dockerfiles, Docker Compose stacks, image hardening, container networking, or volume strategy -> `docker-patterns`
 - AWS cost analysis, Cost Explorer queries, rightsizing, waste detection, Savings Plans, or Reserved Instance evaluation -> `aws-cost-optimizer`
 - Terraform modules, Terragrunt live repos, Atlantis config, generated providers/backends, or shared HCL -> `terraform-terragrunt` plus `terraform-style-guide` when Terraform HCL authoring or review is in scope
@@ -84,15 +84,9 @@ For each change:
 
 ## Risk classification
 
-Classify as:
+Apply `delivery-gates` and the active profile. Classify `plan`, `diff`, and check-mode commands by their actual effects, including remote locks, jobs, writes, and output exposure.
 
-- `Read-only` — inspection, dry-run, plan output only.
-- `Fast-path` — local, reversible, pattern-matched, no secrets/IAM/new deployment paths, no protected surface, and no production or deployment behavior changes.
-- `Approval-required` — everything else.
-
-Repository mutation is allowed only in `Fast-path` after delivery gates permit it. `Read-only` remains inspection, dry-run, or plan output only.
-
-Triggers for `Approval-required`:
+Additional DevOps approval triggers:
 
 - New cloud roles or IAM grants.
 - New deployment paths or environments.
@@ -106,13 +100,13 @@ Triggers for `Approval-required`:
 
 ## Validation baseline
 
-Run the appropriate specialist validator before implementation:
+Use the specialist skill to select checks for the touched surface. Establish safe preflight and the target before implementation; validate the changed behavior afterward. Prefer static or local checks first. Before running a validator against shared or remote state, verify its effects, context, and approval scope. Approval for a repository edit does not itself authorize remote changes.
 
-- Terraform/Terragrunt — `terraform plan` / `terragrunt plan`, plus repo-specific format and validate steps.
-- CDK — `cdk synth` / `cdk diff` scoped to the exact stack.
-- GitOps/Helm/Kubernetes — `helm lint` / `helm template`, `kubectl diff`, or `argocd app diff` when the task and approval posture allow it.
-- Ansible — `ansible-playbook --syntax-check`, and `--check --diff` when the repo and task support safe dry runs.
-- GitHub Actions — `actionlint`, YAML validation, typed interface checks, and helper script or action metadata validation.
+- Terraform or Terragrunt — use the smallest affected unit; check backend locks and remote execution before planning.
+- CDK — prefer scoped synthesis and template comparison; check for lookups and avoid the default change-set diff.
+- GitOps, Helm, or Kubernetes — render and lint locally first; use remote checks only after assessing their effects.
+- Ansible — start with syntax and lint checks; review the wrapper and reachable tasks before check mode or diff output.
+- GitHub Actions — validate syntax, typed interfaces, helper scripts, and dependency lockfiles as applicable.
 
 ## Static validators
 

@@ -1,6 +1,6 @@
 # Shared skills pack
 
-Skills available in this repository. Skills are loaded per execution phase.
+Tadzio in OMP uses this skill pack with the [append profile](../omp/APPEND_SYSTEM.md). Load skills by task, phase, or stack; the active profile defines ownership and delegation.
 
 ## Directory layout
 
@@ -13,7 +13,13 @@ skills/
 │   ├── test-strategy/
 │   ├── review-rubric/
 │   ├── documentalist/
-│   └── agent-governance/
+│   ├── agent-governance/
+│   ├── retro/
+│   ├── writing-for-agents/
+│   ├── github-create-pr/
+│   ├── jira-create-ticket/
+│   ├── jira-search/
+│   └── confluence-search/
 ├── per-phase/                         # Loaded when phase trigger fires
 │   ├── discovery-scope/               # Phase 1
 │   ├── architect/                     # Phase 2
@@ -45,9 +51,7 @@ skills/
 | Artifact | Required fields | Selection |
 |---|---|---|
 | `skills/**/SKILL.md` | `name`, `description` | Explicit phase, stack, or named-skill dispatch |
-| `github/instructions/*.instructions.md` | `name`, `description`, `applyTo` | Instruction glob matching |
-| `github_builtin/instructions/*.instructions.md` | `name`, `description`, `applyTo` | GitHub Built-in instruction matching |
-| `pi/SYSTEM.md` | None | Pi runtime prompt |
+| `omp/APPEND_SYSTEM.md` | None | OMP append profile |
 
 Optional skill provenance fields such as `origin`, `source`, `date_added`, and `risk` are informational unless a validator explicitly enforces them.
 
@@ -61,7 +65,7 @@ An agent loads skills per execution phase. Each per-phase skill complements cros
 - Phase 4 (App Implementation) -> `coder`, `repo-conventions`, plus `python-patterns` for Python app work
 - Phase 5 (DevOps Implementation) -> `devops`, `repo-conventions`, plus stack-specific skills as needed:
   - `terminal-context-bridge` for AWS/K8s context
-  - `github-actions` (plus `github-actions-local` when repo-specific overlay is needed) for workflow-local GitHub Actions work
+  - `github-actions` for workflows, actions, and `.github/workflows/actions.lock`; add `github-actions-local` when repository-specific conventions apply.
   - `docker-patterns` for container work
   - `terraform-terragrunt` with `terraform-style-guide` for Terraform HCL
   - `cdk-aws`, `argocd-gitops`, `ansible-ops` as applicable
@@ -69,4 +73,14 @@ An agent loads skills per execution phase. Each per-phase skill complements cros
 - Phase 6 (Testing) -> `tester`, `test-strategy`, plus `python-testing` for Python tests
 - Phase 7 (Final Review) -> `reviewer`, `review-rubric`
 - Agent/customization artifact changes -> `agent-governance`
-- Memory between sessions -> `project-memory-hygiene`
+- Session retrospective, on request -> [`retro`](cross-cutting/retro/SKILL.md); loads `writing-for-agents`.
+- Writing or reviewing agent-facing instructions and skills -> [`writing-for-agents`](cross-cutting/writing-for-agents/SKILL.md).
+- Memory between sessions -> [`project-memory-hygiene`](project-memory-hygiene/SKILL.md): backend-aware OMP `local` and Mnemopi workflows, plus capability-gated guidance for other runtimes.
+- Drafting or publishing GitHub pull requests -> [`github-create-pr`](cross-cutting/github-create-pr/SKILL.md). Follow the target repository's template and use `gh` for authorized publication.
+- Drafting or creating Jira issues -> [`jira-create-ticket`](cross-cutting/jira-create-ticket/SKILL.md). Drafts stay local; authorized submissions use ACLI.
+- Reading Jira issues and comments, or searching Jira with JQL or a saved filter -> [`jira-search`](cross-cutting/jira-search/SKILL.md), read-only via ACLI.
+- Finding announcements, requests, decisions, or conclusions in Confluence -> [`confluence-search`](cross-cutting/confluence-search/SKILL.md). Use ACLI for blog listings and known content; use full-text search for discovery beyond ACLI.
+
+`retro` and `writing-for-agents` carry their upstream source and revision in their frontmatter, with MIT licenses in each skill directory.
+
+OMP discovers only one level below a skill root. Skills under category directories need an appropriate discovery configuration or individual links before `skill://` and `/skill:` can find them.

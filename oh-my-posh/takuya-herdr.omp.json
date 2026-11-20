@@ -1,0 +1,141 @@
+{
+  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+  "blocks": [
+    {
+      "alignment": "left",
+      "segments": [
+        {
+          "background": "#3c3836",
+          "foreground": "#ebdbb2",
+          "leading_diamond": "\u256d\u2500\ue0b6",
+          "style": "diamond",
+          "template": " \uf489 ",
+          "type": "text"
+        },
+        {
+          "background": "#9d0006",
+          "foreground": "#fbf1c7",
+          "options": {
+            "root_icon": "\uf292"
+          },
+          "style": "diamond",
+          "template": "<parentBackground>\ue0b0</> \uf0e7 ",
+          "type": "root"
+        },
+        {
+          "background": "#83a598",
+          "foreground": "#1d2021",
+          "powerline_symbol": "\ue0b0",
+          "options": {
+            "style": "agnoster_short",
+            "max_depth": 3
+          },
+          "style": "powerline",
+          "template": " \uf07c {{ .Path }} ",
+          "type": "path"
+        },
+        {
+          "background": "#a8bb26",
+          "background_templates": [
+            "{{ if or (.Working.Changed) (.Staging.Changed) }}#fe8019{{ end }}",
+            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}#fb4934{{ end }}",
+            "{{ if gt .Ahead 0 }}#8ec07c{{ end }}",
+            "{{ if and (not .Upstream) (not .Detached) }}#8ec07c{{ end }}",
+            "{{ if gt .Behind 0 }}#fabd2f{{ end }}"
+          ],
+          "foreground": "#1d2021",
+          "powerline_symbol": "\ue0b0",
+          "options": {
+            "branch_icon": "\ue725 "
+          },
+          "style": "powerline",
+          "template": " {{ .HEAD }}{{ if gt .Ahead 0 }} \u2191{{ .Ahead }}{{ else if and (not .Upstream) (not .Detached) }} ?{{ end }} {{ if .Working.Changed }}{{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<#9d0006> \uf046 {{ .Staging.String }}</>{{ end }} ",
+          "type": "git"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "right",
+      "segments": [
+        {
+          "background": "#3c3836",
+          "foreground": "#83a598",
+          "leading_diamond": " \ue0b6",
+          "options": {
+            "display_mode": "environment",
+            "folder_name_fallback": false,
+            "home_enabled": true
+          },
+          "style": "diamond",
+          "template": " \ue73c {{ .Venv }} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "python"
+        },
+        {
+          "background": "#3c3836",
+          "foreground": "#b8bb26",
+          "leading_diamond": " \ue0b6",
+          "options": {
+            "fetch_package_manager": true,
+            "npm_icon": " <#fb4934>\ue5fa</> ",
+            "yarn_icon": " <#83a598>\ue6a7</>"
+          },
+          "style": "diamond",
+          "template": "\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
+          "trailing_diamond": "\ue0b4",
+          "type": "node"
+        },
+        {
+          "background": "#504945",
+          "foreground": "#ebdbb2",
+          "leading_diamond": " \ue0b6",
+          "options": {
+            "always_enabled": true
+          },
+          "style": "diamond",
+          "template": " \ueba2 {{ .FormattedMs }}\u2800",
+          "trailing_diamond": "\ue0b4",
+          "type": "executiontime"
+        },
+        {
+          "background": "#d79921",
+          "foreground": "#1d2021",
+          "invert_powerline": true,
+          "leading_diamond": " \ue0b6",
+          "style": "diamond",
+          "template": " \ue641 {{ .CurrentDate | date .Format }} ",
+          "trailing_diamond": "\ue0b4",
+          "type": "time"
+        }
+      ],
+      "type": "prompt"
+    },
+    {
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "#83a598",
+          "style": "plain",
+          "template": "\u2570\u2500",
+          "type": "text"
+        },
+        {
+          "foreground": "#ebdbb2",
+          "foreground_templates": [
+            "{{ if gt .Code 0 }}#fb4934{{ end }}"
+          ],
+          "options": {
+            "always_enabled": true
+          },
+          "style": "plain",
+          "template": "\u276f ",
+          "type": "status"
+        }
+      ],
+      "type": "prompt"
+    }
+  ],
+  "version": 4
+}

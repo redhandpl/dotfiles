@@ -1,6 +1,6 @@
 ---
 name: cdk-aws
-description: Specialist skill for AWS CDK-based stacks and config repositories. Guides config-to-stack resolution, synth or diff discipline, and approval boundaries around deploy or destroy.
+description: Resolve CDK stack and config targets, validate synthesis, and choose a diff method without unintended AWS writes.
 ---
 
 # AWS CDK
@@ -27,8 +27,9 @@ Pair it with `devops`; if the CDK app is Python-based, keep all Python work insi
 
 ## Validation
 
-- `cdk synth` or the repository-equivalent synthesis step
-- `cdk diff <stack> -c config=<file>` on the exact target stack
+- Use `cdk synth <stack>` or the repository-equivalent synthesis step after checking app and wrapper side effects, including context lookups.
+- For a comparison against AWS, prefer `cdk diff <stack> --method=template --exclusively -c config=<file>`. It avoids creating a CloudFormation change set, can still query AWS, and provides less precise replacement information. If remote validation is out of scope, compare the available templates locally and report that limitation.
+- The default `auto` or explicit `change-set` method can create a CloudFormation change set and publish assets. Treat those effects as remote mutations and leave them out of read-only validation.
 - Inspect synthesized CloudFormation or diff output for replacements, deletes, IAM expansion, or networking changes
 - Validate config-file path, naming, and account or region mapping before diffing
 - If a toolbox container or wrapper is the repository norm, validate through that path instead of inventing a local shortcut
@@ -36,7 +37,7 @@ Pair it with `devops`; if the CDK app is Python-based, keep all Python work insi
 
 ## Guardrails
 
-- `cdk deploy` and `cdk destroy` are approval-sensitive operations.
+- Leave `cdk deploy` and `cdk destroy` to the authorized operator when the active profile prohibits direct infrastructure mutations. Approval for validation does not authorize either command.
 - Treat bootstrap version changes, asset publishing, context defaults, and stack renames as high risk.
 - Do not diff or deploy all stacks when the change is stack-local.
 - Treat config-only repository changes as cross-repository rollout coupling, not as isolated YAML edits.
