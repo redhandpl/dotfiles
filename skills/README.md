@@ -13,7 +13,9 @@ skills/
 │   ├── test-strategy/
 │   ├── review-rubric/
 │   ├── documentalist/
-│   └── agent-governance/
+│   ├── agent-governance/
+│   ├── retro/
+│   └── writing-for-agents/
 ├── per-phase/                         # Loaded when phase trigger fires
 │   ├── discovery-scope/               # Phase 1
 │   ├── architect/                     # Phase 2
@@ -69,4 +71,8 @@ An agent loads skills per execution phase. Each per-phase skill complements cros
 - Phase 6 (Testing) -> `tester`, `test-strategy`, plus `python-testing` for Python tests
 - Phase 7 (Final Review) -> `reviewer`, `review-rubric`
 - Agent/customization artifact changes -> `agent-governance`
-- Memory between sessions -> `project-memory-hygiene`
+- Session retrospective, on request -> [`retro`](cross-cutting/retro/SKILL.md); loads `writing-for-agents`.
+- Writing or reviewing agent-facing instructions and skills -> [`writing-for-agents`](cross-cutting/writing-for-agents/SKILL.md).
+- Memory between sessions -> [`project-memory-hygiene`](project-memory-hygiene/SKILL.md): backend-aware OMP `local` and Mnemopi workflows, plus capability-gated guidance for other runtimes.
+
+`retro` and `writing-for-agents` carry their upstream source and revision in their frontmatter, with MIT licenses in each skill directory. OMP discovers only one level below a skill root; these nested directories require an appropriate discovery configuration or individual links before `skill://` and `/skill:` can find them.

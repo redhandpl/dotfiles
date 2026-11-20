@@ -1,0 +1,25 @@
+keybind = global:ctrl+grave_accent=toggle_quick_terminal
+quick-terminal-size = 90%, 85%
+quick-terminal-screen = main
+theme = Monokai redhand
+#keybind = ctrl+a>o=toggle_tab_overview
+
+# aesthetics
+background-opacity = 0.95
+background-blur=16
+#background=#000000
+
+# typography
+font-size=13
+font-thicken=true
+font-thicken-strength=1
+#adjust-cell-height=1
+
+shell-integration = zsh
+shell-integration-features = no-title
+bell-features = no-system, no-audio, no-attention, title, border
+
+#mouse-reporting = false
+#mouse-shift-capture = never
+
+term = xterm-256color

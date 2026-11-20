@@ -1,0 +1,120 @@
+background: &background "#171717"
+surface: &surface "#282828"
+selected: &selected "#504945"
+border: &border "#665c54"
+dim: &dim "#928374"
+muted: &muted "#bdae93"
+text: &text "#ebdbb2"
+pink: &pink "#fe4386"
+green: &green "#a6e32d"
+yellow: &yellow "#fabd2f"
+blue: &blue "#00beff"
+cyan: &cyan "#5ed7ff"
+purple: &purple "#be9eff"
+
+k9s:
+  body:
+    fgColor: *text
+    bgColor: *background
+    logoColor: *cyan
+    logoColorMsg: *text
+    logoColorInfo: *green
+    logoColorWarn: *yellow
+    logoColorError: *pink
+  prompt:
+    fgColor: *text
+    bgColor: *surface
+    suggestColor: *cyan
+    border:
+      command: *cyan
+      default: *border
+  help:
+    fgColor: *text
+    bgColor: *background
+    sectionColor: *cyan
+    keyColor: *pink
+    numKeyColor: *yellow
+  info:
+    fgColor: *muted
+    sectionColor: *cyan
+  dialog:
+    fgColor: *text
+    bgColor: *surface
+    buttonFgColor: *text
+    buttonBgColor: *selected
+    buttonFocusFgColor: *background
+    buttonFocusBgColor: *cyan
+    labelFgColor: *yellow
+    fieldFgColor: *text
+  frame:
+    border:
+      fgColor: *border
+      focusColor: *cyan
+    menu:
+      fgColor: *text
+      keyColor: *pink
+      numKeyColor: *yellow
+    crumbs:
+      fgColor: *text
+      bgColor: *selected
+      activeColor: *cyan
+    status:
+      newColor: *cyan
+      modifyColor: *yellow
+      addColor: *green
+      pendingColor: *yellow
+      errorColor: *pink
+      highlightColor: *cyan
+      killColor: *pink
+      completedColor: *dim
+    title:
+      fgColor: *text
+      bgColor: *background
+      highlightColor: *cyan
+      counterColor: *purple
+      filterColor: *green
+  views:
+    table:
+      fgColor: *text
+      bgColor: *background
+      cursorFgColor: *background
+      cursorBgColor: *selected
+      markColor: *yellow
+      header:
+        fgColor: *cyan
+        bgColor: *background
+        sorterColor: *yellow
+        selectedSortColumnColor: *cyan
+    xray:
+      fgColor: *text
+      bgColor: *background
+      cursorColor: *selected
+      cursorTextColor: *text
+      graphicColor: *cyan
+    charts:
+      bgColor: *background
+      dialBgColor: *background
+      chartBgColor: *background
+      focusFgColor: *background
+      focusBgColor: *cyan
+      defaultDialColors: [*green, *pink]
+      defaultChartColors: [*green, *pink]
+      resourceColors:
+        cpu: [*blue, *purple]
+        mem: [*yellow, *pink]
+    yaml:
+      keyColor: *cyan
+      colonColor: *muted
+      valueColor: *yellow
+    picker:
+      mainColor: *text
+      focusColor: *cyan
+      shortcutColor: *pink
+    logs:
+      fgColor: *text
+      bgColor: *background
+      indicator:
+        fgColor: *text
+        bgColor: *selected
+        toggleOnColor: *green
+        toggleOffColor: *dim

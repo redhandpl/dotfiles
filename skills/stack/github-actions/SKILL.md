@@ -20,11 +20,13 @@ Pair it with a repository-local overlay when helper actions, auth wrappers, runn
 
 ## Authoring defaults
 
+When authoring or reviewing workflow YAML, consult the relevant section of [GitHub's Workflow syntax reference (Markdown)](https://docs.github.com/en/actions/reference/workflows-and-actions/workflow-syntax.md) to verify supported keys, values, and defaults.
+
 - Keep reusable interfaces strongly typed (`string`, `boolean`, `number`) with explicit defaults and stable descriptions.
 - Preserve existing input/output names unless a repository owner requests migration in the tracked change request (issue/PR/plan).
 - Keep `permissions` explicit at workflow and job level.
 - Keep runner resolution aligned with existing typed-input and runner-selection patterns.
-- Use `actions/checkout@v4` with `fetch-depth: 1` and `persist-credentials: false` unless dedicated write access is intentionally required.
+- Use `actions/checkout` with the repository's pinning convention, `fetch-depth: 1`, and `persist-credentials: false` unless dedicated write access is intentionally required.
 - Keep logic-heavy behavior in composite actions/scripts; reusable workflows should orchestrate.
 - In shell steps, pass untrusted or dynamic values via `env` instead of direct `${{ }}` interpolation.
 - Keep operator-facing summaries deterministic.
@@ -80,6 +82,14 @@ Pair it with a repository-local overlay when helper actions, auth wrappers, runn
 - Scope caches carefully and avoid poisoning shared caches.
 - Keep artifacts minimal, intentional, and retention-bounded.
 - If a workflow updates a GitOps repo or waits for external sync, fail fast and emit actionable summaries.
+
+### Workflow dependency lockfiles
+
+- If the repository uses [gh-actions-lock](https://github.com/github/gh-actions-lock), inspect `.github/workflows/actions.lock` and its existing verification policy before changing workflow dependencies. Preserve the lockfile and workflow changes together; do not edit the generated lockfile manually.
+- After changes to workflow `uses:` references or transitive action dependencies, use the installed tool's `--help` and repository policy to update the lockfile. A plain `gh actions-lock` can rewrite workflows and requires network access; review its full diff and stay within the approved scope.
+- Validate with `gh actions-lock --verify-local` for offline coverage and `gh actions-lock --verify` for network-backed provenance. Report unavailable checks rather than treating the offline check as equivalent.
+- The lockfile does not cover external reusable workflows called through `jobs.<id>.uses`, container images, or local `./` actions. Review these dependencies separately. Investigate moved pins before accepting them; do not automate `--accept-moved`.
+- For repositories without a lockfile, follow their existing pinning policy; adopting a lockfile is a separate change.
 
 ## Validation (repository baseline)
 
